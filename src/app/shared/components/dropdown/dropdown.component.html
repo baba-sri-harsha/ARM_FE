@@ -1,17 +1,16 @@
-
 <input
   type="text"
   [placeholder]="label"
   matInput
   [formControl]="myControl"
   [matAutocomplete]="auto"
+  #inputValue
+  value="inputValue.value"
+  (keyup)="addValue(inputValue.value)"
 />
 <mat-icon>arrow_drop_down</mat-icon>
 <mat-autocomplete #auto="matAutocomplete">
-  <mat-option
-    *ngFor="let option of filteredOptions | async"
-    [value]="option.viewValue"
-  >
-    {{ option.viewValue }}
+  <mat-option *ngFor="let option of parentData" [value]="option.value">
+    {{ option.value }}
   </mat-option>
 </mat-autocomplete>

@@ -6,19 +6,22 @@
 
     <div class="dropdown-container">
       <div class="cont">
-        <app-dropdown [parentData]="foods" label="Status"> </app-dropdown>
+        <app-dropdown
+          (childData)="callGetTalentService($event)"
+          label="Talents"
+          [parentData]="dropDownOption"
+        >
+        </app-dropdown>
+      </div>
+      <div class="cont">
+        <app-dropdown label="Priority"> </app-dropdown>
       </div>
 
       <div class="cont">
-        <app-dropdown [parentData]="foods" label="Status"> </app-dropdown>
+        <app-dropdown label="Production"> </app-dropdown>
       </div>
-
       <div class="cont">
-        <app-dropdown [parentData]="foods" label="Status"> </app-dropdown>
-      </div>
-
-      <div class="cont">
-        <app-dropdown [parentData]="foods" label="Status"> </app-dropdown>
+        <app-dropdown label="Type"> </app-dropdown>
       </div>
     </div>
 
