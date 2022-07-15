@@ -2,14 +2,25 @@ import { LayoutComponent } from './../../../shared/components/layout/layout.comp
 import { BoxContainerComponent } from './../../../shared/components/box-container/box-container.component';
 import { RequestListComponent } from './../request-list/request-list.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { of } from 'rxjs';
 import { DashboardComponent } from './dashboard.component';
-import { DropDownService } from 'src/app/shared/services/drop-down.service';
+import { DropdownService } from 'src/app/shared/services/dropdown.service';
+import { TalentService } from '../../talent.service';
 import { HttpClientModule } from '@angular/common/http';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
+
+  const MockDropdownService = {
+    getDropdownOptions: jasmine.createSpy().and.returnValue([])
+  };
+
+  const MockTalentService = {
+    getAllTalents: () => {
+      return of([{talentName: 'abc'}]);
+    }
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -19,7 +30,11 @@ describe('DashboardComponent', () => {
         BoxContainerComponent,
         LayoutComponent
       ],
-      imports: [HttpClientModule]
+      imports: [HttpClientModule],
+      providers: [
+        {provide: DropdownService, useValue: MockDropdownService},
+        {provide: TalentService, useValue: MockTalentService}
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(DashboardComponent);

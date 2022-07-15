@@ -1,16 +1,16 @@
 import { HttpClientModule } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 
-import { DropDownService } from './drop-down.service';
+import { TalentService } from './talent.service';
 
-describe('DropDownService', () => {
-  let service: DropDownService;
+describe('TalentService', () => {
+  let service: TalentService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule]
     });
-    service = TestBed.inject(DropDownService);
+    service = TestBed.inject(TalentService);
   });
 
   it('should be created', () => {

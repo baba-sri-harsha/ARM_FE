@@ -7,9 +7,9 @@
     <div class="dropdown-container">
       <div class="cont">
         <app-dropdown
-          (childData)="callGetTalentService($event)"
+          *ngIf="talentDropdownOptions.length > 0"
           label="Talents"
-          [parentData]="dropDownOption"
+          [options]="talentDropdownOptions"
         >
         </app-dropdown>
       </div>
