@@ -4,7 +4,6 @@ import { DropdownOption } from 'src/app/shared/components/dropdown/dropdown.comp
 import { TalentService } from '../../talent.service';
 import { TalentNames } from 'src/app/models/talentnames';
 
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -15,13 +14,24 @@ export class DashboardComponent implements OnInit {
   somedata = '';
   constructor(
     private _dropdownService: DropdownService,
-    private _talentService: TalentService    
+    private _talentService: TalentService
   ) {}
 
   ngOnInit(): void {
     this._talentService.getAllTalents().subscribe((data: TalentNames[]) => {
-        this.talentDropdownOptions = this._dropdownService.getDropdownOptions<TalentNames>(data, 'talentName', 'talentName');
-        console.log(this.talentDropdownOptions);
+      this.talentDropdownOptions =
+        this._dropdownService.getDropdownOptions<TalentNames>(
+          data,
+          'talentName',
+          'talentName'
+        );
+      console.log(this.talentDropdownOptions);
     });
   }
+
+  searchText: string = '';
+
+  onSearchTextEntered = (searchValue: string) => {
+    this.searchText = searchValue;
+  };
 }

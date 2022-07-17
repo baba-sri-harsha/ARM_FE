@@ -1,0 +1,10 @@
+<div class="input-container">
+  <input
+    class="input-element"
+    matInput
+    type="text"
+    [(ngModel)]="enteredSearchValue"
+    (input)="onSearchTextChanged()"
+  />
+  <mat-icon class="icon">search</mat-icon>
+</div>

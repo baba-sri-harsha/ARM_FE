@@ -15,11 +15,12 @@ import { HeaderComponent } from './components/header/header.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { BoxContainerComponent } from './components/box-container/box-container.component';
 import { MatTableModule } from '@angular/material/table';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -27,10 +28,12 @@ import { MatTableModule } from '@angular/material/table';
     NavbarComponent,
     HeaderComponent,
     DropdownComponent,
-    BoxContainerComponent
+    BoxContainerComponent,
+    SearchComponent
   ],
   imports: [
     CommonModule,
+    FormsModule,
     ReactiveFormsModule,
     MatAutocompleteModule,
     MatCardModule,
@@ -48,7 +51,8 @@ import { MatTableModule } from '@angular/material/table';
     DropdownComponent,
     MatTableModule,
     MatIconModule,
-    BoxContainerComponent
+    BoxContainerComponent,
+    SearchComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
 })
