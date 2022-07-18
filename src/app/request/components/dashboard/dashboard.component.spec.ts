@@ -7,6 +7,7 @@ import { DashboardComponent } from './dashboard.component';
 import { DropdownService } from 'src/app/shared/services/dropdown.service';
 import { HttpClientModule } from '@angular/common/http';
 import { TalentService } from 'src/app/services/talent/talent.service';
+import { ProductionService } from 'src/app/services/production/production.service';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -21,6 +22,11 @@ describe('DashboardComponent', () => {
       return of([{ talentName: 'abc' }]);
     }
   };
+  const MockProductionService = {
+    getAllProductions: () => {
+      return of([{ productionCompanyName: 'abc' }]);
+    }
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -33,7 +39,8 @@ describe('DashboardComponent', () => {
       imports: [HttpClientModule],
       providers: [
         { provide: DropdownService, useValue: MockDropdownService },
-        { provide: TalentService, useValue: MockTalentService }
+        { provide: TalentService, useValue: MockTalentService },
+        { provide: ProductionService, useValue: MockProductionService }
       ]
     }).compileComponents();
 
