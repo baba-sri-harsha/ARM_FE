@@ -21,8 +21,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
-import { ProductionService } from '../services/production/production.service';
-import { TalentService } from '../services/talent/talent.service';
+
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -52,6 +51,6 @@ import { TalentService } from '../services/talent/talent.service';
     MatFormFieldModule
   ],
   exports: [RequestListComponent],
-  providers: [ProductionService, TalentService]
+  providers: []
 })
 export class RequestModule {}
