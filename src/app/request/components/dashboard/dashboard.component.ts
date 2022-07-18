@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { DropdownService } from 'src/app/shared/services/dropdown.service';
 import { DropdownOption } from 'src/app/shared/components/dropdown/dropdown.component';
 import { TalentNames } from 'src/app/models/talentnames';
-import { TalentService } from 'src/app/services/talent/talent.service';
 import { ProductionService } from 'src/app/services/production/production.service';
 import { ProductionNames } from 'src/app/models/productionnames';
+import { TalentService } from 'src/app/services/talent/talent.service';
 enum Priority {
   HIGH = 'High',
   LOW = 'Low',
@@ -31,12 +31,13 @@ export class DashboardComponent implements OnInit {
   talentDropdownOptions: DropdownOption[] = [];
   productionDropdownOptions: DropdownOption[] = [];
   priorityDropDownOptions: DropdownOption[] = [];
+  statusDropDownOptions: DropdownOption[] = [];
+
   priorities: Priorities[] = [
     { name: Priority.HIGH },
     { name: Priority.MEDIUM },
     { name: Priority.LOW }
   ];
-  statusDropDownOptions: DropdownOption[] = [];
   statuses: Statuses[] = [
     { name: Status.PI },
     { name: Status.PT },
