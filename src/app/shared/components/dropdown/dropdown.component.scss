@@ -8,7 +8,7 @@
 
 input {
   background-color: mat.get-color-from-palette($md-primary-pallette, 500);
-  
+  border-radius: 5px;
   border: $border;
   color: $text-color;
 }
@@ -17,8 +17,12 @@ mat-icon {
   color: $gray;
   position: absolute;
   right: 0;
+  bottom: 1px;
 }
 
 mat-option {
   color: $text-color;
+}
+::ng-deep .mat-tooltip {
+  font-size: 15px;
 }

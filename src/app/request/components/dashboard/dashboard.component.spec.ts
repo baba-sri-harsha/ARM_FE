@@ -5,8 +5,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { DashboardComponent } from './dashboard.component';
 import { DropdownService } from 'src/app/shared/services/dropdown.service';
-import { TalentService } from '../../talent.service';
 import { HttpClientModule } from '@angular/common/http';
+import { TalentService } from 'src/app/services/talent/talent.service';
+import { ProductionService } from 'src/app/services/production/production.service';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -18,7 +19,12 @@ describe('DashboardComponent', () => {
 
   const MockTalentService = {
     getAllTalents: () => {
-      return of([{talentName: 'abc'}]);
+      return of([{ talentName: 'abc' }]);
+    }
+  };
+  const MockProductionService = {
+    getAllProductions: () => {
+      return of([{ productionCompanyName: 'abc' }]);
     }
   };
 
@@ -32,8 +38,9 @@ describe('DashboardComponent', () => {
       ],
       imports: [HttpClientModule],
       providers: [
-        {provide: DropdownService, useValue: MockDropdownService},
-        {provide: TalentService, useValue: MockTalentService}
+        { provide: DropdownService, useValue: MockDropdownService },
+        { provide: TalentService, useValue: MockTalentService },
+        { provide: ProductionService, useValue: MockProductionService }
       ]
     }).compileComponents();
 

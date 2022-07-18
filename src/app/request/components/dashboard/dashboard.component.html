@@ -1,6 +1,6 @@
 <app-layout>
   <ng-container header>
-    <button mat-raised-button color="primary">
+    <button mat-raised-button color="primary" [routerLink]="['create']">
       <mat-icon>playlist_add</mat-icon>Create New
     </button>
 
@@ -14,14 +14,25 @@
         </app-dropdown>
       </div>
       <div class="cont">
-        <app-dropdown label="Priority"> </app-dropdown>
+        <app-dropdown label="Priority" [options]="priorityDropDownOptions">
+        </app-dropdown>
       </div>
 
       <div class="cont">
-        <app-dropdown label="Production"> </app-dropdown>
+        <app-dropdown
+          *ngIf="productionDropdownOptions.length > 0"
+          label="Production"
+          [options]="productionDropdownOptions"
+        >
+        </app-dropdown>
       </div>
       <div class="cont">
-        <app-dropdown label="Type"> </app-dropdown>
+        <app-dropdown
+          *ngIf="statusDropDownOptions.length > 0"
+          label="Status"
+          [options]="statusDropDownOptions"
+        >
+        </app-dropdown>
       </div>
     </div>
 
