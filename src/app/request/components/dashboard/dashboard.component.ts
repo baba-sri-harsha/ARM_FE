@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { DropdownService } from 'src/app/shared/services/dropdown.service';
 import { DropdownOption } from 'src/app/shared/components/dropdown/dropdown.component';
 import { TalentNames } from 'src/app/models/talentnames';
-import { ProductionService } from 'src/app/services/production/production.service';
 import { ProductionNames } from 'src/app/models/productionnames';
 import { TalentService } from 'src/app/services/talent/talent.service';
+import { ProductionService } from 'src/app/services/production/production.service';
 enum Priority {
   HIGH = 'High',
   LOW = 'Low',
