@@ -1,3 +1,3 @@
-export interface Productionnames {
-  productionCompanyName: string;
+export class Productionnames {
+  constructor(public productionCompanyName: string) {}
 }
