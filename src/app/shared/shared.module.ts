@@ -21,6 +21,7 @@ import { MatInputModule } from '@angular/material/input';
 import { BoxContainerComponent } from './components/box-container/box-container.component';
 import { MatTableModule } from '@angular/material/table';
 import { SearchComponent } from './components/search/search.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { SearchComponent } from './components/search/search.component';
     MatIconModule,
     MatInputModule,
     MatButtonModule,
+    MatTooltipModule,
     RouterModule.forChild([])
   ],
   exports: [
@@ -52,6 +54,7 @@ import { SearchComponent } from './components/search/search.component';
     MatTableModule,
     MatIconModule,
     BoxContainerComponent,
+    MatTooltipModule,
     SearchComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]

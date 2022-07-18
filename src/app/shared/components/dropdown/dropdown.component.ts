@@ -10,9 +10,9 @@ import {
 import { FormControl } from '@angular/forms';
 import { fromEvent, Observable } from 'rxjs';
 import { map, startWith, switchMap, filter } from 'rxjs/operators';
+import { TooltipPosition } from '@angular/material/tooltip';
 export interface DropdownOption {
   value: string;
-  viewValue: string;
 }
 
 @Component({
@@ -24,9 +24,10 @@ export class DropdownComponent implements OnInit {
   @Input()
   label: string = 'Pick one';
   @Output() childData: EventEmitter<string> = new EventEmitter();
-  
+
   @Input() options: DropdownOption[] = [];
   myControl = new FormControl('');
+  position: TooltipPosition[] = ['above'];
   constructor() {}
 
   filteredOptions!: Observable<DropdownOption[]>;
@@ -34,12 +35,12 @@ export class DropdownComponent implements OnInit {
   ngOnInit(): void {
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
-      map((value:string | null) => this._filter(value || ''))
+      map((value: string | null) => this._filter(value || ''))
     );
   }
 
   private _filter(value: string | null): DropdownOption[] {
-    if(!value){
+    if (!value) {
       return [...this.options];
     }
     const filterValue = value.toLowerCase();

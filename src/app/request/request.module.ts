@@ -10,25 +10,44 @@ import { RequestRoutingModule } from './request-routing.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { CreateRequestComponent } from './components/create-request/create-request.component';
 import { RequestListComponent } from './components/request-list/request-list.component';
-import { MatPaginatorModule } from '@angular/material/paginator';
 import { TaskListComponent } from './components/task-list/task-list.component';
+import { ContractDetailsComponent } from './components/contract-details/contract-details.component';
+import { ReportCategoryComponent } from './components/report-category/report-category.component';
+import { ImportantDatesComponent } from './components/important-dates/important-dates.component';
+import { DocumentsDossierComponent } from './components/documents-dossier/documents-dossier.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 @NgModule({
   declarations: [
     DashboardComponent,
     CreateRequestComponent,
     TaskListComponent,
-    RequestListComponent
+    RequestListComponent,
+    ContractDetailsComponent,
+    ReportCategoryComponent,
+    ImportantDatesComponent,
+    DocumentsDossierComponent
   ],
 
   imports: [
     CommonModule,
     SharedModule,
     UserModule,
+    RequestRoutingModule,
+    HttpClientModule,
     MatIconModule,
     MatButtonModule,
     MatPaginatorModule,
-    RequestRoutingModule,
-    HttpClientModule
+    MatTableModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatFormFieldModule
   ],
   exports: [RequestListComponent]
 })

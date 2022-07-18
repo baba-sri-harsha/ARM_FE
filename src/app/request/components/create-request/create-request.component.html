@@ -1,3 +1,30 @@
 <app-layout>
-  <p>create-request works!</p>
+  <ng-container header>
+    <div class="request" color="primary">
+      <h3>Request #21315</h3>
+    </div>
+
+    <div class="dropdown-container">
+      <div class="cont">
+        <h5>Date: 05/20/2022</h5>
+      </div>
+      <div class="cont">
+        <app-dropdown [options]="status" label="Status"> </app-dropdown>
+      </div>
+
+      <div class="cont">
+        <app-dropdown [options]="priority" label="Priority"> </app-dropdown>
+      </div>
+
+      <div class="cont">
+        <app-dropdown [options]="union" label="Union"> </app-dropdown>
+      </div>
+    </div>
+    <div>
+      <button mat-raised-button color="secondary">Close</button>
+      <span></span>
+      <button mat-raised-button color="primary">Submit</button>
+    </div>
+  </ng-container>
+  <app-contract-details></app-contract-details>
 </app-layout>

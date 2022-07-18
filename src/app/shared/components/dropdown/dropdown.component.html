@@ -10,8 +10,10 @@
 <mat-autocomplete #auto="matAutocomplete">
   <mat-option
     *ngFor="let option of filteredOptions | async"
-    [value]="option.viewValue"
+    [value]="option.value"
+    matTooltip="{{ option.value }}"
+    [matTooltipPosition]="position[0]"
   >
-    {{ option.viewValue }}
+    {{ option.value }}
   </mat-option>
 </mat-autocomplete>
