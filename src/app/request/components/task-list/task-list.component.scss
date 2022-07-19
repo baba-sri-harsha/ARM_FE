@@ -11,6 +11,14 @@ button {
   border-radius: 3px;
   background-color: white;
 }
+
+.table-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  overflow-y: scroll;
+}
 button:hover {
   background-color: rgba(154, 168, 24, 0.5019607843137255);
 }
@@ -21,11 +29,11 @@ td.mat-cell {
 
 th.mat-header-cell {
   padding: 16px 0;
-  border-bottom: 1px solid grey;
-  border-top: 1px solid grey;
-
+  /* row border */
+  border-bottom: 1px solid black;
+  border-top: 1px solid black;
   font-weight: 500;
-  color: $black;
+  color: black;
   font-size: 0.938rem;
   text-align: center;
 }
@@ -39,7 +47,6 @@ th.mat-header-cell:last-child {
   /* row border */
   border-right: 1px solid black;
 }
-
 .example-h2 {
   margin: 10px;
 }

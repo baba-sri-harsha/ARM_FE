@@ -29,16 +29,18 @@ export class HeaderComponent implements OnInit {
       this.auth.login();
     }
 
-    //Getting roles of user
+    // Getting roles of user
     // let roles =
     //   this.keycloakService.getKeycloakInstance().realmAccess?.['roles'];
     // console.log(`Roles: ${roles}`);
-    // if (roles?.indexOf('admin') != -1) {
-    //   console.log(`admin`);
+    // if (roles?.indexOf('report_owner') != -1) {
+    //   console.log(`report_owner`);
     // }
     // if (roles?.indexOf('user') != -1) {
     //   console.log(`user`);
-    // } else {
+    // }
+
+    // else {
     //   console.log(`User role not found`);
     // }
   }

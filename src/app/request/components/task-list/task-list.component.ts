@@ -1,3 +1,5 @@
+import { KeycloakProfile } from 'keycloak-js';
+import { AuthGuard } from './../../../user/auth.guard';
 import {
   Component,
   Input,
@@ -9,6 +11,7 @@ import { MatTableDataSource } from '@angular/material/table';
 
 // import { MatTableDataSource } from '@angular/material/table';
 import { TaskService } from 'src/app/services/task/task.service';
+import { AuthService } from 'src/app/user/auth.service';
 
 @Component({
   selector: 'app-task-list',
@@ -16,23 +19,26 @@ import { TaskService } from 'src/app/services/task/task.service';
   styleUrls: ['./task-list.component.scss']
 })
 export class TaskListComponent implements OnInit, OnChanges {
+  public userProfile: KeycloakProfile = {};
   tasks: Task[] = [];
   showLoader: boolean = false;
+  dataSource = new MatTableDataSource<Task>();
 
   displayedColumns: string[] = [
     'requestId',
     'taskDescription',
-    'production',
-    'productionId',
-    'project',
+    'productionCompanyName',
+    'projectName',
     'talentName',
     'priority',
-    'auditPeriod',
-    'request',
-    'closed',
-    'actions'
+    'auditStartDate',
+    'auditEndDate',
+    'requestRaised',
+    'requestClosed',
+    'quickActions'
   ];
-  constructor(private _taskService: TaskService) {}
+
+  constructor(private _taskService: TaskService, private auth: AuthService) {}
 
   @Input() searchedValue: string = '';
 
@@ -40,21 +46,21 @@ export class TaskListComponent implements OnInit, OnChanges {
     this.searchResults();
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.showLoader = true;
     this.dataSource.filter = this.searchedValue;
     this.dataSource.data = this.tasks;
 
-    this._taskService.getTasks().subscribe((data: Task[]) => {
-      this.tasks = data;
-      this.dataSource.data = data;
-      this.showLoader = false;
-    });
+    this.userProfile = await this.auth.loadUserProfile();
+    console.log(this.userProfile);
+    this._taskService
+      .getTasksForLoggedInUser(this.userProfile.username)
+      .subscribe((data: Task[]) => {
+        this.tasks = data;
+      });
 
     console.log(this.dataSource);
   }
-
-  dataSource = new MatTableDataSource<Task>();
 
   searchResults = () => {
     this.dataSource.filter = this.searchedValue.trim().toLowerCase();
