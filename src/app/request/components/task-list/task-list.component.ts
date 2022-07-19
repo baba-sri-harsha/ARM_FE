@@ -1,10 +1,13 @@
 import {
+  AfterViewInit,
   Component,
   Input,
   OnChanges,
   OnInit,
-  SimpleChanges
+  SimpleChanges,
+  ViewChild
 } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
 // import { MatTableDataSource } from '@angular/material/table';
@@ -15,7 +18,7 @@ import { TaskService } from 'src/app/services/task/task.service';
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.scss']
 })
-export class TaskListComponent implements OnInit, OnChanges {
+export class TaskListComponent implements OnInit, OnChanges, AfterViewInit {
   tasks: Task[] = [];
   showLoader: boolean = false;
 
@@ -48,6 +51,7 @@ export class TaskListComponent implements OnInit, OnChanges {
     this._taskService.getTasks().subscribe((data: Task[]) => {
       this.tasks = data;
       this.dataSource.data = data;
+      this.dataSource.data = this.tasks;
       this.showLoader = false;
     });
 
@@ -55,6 +59,13 @@ export class TaskListComponent implements OnInit, OnChanges {
   }
 
   dataSource = new MatTableDataSource<Task>();
+
+  @ViewChild('paginator') paginator!: MatPaginator;
+
+  ngAfterViewInit() {
+    this.dataSource = new MatTableDataSource(this.tasks);
+    this.dataSource.paginator = this.paginator;
+  }
 
   searchResults = () => {
     this.dataSource.filter = this.searchedValue.trim().toLowerCase();

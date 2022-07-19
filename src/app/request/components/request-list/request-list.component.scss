@@ -37,7 +37,7 @@ th.mat-header-cell {
   border-bottom: 1px solid black;
   border-top: 1px solid black;
   font-weight: 500;
-  color: black;
+  color: $black;
   font-size: 0.938rem;
   text-align: center;
 }
@@ -54,4 +54,8 @@ th.mat-header-cell:last-child {
 
 mat-paginator {
   align-self: flex-end;
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+  margin: 0 auto;
 }
