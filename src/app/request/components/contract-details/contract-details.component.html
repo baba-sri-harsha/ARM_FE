@@ -1,0 +1,34 @@
+<app-box-container>
+  <ng-container header>
+    <div class="request" color="primary">Contract Details</div>
+
+    <!-- <div class="dropdown-container"> -->
+    <div class="cont">
+      <app-dropdown label="Production Company"> </app-dropdown>
+    </div>
+    <div class="cont">
+      <app-dropdown label="Project Name"> </app-dropdown>
+    </div>
+    <div class="cont">
+      <app-dropdown label="Talent Name"> </app-dropdown>
+    </div>
+    <div class="cont">Production#</div>
+    <div class="cont">Date<mat-icon>calendar_today</mat-icon></div>
+  </ng-container>
+
+  <div class="container">
+    <div class="box1">
+      <app-report-category></app-report-category>
+    </div>
+    <div class="box2">
+      <div class="right-box">
+        <div class="cal">
+          <app-important-dates></app-important-dates>
+        </div>
+        <div class="cal">
+          <app-documents-dossier></app-documents-dossier>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-box-container>
