@@ -39,7 +39,7 @@
     <app-search (searchTextChanged)="onSearchTextEntered($event)"></app-search>
   </ng-container>
   <ng-container>
-    <app-task-list [searchedValue]="searchText"></app-task-list>
-    <!-- <app-request-list></app-request-list> -->
+    <!-- <app-task-list [searchedValue]="searchText"></app-task-list> -->
+    <app-request-list [searchedValue]="searchText"></app-request-list>
   </ng-container>
 </app-layout>
