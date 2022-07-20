@@ -6,6 +6,14 @@ table {
   width: 98%;
 }
 
+.table-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  overflow: auto;
+}
+
 button {
   border: 0px;
   border-radius: 3px;
@@ -77,4 +85,12 @@ th.mat-header-cell:last-child {
   //   border: red solid 1px;
   padding: 0px;
   margin: 0px;
+}
+
+mat-paginator {
+  align-self: flex-end;
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+  margin: 0 auto;
 }

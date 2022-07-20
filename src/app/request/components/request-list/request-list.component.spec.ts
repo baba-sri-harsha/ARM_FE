@@ -3,6 +3,7 @@ import { MatTableModule } from '@angular/material/table';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RequestListComponent } from './request-list.component';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('RequestListComponent', () => {
   let component: RequestListComponent;
@@ -11,7 +12,7 @@ describe('RequestListComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [RequestListComponent],
-      imports: [MatTableModule, MatIconModule]
+      imports: [MatTableModule, MatIconModule, HttpClientModule]
     }).compileComponents();
 
     fixture = TestBed.createComponent(RequestListComponent);

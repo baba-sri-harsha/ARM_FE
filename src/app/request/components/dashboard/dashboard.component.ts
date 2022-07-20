@@ -5,7 +5,6 @@ import { TalentNames } from 'src/app/models/talentnames';
 import { Productionnames } from 'src/app/models/productionnames';
 import { TalentService } from 'src/app/services/talent/talent.service';
 import { ProductionService } from 'src/app/services/production/production.service';
-import { Router } from '@angular/router';
 enum Priority {
   HIGH = 'High',
   LOW = 'Low',
@@ -46,11 +45,11 @@ export class DashboardComponent implements OnInit {
     { name: Status.C }
   ];
   somedata = '';
+
   constructor(
     private _dropdownService: DropdownService,
     private _talentService: TalentService,
-    private _productionService: ProductionService,
-    public _router: Router
+    private _productionService: ProductionService
   ) {}
 
   ngOnInit(): void {

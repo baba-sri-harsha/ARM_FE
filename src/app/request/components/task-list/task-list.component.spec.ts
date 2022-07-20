@@ -1,9 +1,11 @@
+import { KeycloakService } from 'keycloak-angular';
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { TaskService } from 'src/app/services/task/task.service';
+import { AuthService } from 'src/app/user/auth.service';
 import { TaskListComponent } from './task-list.component';
 
 describe('TaskListComponent', () => {
@@ -14,7 +16,7 @@ describe('TaskListComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [TaskListComponent],
       imports: [MatTableModule, MatIconModule, HttpClientModule],
-      providers: []
+      providers: [AuthService, TaskService, KeycloakService]
     }).compileComponents();
 
     fixture = TestBed.createComponent(TaskListComponent);

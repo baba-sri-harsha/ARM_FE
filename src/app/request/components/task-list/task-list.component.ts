@@ -1,12 +1,15 @@
 import { KeycloakProfile } from 'keycloak-js';
 import { AuthGuard } from './../../../user/auth.guard';
 import {
+  AfterViewInit,
   Component,
   Input,
   OnChanges,
   OnInit,
-  SimpleChanges
+  SimpleChanges,
+  ViewChild
 } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
 // import { MatTableDataSource } from '@angular/material/table';
@@ -18,7 +21,7 @@ import { AuthService } from 'src/app/user/auth.service';
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.scss']
 })
-export class TaskListComponent implements OnInit, OnChanges {
+export class TaskListComponent implements OnInit, OnChanges, AfterViewInit {
   public userProfile: KeycloakProfile = {};
   tasks: Task[] = [];
   showLoader: boolean = false;
@@ -52,16 +55,23 @@ export class TaskListComponent implements OnInit, OnChanges {
     this.dataSource.data = this.tasks;
 
     this.userProfile = await this.auth.loadUserProfile();
-    console.log(this.userProfile);
     this._taskService
       .getTasksForLoggedInUser(this.userProfile.username)
       .subscribe((data: Task[]) => {
-        this.tasks = data;
+        this.dataSource.data = data;
       });
 
-    console.log(this.dataSource);
+    // console.log(this.dataSource);
   }
 
+  @ViewChild('paginator') paginator!: MatPaginator;
+
+  ngAfterViewInit() {
+    this.dataSource = new MatTableDataSource(this.dataSource.data);
+    this.dataSource.paginator = this.paginator;
+  }
+
+  //for searching inside the table data
   searchResults = () => {
     this.dataSource.filter = this.searchedValue.trim().toLowerCase();
   };

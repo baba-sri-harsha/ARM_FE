@@ -1,27 +1,29 @@
 @import 'src/scss/variables';
 .cont {
-  margin-left: 0.4rem;
+    margin-left: 0.4rem;
+  }
+
+  .dropdown-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .icon {
+    margin-right: 0.5rem;
+  }
+.header{
+    display: flex;
+    justify-content: space-between;
 }
 
-.dropdown-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-.header {
-  display: flex;
-  justify-content: space-between;
-}
-h3,
-h5 {
-}
-.request {
-  background-color: $background-color;
-  align-items: center;
+.request{
+    background-color: $background-color;
+    align-items:  center;
 }
 
-button {
-  // border : red solid 1px;
-  margin-right: 1rem;
+button{
+    // border : red solid 1px;
+    margin-right: 1rem;
 }

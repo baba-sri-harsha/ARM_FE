@@ -3,8 +3,13 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NavbarComponent } from '../navbar/navbar.component';
 
 import { LayoutComponent } from './layout.component';
-import { AuthService } from 'src/app/user/auth.service';
 import { KeycloakService } from 'keycloak-angular';
+
+const MockKeycloakService = {
+  getKeycloakInstance: () => {
+    return ['manger'];
+  }
+};
 
 describe('LayoutComponent', () => {
   let component: LayoutComponent;
@@ -13,7 +18,7 @@ describe('LayoutComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [LayoutComponent, NavbarComponent, HeaderComponent],
-      providers: [KeycloakService]
+      providers: [{ provide: KeycloakService, useValue: MockKeycloakService }]
     }).compileComponents();
 
     fixture = TestBed.createComponent(LayoutComponent);

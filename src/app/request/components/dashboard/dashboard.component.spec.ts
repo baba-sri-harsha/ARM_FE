@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { LayoutComponent } from './../../../shared/components/layout/layout.component';
 import { BoxContainerComponent } from './../../../shared/components/box-container/box-container.component';
 import { RequestListComponent } from './../request-list/request-list.component';

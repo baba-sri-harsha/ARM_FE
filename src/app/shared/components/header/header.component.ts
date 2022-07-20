@@ -23,6 +23,7 @@ export class HeaderComponent implements OnInit {
     this.loggedIn = await this.auth.isLoggedIn();
     if (this.loggedIn) {
       this.userProfile = await this.auth.loadUserProfile();
+
       // console.log(this.userProfile);
       this.firstName = this.userProfile.firstName;
     } else {
