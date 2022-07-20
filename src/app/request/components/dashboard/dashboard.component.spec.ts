@@ -9,6 +9,7 @@ import { DropdownService } from 'src/app/shared/services/dropdown.service';
 import { HttpClientModule } from '@angular/common/http';
 import { TalentService } from 'src/app/services/talent/talent.service';
 import { ProductionService } from 'src/app/services/production/production.service';
+import { KeycloakService } from 'keycloak-angular';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -38,7 +39,7 @@ describe('DashboardComponent', () => {
         LayoutComponent
       ],
       imports: [HttpClientModule],
-      providers: [
+      providers: [KeycloakService,
         { provide: DropdownService, useValue: MockDropdownService },
         { provide: TalentService, useValue: MockTalentService },
         { provide: ProductionService, useValue: MockProductionService }

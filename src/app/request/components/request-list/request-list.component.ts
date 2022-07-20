@@ -9,174 +9,29 @@ import {
 } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { KeycloakService } from 'keycloak-angular';
+import { KeycloakProfile } from 'keycloak-js';
+import { RequestService } from 'src/app/services/request/request.service';
+import { AuthService } from 'src/app/user/auth.service';
 
-type Request = {
-  requestId: number;
-  production: string;
-  productionId: number;
-  projectName: string;
-  talentName: string;
-  union: string;
-  priority: string;
-  requestRaised: string;
-  expectedClosure: string;
-  status: string;
-};
 @Component({
   selector: 'app-request-list',
   templateUrl: './request-list.component.html',
   styleUrls: ['./request-list.component.scss']
 })
 export class RequestListComponent implements OnInit, OnChanges, AfterViewInit {
-  //dummy data
-
   headers = [
     'requestId',
-    'production',
-    'productionId',
+    'productionCompanyName',
+    'productionNumber',
     'projectName',
     'talentName',
     'union',
     'priority',
-    'requestRaised',
+    'requestCreated',
     'expectedClosure',
     'status',
     'actions'
-  ];
-
-  requests: Request[] = [
-    {
-      requestId: 1,
-      production: 'Marvel',
-      productionId: 100,
-      projectName: 'Iron man',
-      talentName: 'robert',
-      union: 'DAG',
-      priority: 'LOW',
-      requestRaised: '2022-03-02',
-      expectedClosure: '2022-03-02',
-      status: 'Pending Internal'
-    },
-    {
-      requestId: 251315,
-      production: 'Marvel',
-      productionId: 100,
-      projectName: 'Iron man',
-      talentName: 'robert',
-      union: 'DAG',
-      priority: 'LOW',
-      requestRaised: '2022-03-02',
-      expectedClosure: '2022-03-02',
-      status: 'Pending Internal'
-    },
-    {
-      requestId: 251315,
-      production: 'Marvel',
-      productionId: 100,
-      projectName: 'Iron man',
-      talentName: 'robert',
-      union: 'DAG',
-      priority: 'LOW',
-      requestRaised: '2022-03-02',
-      expectedClosure: '2022-03-02',
-      status: 'Pending Internal'
-    },
-    {
-      requestId: 251315,
-      production: 'Marvel',
-      productionId: 100,
-      projectName: 'Iron man',
-      talentName: 'robert',
-      union: 'DAG',
-      priority: 'LOW',
-      requestRaised: '2022-03-02',
-      expectedClosure: '2022-03-02',
-      status: 'Pending Internal'
-    },
-    {
-      requestId: 251315,
-      production: 'Marvel',
-      productionId: 100,
-      projectName: 'Iron man',
-      talentName: 'robert',
-      union: 'DAG',
-      priority: 'LOW',
-      requestRaised: '2022-03-02',
-      expectedClosure: '2022-03-02',
-      status: 'Pending Internal'
-    },
-    {
-      requestId: 251315,
-      production: 'Marvel',
-      productionId: 100,
-      projectName: 'Iron man',
-      talentName: 'robert',
-      union: 'DAG',
-      priority: 'LOW',
-      requestRaised: '2022-03-02',
-      expectedClosure: '2022-03-02',
-      status: 'Pending Internal'
-    },
-    {
-      requestId: 251315,
-      production: 'Marvel',
-      productionId: 100,
-      projectName: 'Iron man',
-      talentName: 'robert',
-      union: 'DAG',
-      priority: 'LOW',
-      requestRaised: '2022-03-02',
-      expectedClosure: '2022-03-02',
-      status: 'Pending Internal'
-    },
-    {
-      requestId: 251315,
-      production: 'Marvel',
-      productionId: 100,
-      projectName: 'Iron man',
-      talentName: 'robert',
-      union: 'DAG',
-      priority: 'LOW',
-      requestRaised: '2022-03-02',
-      expectedClosure: '2022-03-02',
-      status: 'Pending Internal'
-    },
-    {
-      requestId: 2,
-      production: 'Marvel',
-      productionId: 100,
-      projectName: 'Iron man',
-      talentName: 'robert',
-      union: 'DAG',
-      priority: 'LOW',
-      requestRaised: '2022-03-02',
-      expectedClosure: '2022-03-02',
-      status: 'Pending Internal'
-    },
-    {
-      requestId: 2,
-      production: 'Marvel',
-      productionId: 100,
-      projectName: 'Iron man',
-      talentName: 'robert',
-      union: 'DAG',
-      priority: 'LOW',
-      requestRaised: '2022-03-02',
-      expectedClosure: '2022-03-02',
-      status: 'Pending Internal'
-    },
-    {
-      requestId: 2,
-      production: 'Marvel',
-      productionId: 100,
-      projectName: 'Iron man',
-      talentName: 'robert',
-      union: 'DAG',
-      priority: 'LOW',
-      requestRaised: '2022-03-02',
-      expectedClosure: '2022-03-02',
-      status: 'Pending Internal'
-    }
   ];
 
   showLoader: boolean = false;
@@ -194,26 +49,38 @@ export class RequestListComponent implements OnInit, OnChanges, AfterViewInit {
     'closed',
     'actions'
   ];
-  constructor() {}
+  constructor(
+    private _requestService: RequestService,
+    private keycloakService: KeycloakService,
+    private auth: AuthService
+  ) {}
 
   @Input() searchedValue: string = '';
+  requests: Request[] = [];
+  isLoggedIn = true;
+  public loggedIn: boolean = false;
+  public userProfile: KeycloakProfile = {};
+  firstName: string | undefined;
 
   ngOnChanges(changes: SimpleChanges): void {
     this.searchResults();
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.showLoader = true;
     this.dataSource.filter = this.searchedValue;
     this.dataSource.data = this.requests;
 
-    // this._taskService.getTasks().subscribe((data: Request[]) => {
-    //   this.requests = data;
-    //   this.dataSource.data = data;
-    //   this.dataSource.data = this.tasks;
-    //   this.showLoader = false;
-    // });
+    this.userProfile = await this.auth.loadUserProfile();
 
+    this._requestService
+      .getAllRequests(this.userProfile.username)
+      .subscribe((data: Request[]) => {
+        this.dataSource.data = data;
+
+        console.log(`Inside Request List Component`);
+        console.log(data);
+      });
     console.log(this.dataSource);
   }
 
