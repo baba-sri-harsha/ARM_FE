@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Productionnames } from 'src/app/models/productionnames';
+import { ProductionNames } from 'src/app/models/productionnames';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +9,12 @@ import { Productionnames } from 'src/app/models/productionnames';
 export class ProductionService {
   constructor(private _httpClient: HttpClient) {}
 
-  getAllProductions = (): Observable<Productionnames[]> => {
+  getAllProductions = (): Observable<ProductionNames[]> => {
     const url = 'http://localhost:9090/api/productions';
-    return this._httpClient.get<Productionnames[]>(url);
+    return this._httpClient.get<ProductionNames[]>(url);
+  };
+  getAllProductionByName = (productionName:string): Observable<ProductionNames[]> => {
+    const url = 'http://localhost:9090/api/productions/${productionName}';
+    return this._httpClient.get<ProductionNames[]>(url);
   };
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DropdownService } from 'src/app/shared/services/dropdown.service';
 import { DropdownOption } from 'src/app/shared/components/dropdown/dropdown.component';
 import { TalentNames } from 'src/app/models/talentnames';
-import { Productionnames } from 'src/app/models/productionnames';
+import { ProductionNames } from 'src/app/models/productionnames';
 import { TalentService } from 'src/app/services/talent/talent.service';
 import { ProductionService } from 'src/app/services/production/production.service';
 enum Priority {
@@ -65,9 +65,9 @@ export class DashboardComponent implements OnInit {
 
     this._productionService
       .getAllProductions()
-      .subscribe((data: Productionnames[]) => {
+      .subscribe((data: ProductionNames[]) => {
         this.productionDropdownOptions =
-          this._dropdownService.getDropdownOptions<Productionnames>(
+          this._dropdownService.getDropdownOptions<ProductionNames>(
             data,
             'productionCompanyName',
             'productionCompanyName'

@@ -22,6 +22,7 @@ import { BoxContainerComponent } from './components/box-container/box-container.
 import { MatTableModule } from '@angular/material/table';
 import { SearchComponent } from './components/search/search.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { ContractDropdownComponent } from './components/contract-dropdown/contract-dropdown/contract-dropdown.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     HeaderComponent,
     DropdownComponent,
     BoxContainerComponent,
-    SearchComponent
+    SearchComponent,
+    ContractDropdownComponent
   ],
   imports: [
     CommonModule,
@@ -55,7 +57,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatIconModule,
     BoxContainerComponent,
     MatTooltipModule,
-    SearchComponent
+    SearchComponent,
+    ContractDropdownComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
 })

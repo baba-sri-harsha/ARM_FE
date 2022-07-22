@@ -1,0 +1,25 @@
+<form class="example-form">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>{{ label }}</mat-label>
+      <input
+        type="text"
+        required
+        matInput
+        [formControl]="myControl"
+        [matAutocomplete]="auto"
+        #inputValue
+      />
+      <mat-icon>arrow_drop_down</mat-icon>
+  
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option 
+        *ngFor="let option of filteredOptions | async" 
+        [value]="option.value"
+        matTooltip="{{ option.value }}"
+        [matTooltipPosition]="position[0]"
+        >
+          {{ option.value }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>

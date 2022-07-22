@@ -1,20 +1,56 @@
-<app-box-container>
-  <ng-container header>
-    <div class="request" color="primary">Contract Details</div>
+<div class="appbar">
+  <mat-toolbar>
+    <span>Contract Details</span>
 
-    <!-- <div class="dropdown-container"> -->
-    <div class="cont">
-      <app-dropdown label="Production Company"> </app-dropdown>
+    <!-- <div class="cont">
+        <input class="important" list="options1" placeholder="Production Company" required/>
+      <datalist id="options1">
+        <option
+          [value]="option.value"
+          *ngFor="let option of productionCompanyName"
+        ></option>
+      </datalist>
     </div>
     <div class="cont">
-      <app-dropdown label="Project Name"> </app-dropdown>
-    </div>
-    <div class="cont">
-      <app-dropdown label="Talent Name"> </app-dropdown>
-    </div>
+        <input class="important" list="options2" placeholder="Project Name" required/>
+        <datalist id="options2">
+          <option
+            [value]="option.value"
+            *ngFor="let option of talentNames"
+          ></option>
+        </datalist>
+      </div>
+      <div class="cont">
+        <input class="important" list="options3" placeholder="Talent Name" required/>
+        <datalist id="options3">
+          <option
+            [value]="option.value"
+            *ngFor="let option of projectNames"
+          ></option>
+        </datalist>
+      </div>  -->
+
+    <app-contract-dropdown
+      *ngIf="productionDropdownOptions.length > 0"
+      label="Production Company"
+      [options]="productionDropdownOptions"
+    >
+    </app-contract-dropdown>
+    <app-contract-dropdown
+      *ngIf="projectDropdownOptions.length > 0"
+      label="Project Name"
+      [options]="projectDropdownOptions"
+    >
+    </app-contract-dropdown>
+    <app-contract-dropdown
+      *ngIf="talentDropdownOptions.length > 0"
+      label="Talent Name"
+      [options]="talentDropdownOptions"
+    ></app-contract-dropdown>
+
     <div class="cont">Production#</div>
     <div class="cont">Date<mat-icon>calendar_today</mat-icon></div>
-  </ng-container>
+  </mat-toolbar>
 
   <div class="container">
     <div class="box1">
@@ -25,10 +61,10 @@
         <div class="cal">
           <app-important-dates></app-important-dates>
         </div>
-        <div class="cal">
+        <div class="doc">
           <app-documents-dossier></app-documents-dossier>
         </div>
       </div>
     </div>
   </div>
-</app-box-container>
+</div>

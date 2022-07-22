@@ -11,7 +11,6 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { CreateRequestComponent } from './components/create-request/create-request.component';
 import { RequestListComponent } from './components/request-list/request-list.component';
 import { TaskListComponent } from './components/task-list/task-list.component';
-import { ContractDetailsComponent } from './components/contract-details/contract-details.component';
 import { ReportCategoryComponent } from './components/report-category/report-category.component';
 import { ImportantDatesComponent } from './components/important-dates/important-dates.component';
 import { DocumentsDossierComponent } from './components/documents-dossier/documents-dossier.component';
@@ -20,7 +19,11 @@ import { MatTableModule } from '@angular/material/table';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatInputModule } from '@angular/material/input';
+import { ContractDetailsComponent } from './components/contract-details/contract-details.component';
 
 @NgModule({
   declarations: [
@@ -28,10 +31,11 @@ import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
     CreateRequestComponent,
     TaskListComponent,
     RequestListComponent,
-    ContractDetailsComponent,
     ReportCategoryComponent,
     ImportantDatesComponent,
-    DocumentsDossierComponent
+    DocumentsDossierComponent,
+    ContractDetailsComponent
+
   ],
 
   imports: [
@@ -48,7 +52,11 @@ import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
     MatNativeDateModule,
     ReactiveFormsModule,
     FormsModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatToolbarModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    
   ],
   exports: [RequestListComponent],
   providers: []
