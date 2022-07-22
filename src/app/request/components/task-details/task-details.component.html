@@ -1,0 +1,132 @@
+<app-layout>
+  <ng-container header>
+    <span class="top-header" *ngIf="taskDetails"
+      >Request: {{ taskDetails.requestId }}</span
+    >
+
+    <span class="top-header" *ngIf="taskDetails"
+      >Date: {{ taskDetails.requestRaised }}</span
+    >
+
+    <span class="top-header" *ngIf="taskDetails"
+      >Priority:{{ taskDetails.priority }}</span
+    >
+    <div>
+      <button mat-raised-button color="secondary">Close</button>
+      <span></span>
+    </div>
+  </ng-container>
+
+  <app-box-container>
+    <ng-container header>
+      <div class="contract" color="primary">Contract Details</div>
+
+      <div *ngIf="taskDetails">
+        <div class="cont">
+          <span class="head">Production Company*</span>
+          <span class="title">{{ taskDetails.productionCompanyName }}</span>
+          <mat-icon class="drop-down">arrow_drop_down</mat-icon>
+        </div>
+      </div>
+      <div *ngIf="taskDetails">
+        <div class="cont">
+          <span class="head">Project Name*</span>
+          <span class="title">{{ taskDetails.projectName }}</span>
+          <mat-icon class="drop-down">arrow_drop_down</mat-icon>
+        </div>
+      </div>
+      <div *ngIf="taskDetails">
+        <div class="cont">
+          <span class="head">Talent Name*</span>
+          <span class="title">{{ taskDetails.talentName }}</span>
+          <mat-icon class="drop-down">arrow_drop_down</mat-icon>
+        </div>
+      </div>
+      <div *ngIf="taskDetails">
+        <div class="cont">
+          <span class="head">Production# </span>
+          <span class="title">{{ taskDetails.ProductionNumber }}</span>
+          <mat-icon class="drop-down">arrow_drop_down</mat-icon>
+        </div>
+      </div>
+      <div *ngIf="taskDetails">
+        <div class="cont">
+          <span class="head">Date</span>
+          <span class="title"> {{ taskDetails.requestRaised }}</span>
+          <mat-icon class="drop-down">calendar_today</mat-icon>
+        </div>
+      </div>
+    </ng-container>
+
+    <div class="container">
+      <div class="box1">
+        <table mat-table [dataSource]="data" class="mat-elevation-z8">
+          <ng-container matColumnDef="category">
+            <th mat-header-cell *matHeaderCellDef>Category</th>
+            <td mat-cell *matCellDef>
+              <mat-checkbox
+                [checked]="true"
+                disabled="true"
+                *ngIf="taskDetails"
+                >{{ taskDetails.taskDescription }}</mat-checkbox
+              >
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="auditPeriod">
+            <th mat-header-cell *matHeaderCellDef>Audit Period</th>
+            <td mat-cell *matCellDef>
+              <div *ngIf="taskDetails">
+                {{ taskDetails.auditStartDate }}~{{ taskDetails.auditEndDate }}
+              </div>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Transaction History">
+            <th mat-header-cell *matHeaderCellDef>Transaction History</th>
+            <td mat-cell *matCellDef="let data">
+              SAP:
+              <button>
+                <mat-icon aria-hidden="false" aria-label="{2:label} icon"
+                  >input</mat-icon
+                >
+              </button>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Actions</th>
+            <td mat-cell *matCellDef>
+              <button mat-icon-button disabled="true">
+                <mat-icon>notifications_alert</mat-icon>
+              </button>
+              <button mat-icon-button disabled="true">
+                <mat-icon>upload</mat-icon>
+              </button>
+              <button mat-icon-button disabled="true">
+                <mat-icon>save_alt</mat-icon>
+              </button>
+              <button mat-icon-button disabled="true">
+                <mat-icon>preview</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+        <!-- <app-box-container>
+          <h1>Message Component</h1>
+        </app-box-container> -->
+      </div>
+
+      <div class="box2">
+        <div class="right-box">
+          <div class="cal">
+            <app-documents-dossier></app-documents-dossier>
+          </div>
+        </div>
+      </div>
+    </div>
+  </app-box-container>
+</app-layout>

@@ -15,6 +15,7 @@ import { MatTableDataSource } from '@angular/material/table';
 // import { MatTableDataSource } from '@angular/material/table';
 import { TaskService } from 'src/app/services/task/task.service';
 import { AuthService } from 'src/app/user/auth.service';
+import { TaskVO } from 'src/app/models/taskVO';
 
 @Component({
   selector: 'app-task-list',
@@ -59,9 +60,8 @@ export class TaskListComponent implements OnInit, OnChanges, AfterViewInit {
       .getTasksForLoggedInUser(this.userProfile.username)
       .subscribe((data: Task[]) => {
         this.dataSource.data = data;
+        console.log('Data:', data);
       });
-
-    // console.log(this.dataSource);
   }
 
   @ViewChild('paginator') paginator!: MatPaginator;

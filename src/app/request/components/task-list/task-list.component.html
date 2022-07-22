@@ -58,8 +58,10 @@
 
     <ng-container matColumnDef="quickActions">
       <th mat-header-cell *matHeaderCellDef>Quick Actions</th>
-      <td mat-cell *matCellDef class="conte">
-        <button class="cont"><mat-icon>forum</mat-icon></button>
+      <td mat-cell class="conte" *matCellDef="let task">
+        <button class="cont">
+          <mat-icon [routerLink]="['taskDetails', task.taskId]">forum</mat-icon>
+        </button>
 
         <button class="cont"><mat-icon>edit_note_black</mat-icon></button>
         <button class="cont"><mat-icon>visibility</mat-icon></button>

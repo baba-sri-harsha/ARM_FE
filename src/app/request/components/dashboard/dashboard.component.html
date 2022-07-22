@@ -1,6 +1,11 @@
 <app-layout>
   <ng-container header>
-    <button mat-raised-button color="primary" [routerLink]="['create']">
+    <button
+      mat-raised-button
+      color="primary"
+      [routerLink]="['create']"
+      *ngIf="role === 'manager'"
+    >
       <mat-icon>playlist_add</mat-icon>Create New
     </button>
 
@@ -39,7 +44,14 @@
     <app-search (searchTextChanged)="onSearchTextEntered($event)"></app-search>
   </ng-container>
   <ng-container>
-    <!-- <app-task-list [searchedValue]="searchText"></app-task-list> -->
-    <app-request-list [searchedValue]="searchText"></app-request-list>
+    <app-task-list
+      [searchedValue]="searchText"
+      *ngIf="role === 'report_owner'"
+    ></app-task-list>
+    <app-request-list
+      [searchedValue]="searchText"
+      *ngIf="role === 'manager'"
+    ></app-request-list>
+    <!-- <app-task-details></app-task-details> -->
   </ng-container>
 </app-layout>

@@ -29,6 +29,11 @@ describe('DashboardComponent', () => {
       return of([{ productionCompanyName: 'abc' }]);
     }
   };
+  const MockKeycloakService = {
+    getKeycloakInstance: () => {
+      return ['manger'];
+    }
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -39,7 +44,8 @@ describe('DashboardComponent', () => {
         LayoutComponent
       ],
       imports: [HttpClientModule],
-      providers: [KeycloakService,
+      providers: [
+        { provide: KeycloakService, useValue: MockKeycloakService },
         { provide: DropdownService, useValue: MockDropdownService },
         { provide: TalentService, useValue: MockTalentService },
         { provide: ProductionService, useValue: MockProductionService }

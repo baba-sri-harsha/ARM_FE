@@ -9,7 +9,7 @@ export class RequestService {
   private _baseurl = 'http://localhost:9090/api/request';
   constructor(private _httpClient: HttpClient) {}
 
-  getAllRequests = (username: string|undefined): Observable<Request[]> => {
+  getAllRequests = (username: string | undefined): Observable<Request[]> => {
     return this._httpClient.get<Request[]>(`${this._baseurl}/${username}`);
   };
 }

@@ -20,10 +20,14 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { TaskDetailsComponent } from './components/task-details/task-details.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { ContractDetailsComponent } from './components/contract-details/contract-details.component';
+
 
 @NgModule({
   declarations: [
@@ -34,8 +38,8 @@ import { ContractDetailsComponent } from './components/contract-details/contract
     ReportCategoryComponent,
     ImportantDatesComponent,
     DocumentsDossierComponent,
+    TaskDetailsComponent,
     ContractDetailsComponent
-
   ],
 
   imports: [
@@ -51,12 +55,13 @@ import { ContractDetailsComponent } from './components/contract-details/contract
     MatDatepickerModule,
     MatNativeDateModule,
     ReactiveFormsModule,
+    MatSelectModule,
     FormsModule,
     MatFormFieldModule,
+    MatCheckboxModule,
     MatToolbarModule,
     MatAutocompleteModule,
     MatInputModule,
-    
   ],
   exports: [RequestListComponent],
   providers: []

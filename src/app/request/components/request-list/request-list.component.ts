@@ -79,7 +79,7 @@ export class RequestListComponent implements OnInit, OnChanges, AfterViewInit {
         this.dataSource.data = data;
 
         console.log(`Inside Request List Component`);
-        console.log(data);
+        console.log('Request list', data);
       });
     console.log(this.dataSource);
   }

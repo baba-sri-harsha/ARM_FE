@@ -5,6 +5,7 @@ import { TalentNames } from 'src/app/models/talentnames';
 import { ProductionNames } from 'src/app/models/productionnames';
 import { TalentService } from 'src/app/services/talent/talent.service';
 import { ProductionService } from 'src/app/services/production/production.service';
+import { KeycloakService } from 'keycloak-angular';
 enum Priority {
   HIGH = 'High',
   LOW = 'Low',
@@ -44,15 +45,20 @@ export class DashboardComponent implements OnInit {
     { name: Status.SP },
     { name: Status.C }
   ];
-  somedata = '';
+  // somedata = '';
 
   constructor(
     private _dropdownService: DropdownService,
     private _talentService: TalentService,
-    private _productionService: ProductionService
+    private _productionService: ProductionService,
+    private keycloakService: KeycloakService
   ) {}
 
+  roles: string[] | undefined;
+  role: string = '';
+
   ngOnInit(): void {
+    console.log(`Inside dashboard component`);
     this._talentService.getAllTalents().subscribe((data: TalentNames[]) => {
       this.talentDropdownOptions =
         this._dropdownService.getDropdownOptions<TalentNames>(
@@ -88,6 +94,13 @@ export class DashboardComponent implements OnInit {
         'name',
         'name'
       );
+    this.roles =
+      this.keycloakService.getKeycloakInstance().realmAccess?.['roles'];
+    if (this.roles?.indexOf('report_owner') != -1) {
+      this.role = 'report_owner';
+    } else {
+      this.role = 'manager';
+    }
   }
 
   searchText: string = '';

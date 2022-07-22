@@ -4,6 +4,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { Role } from '../models/role';
 import { AuthGuard } from '../user/auth.guard';
 import { CreateRequestComponent } from './components/create-request/create-request.component';
+import { TaskDetailsComponent } from './components/task-details/task-details.component';
 
 const routes: Routes = [
   {
@@ -17,7 +18,12 @@ const routes: Routes = [
   {
     path: 'create',
     component: CreateRequestComponent
-  }
+  },
+  { path: 'taskDetails/:taskId', component: TaskDetailsComponent }
+  // {
+  //   path: 'task-view',
+  //   component: TaskViewComponent
+  // }
 ];
 
 @NgModule({

@@ -1,0 +1,146 @@
+@import 'src/scss/variables';
+span {
+  font-size: small;
+}
+.container {
+  display: flex;
+  justify-content: right;
+}
+mat-icon {
+  overflow: inherit;
+}
+// .date {
+//   margin-left: 20.5%;
+// }
+.cont {
+  .head {
+    font-weight: 380;
+    margin-left: 5px;
+  }
+  .title {
+    margin-left: 5px;
+  }
+  .drop-down {
+    position: absolute;
+    display: inline-flex;
+    justify-content: right;
+    margin-left: 12.25%;
+    margin-top: 0.25%;
+    color: grey;
+  }
+  background-color: white;
+  height: 40px;
+  width: 200px;
+  //   text-align: center;
+  border-radius: 5px;
+  font-weight: 650;
+  display: flex;
+  flex-direction: column;
+}
+.top-header {
+  background-color: $background-color;
+  height: 30px;
+  width: 130px;
+  border-radius: 7px;
+  font-weight: 600;
+}
+.drop-down {
+  font-size: 30px;
+  display: flex;
+  justify-content: right;
+}
+// category table
+
+table {
+  width: 100%;
+  //   align-items: center;
+  //   overflow: auto;
+}
+th.mat-header-cell {
+  text-align: center;
+  font-size: large;
+  font-weight: bold;
+  color: black;
+  height: 10px;
+  background-color: rgba(184, 184, 184, 0.697);
+}
+tr.mat-header-row {
+  height: 30px;
+}
+.mat-cell,
+.mat-footer-cell {
+  font-size: 14px;
+  text-align: center;
+}
+
+th.mat-header-cell:last-of-type,
+td.mat-cell:last-of-type,
+td.mat-footer-cell:last-of-type {
+  padding-right: 5px;
+}
+
+th.mat-header-cell:first-of-type,
+td.mat-cell:first-of-type,
+td.mat-footer-cell:first-of-type {
+  padding-left: 5px;
+}
+th.mat-header-cell,
+td.mat-cell,
+td.mat-footer-cell {
+  padding: 0;
+  border: rgb(82, 82, 82) solid 1px;
+}
+
+th.mat-header-cell[_ngcontent-qqy-c178]:first-of-type,
+td.mat-cell[_ngcontent-qqy-c178]:first-of-type,
+td.mat-footer-cell[_ngcontent-qqy-c178]:first-of-type {
+  padding-left: 5px;
+  height: 12px;
+  width: 350px;
+}
+th.mat-header-cell[_ngcontent-qqy-c178],
+td.mat-cell[_ngcontent-qqy-c178],
+td.mat-footer-cell[_ngcontent-qqy-c178] {
+  padding: 0px;
+  height: 0px;
+  width: 250px;
+  border: gray solid 1px;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 100%;
+  // overflow: auto;
+}
+.box1 {
+  // border: red solid 1px;
+  // margin: px;
+  width: 100%;
+  height: 100%;
+  margin-top: -5px;
+}
+.box2 {
+  // border: red solid 1px;
+  margin-top: -10px;
+  margin-right: -5px;
+  padding: 5px;
+  // width: 100%;
+  // height: 100%;
+}
+.right-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 5px;
+}
+// .cal {
+//   border: red solid 1px;
+// }
+.category {
+  width: 100%;
+}
+.contract {
+  font-weight: 550;
+}

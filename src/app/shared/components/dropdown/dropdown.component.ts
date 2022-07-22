@@ -23,7 +23,7 @@ export interface DropdownOption {
 export class DropdownComponent implements OnInit {
   @Input()
   label: string = 'Pick one';
-  @Output() childData: EventEmitter<string> = new EventEmitter();
+  // @Output() childData: EventEmitter<string> = new EventEmitter();
 
   @Input() options: DropdownOption[] = [];
   myControl = new FormControl('');
@@ -45,8 +45,8 @@ export class DropdownComponent implements OnInit {
     }
     const filterValue = value.toLowerCase();
 
-    return this.options.filter((food) =>
-      food.value.toLowerCase().includes(filterValue)
+    return this.options.filter((option) =>
+      option.value.toLowerCase().includes(filterValue)
     );
   }
 }

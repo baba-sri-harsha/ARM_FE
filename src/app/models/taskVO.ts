@@ -1,10 +1,11 @@
-export interface Task {
+export interface TaskVO {
   requestId: number;
   taskId: number;
   taskDescription: string;
-  production: string;
+  productionCompanyName: string;
+  ProductionNumber?: string;
   productionId: string;
-  project: string;
+  projectName: string;
   talentName: string;
   priority: string;
   auditStartDate: Date;
