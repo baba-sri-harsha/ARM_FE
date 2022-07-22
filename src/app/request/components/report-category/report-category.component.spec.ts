@@ -1,4 +1,6 @@
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { ReportCategoryComponent } from './report-category.component';
 
@@ -8,9 +10,9 @@ describe('ReportCategoryComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ReportCategoryComponent ]
-    })
-    .compileComponents();
+      declarations: [ReportCategoryComponent],
+      imports: [HttpClientModule, ReactiveFormsModule]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ReportCategoryComponent);
     component = fixture.componentInstance;
