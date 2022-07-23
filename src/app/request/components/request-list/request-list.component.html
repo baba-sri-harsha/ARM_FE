@@ -61,7 +61,9 @@
       <td mat-cell *matCellDef>
         <button><mat-icon>edit_note_black</mat-icon></button>
         <button><mat-icon>visibility</mat-icon></button>
-        <button><mat-icon>add_alert_black</mat-icon></button>
+        <button>
+          <mat-icon (click)="openDialog()">add_alert_black </mat-icon>
+        </button>
         <button><mat-icon>delete</mat-icon></button>
         <button><mat-icon>pending</mat-icon></button>
       </td>

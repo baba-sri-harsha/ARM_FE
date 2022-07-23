@@ -1,0 +1,36 @@
+<app-box-container class="message-container">
+  <div header>
+    <mat-icon>account_box</mat-icon>
+    <!-- <p *ngFor="let message of messages">{{ message.toUserName }}</p> -->
+  </div>
+
+  <div ngClass="message-text-container">
+    <div
+      *ngFor="let message of messages"
+      [ngClass]="{
+        from: message.fromUserName === userProfileName,
+        to: message.fromUserName !== userProfileName
+      }"
+    >
+      <p>{{ message.messageText }}</p>
+      <div>
+        <p
+          [ngClass]="{
+            'message-timestamp-right': message.fromUserName === userProfileName,
+            'message-timestamp-left': message.fromUserName !== userProfileName
+          }"
+        >
+          {{ message.createdAt | date: 'short' }}
+        </p>
+        <!-- <p>{{message.fromUserName}</p> -->
+      </div>
+    </div>
+  </div>
+
+  <div class="message-footer">
+    <textarea class="message-input" [(ngModel)]="messageValue"></textarea>
+    <button (click)="sendMessage()">
+      <mat-icon>send</mat-icon>
+    </button>
+  </div>
+</app-box-container>

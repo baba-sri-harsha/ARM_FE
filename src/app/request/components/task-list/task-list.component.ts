@@ -6,8 +6,10 @@ import {
   Input,
   OnChanges,
   OnInit,
+  QueryList,
   SimpleChanges,
-  ViewChild
+  ViewChild,
+  ViewChildren
 } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -15,7 +17,8 @@ import { MatTableDataSource } from '@angular/material/table';
 // import { MatTableDataSource } from '@angular/material/table';
 import { TaskService } from 'src/app/services/task/task.service';
 import { AuthService } from 'src/app/user/auth.service';
-import { TaskVO } from 'src/app/models/taskVO';
+import { MatDialog } from '@angular/material/dialog';
+import { MessageComponent } from 'src/app/shared/components/message/message.component';
 
 @Component({
   selector: 'app-task-list',
@@ -42,7 +45,11 @@ export class TaskListComponent implements OnInit, OnChanges, AfterViewInit {
     'quickActions'
   ];
 
-  constructor(private _taskService: TaskService, private auth: AuthService) {}
+  constructor(
+    private _taskService: TaskService,
+    private auth: AuthService,
+    public dailog: MatDialog
+  ) {}
 
   @Input() searchedValue: string = '';
 
@@ -66,6 +73,7 @@ export class TaskListComponent implements OnInit, OnChanges, AfterViewInit {
 
   @ViewChild('paginator') paginator!: MatPaginator;
 
+  // @ViewChildren('components') components!: QueryList<number[]>;
   ngAfterViewInit() {
     this.dataSource = new MatTableDataSource(this.dataSource.data);
     this.dataSource.paginator = this.paginator;
@@ -75,4 +83,12 @@ export class TaskListComponent implements OnInit, OnChanges, AfterViewInit {
   searchResults = () => {
     this.dataSource.filter = this.searchedValue.trim().toLowerCase();
   };
+
+  openDialog(): void {
+    this.dailog.open(MessageComponent, {
+      width: '500px',
+      height: '500px',
+      panelClass: 'chat-dialog'
+    });
+  }
 }

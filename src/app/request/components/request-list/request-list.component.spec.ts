@@ -1,3 +1,4 @@
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
@@ -14,8 +15,13 @@ describe('RequestListComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [RequestListComponent],
-      imports: [MatTableModule, MatIconModule, HttpClientModule],
-      providers:[KeycloakService]
+      imports: [
+        MatTableModule,
+        MatIconModule,
+        HttpClientModule,
+        MatDialogModule
+      ],
+      providers: [KeycloakService]
     }).compileComponents();
 
     fixture = TestBed.createComponent(RequestListComponent);

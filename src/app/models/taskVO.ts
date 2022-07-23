@@ -1,6 +1,7 @@
 export interface TaskVO {
   requestId: number;
   taskId: number;
+  createdBy: string;
   taskDescription: string;
   productionCompanyName: string;
   ProductionNumber?: string;

@@ -115,9 +115,11 @@
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
-        <!-- <app-box-container>
-          <h1>Message Component</h1>
-        </app-box-container> -->
+        <!-- <app-box-container> -->
+        <!-- <h1>Message Component</h1>
+           -->
+        <app-message [taskId]="taskId"></app-message>
+        <!-- </app-box-container> -->
       </div>
 
       <div class="box2">

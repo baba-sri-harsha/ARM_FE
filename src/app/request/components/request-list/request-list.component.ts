@@ -13,6 +13,8 @@ import { KeycloakService } from 'keycloak-angular';
 import { KeycloakProfile } from 'keycloak-js';
 import { RequestService } from 'src/app/services/request/request.service';
 import { AuthService } from 'src/app/user/auth.service';
+import { MatDialog } from '@angular/material/dialog';
+import { MessageComponent } from 'src/app/shared/components/message/message.component';
 
 @Component({
   selector: 'app-request-list',
@@ -52,7 +54,8 @@ export class RequestListComponent implements OnInit, OnChanges, AfterViewInit {
   constructor(
     private _requestService: RequestService,
     private keycloakService: KeycloakService,
-    private auth: AuthService
+    private auth: AuthService,
+    public dailog: MatDialog
   ) {}
 
   @Input() searchedValue: string = '';
@@ -91,6 +94,14 @@ export class RequestListComponent implements OnInit, OnChanges, AfterViewInit {
   ngAfterViewInit() {
     this.dataSource = new MatTableDataSource(this.requests);
     this.dataSource.paginator = this.paginator;
+  }
+
+  openDialog(): void {
+    this.dailog.open(MessageComponent, {
+      width: '500px',
+      height: '500px',
+      panelClass: 'chat-dialog'
+    });
   }
 
   searchResults = () => {

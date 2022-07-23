@@ -1,4 +1,3 @@
-import { RequestListComponent } from './../request/components/request-list/request-list.component';
 import {
   CUSTOM_ELEMENTS_SCHEMA,
   NgModule,
@@ -23,6 +22,8 @@ import { MatTableModule } from '@angular/material/table';
 import { SearchComponent } from './components/search/search.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ContractDropdownComponent } from './components/contract-dropdown/contract-dropdown/contract-dropdown.component';
+import { MessageComponent } from './components/message/message.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ContractDropdownComponent } from './components/contract-dropdown/contra
     DropdownComponent,
     BoxContainerComponent,
     SearchComponent,
-    ContractDropdownComponent
+    ContractDropdownComponent,
+    MessageComponent
   ],
   imports: [
     CommonModule,
@@ -47,6 +49,7 @@ import { ContractDropdownComponent } from './components/contract-dropdown/contra
     MatInputModule,
     MatButtonModule,
     MatTooltipModule,
+    MatDialogModule,
     RouterModule.forChild([])
   ],
   exports: [
@@ -58,7 +61,9 @@ import { ContractDropdownComponent } from './components/contract-dropdown/contra
     BoxContainerComponent,
     MatTooltipModule,
     SearchComponent,
-    ContractDropdownComponent
+    ContractDropdownComponent,
+    MessageComponent,
+    MatDialogModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
 })

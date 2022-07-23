@@ -8,15 +8,16 @@ mat-card {
   height: 100%;
   // margin-top: 5px;
   border-radius: 5px;
-  mat-card-title{
-      background-color: #cdd48b;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem;
-      font-size: 18px;
-      font-weight: 400;
+  overflow: auto;
+  mat-card-title {
+    background-color: #cdd48b;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    font-size: 18px;
+    font-weight: 400;
   }
   // mat-card-content{
   //   height: 86%;

@@ -1,3 +1,4 @@
+import { TaskDetails } from './../../../models/taskdetails';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap } from '@angular/router';
@@ -26,8 +27,11 @@ export class TaskDetailsComponent implements OnInit {
     private _activatedRoute: ActivatedRoute,
     private _taskService: TaskService
   ) {}
+
   taskId!: number;
   taskDetails!: TaskVO;
+  reportOwner!: string;
+  taskCredentials!: TaskDetails;
   displayedColumns: string[] = [
     'category',
     'auditPeriod',
@@ -46,15 +50,17 @@ export class TaskDetailsComponent implements OnInit {
     this._activatedRoute.paramMap
       .pipe(
         switchMap((map: ParamMap) => {
-          let tskId = map.get('taskId');
-          if (tskId) this.taskId = parseInt(tskId);
+          let taskId = map.get('taskId');
+          if (taskId) this.taskId = parseInt(taskId);
           // console.log(`${this.taskId}`);
+          // this.taskCredentials.taskId = this.taskId;
 
           return this._taskService.getTaskById(this.taskId);
         })
       )
       .subscribe((data) => {
         this.taskDetails = data;
+        // this.taskCredentials.reportOwner = this.taskDetails.createdBy;
         console.log(`Task Date: ${this.taskDetails.auditStartDate}`);
       });
   }

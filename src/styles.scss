@@ -15,10 +15,21 @@ body {
 }
 
 mat-form-field {
-  .mat-form-field-wrapper{
+  .mat-form-field-wrapper {
     padding-bottom: 0;
   }
-  .mat-form-field-underline{
+  .mat-form-field-underline {
     bottom: 0;
   }
+}
+
+.chat-dialog .mat-dialog-container {
+  overflow-y: hidden !important;
+}
+
+button {
+  text-align: center;
+}
+message-container {
+  margin-top: 0.212rem;
 }

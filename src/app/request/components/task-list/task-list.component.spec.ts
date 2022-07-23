@@ -7,6 +7,7 @@ import { MatTableModule } from '@angular/material/table';
 import { TaskService } from 'src/app/services/task/task.service';
 import { AuthService } from 'src/app/user/auth.service';
 import { TaskListComponent } from './task-list.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 describe('TaskListComponent', () => {
   let component: TaskListComponent;
@@ -15,7 +16,12 @@ describe('TaskListComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TaskListComponent],
-      imports: [MatTableModule, MatIconModule, HttpClientModule],
+      imports: [
+        MatTableModule,
+        MatIconModule,
+        HttpClientModule,
+        MatDialogModule
+      ],
       providers: [AuthService, TaskService, KeycloakService]
     }).compileComponents();
 

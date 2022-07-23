@@ -1,3 +1,4 @@
+import { MessageComponent } from './../shared/components/message/message.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -19,11 +20,12 @@ const routes: Routes = [
     path: 'create',
     component: CreateRequestComponent
   },
-  { path: 'taskDetails/:taskId', component: TaskDetailsComponent }
+  { path: 'taskDetails/:taskId', component: TaskDetailsComponent },
   // {
   //   path: 'task-view',
   //   component: TaskViewComponent
   // }
+  { path: 'message', component: MessageComponent }
 ];
 
 @NgModule({

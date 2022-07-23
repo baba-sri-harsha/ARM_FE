@@ -15,6 +15,7 @@ export class TaskService {
   getTasks = (): Observable<TaskVO[]> => {
     return this._http.get<TaskVO[]>(this._url);
   };
+
   getTasksForLoggedInUser = (userName: any): Observable<Task[]> => {
     return this._http.get<Task[]>(this._url.concat(userName));
   };

@@ -63,8 +63,14 @@
           <mat-icon [routerLink]="['taskDetails', task.taskId]">forum</mat-icon>
         </button>
 
+        <!-- <td mat-cell *matCellDef>
+        <button class="cont" [routerLink]="['/message']">
+          <mat-icon>forum</mat-icon>
+        </button> -->
         <button class="cont"><mat-icon>edit_note_black</mat-icon></button>
-        <button class="cont"><mat-icon>visibility</mat-icon></button>
+        <button class="cont">
+          <mat-icon (click)="openDialog()">visibility</mat-icon>
+        </button>
         <button class="cont"><mat-icon>add_alert_black</mat-icon></button>
         <button class="cont"><mat-icon>delete</mat-icon></button>
         <button class="cont"><mat-icon>pending</mat-icon></button>
@@ -85,3 +91,5 @@
   >
   </mat-paginator>
 </div>
+
+<!-- [queryParams]="{requestId:task.requestId}" -->
