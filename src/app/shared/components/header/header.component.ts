@@ -19,6 +19,10 @@ export class HeaderComponent implements OnInit {
     private keycloakService: KeycloakService
   ) {}
 
+  logout() {
+    this.auth.logout();
+  }
+
   async ngOnInit(): Promise<void> {
     this.loggedIn = await this.auth.isLoggedIn();
     if (this.loggedIn) {
