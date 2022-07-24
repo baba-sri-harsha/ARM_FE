@@ -11,10 +11,6 @@ export class AppComponent implements OnInit {
   public loggedIn: boolean = false;
   public userProfile: KeycloakProfile = {};
 
-  logout() {
-    this.auth.logout();
-  }
-
   constructor(private auth: AuthService) {}
 
   async ngOnInit(): Promise<void> {
