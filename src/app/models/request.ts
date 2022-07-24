@@ -1,3 +1,5 @@
+import { RequestSchedule } from './request-schedule';
+
 export interface Request {
   requestId: number;
   productionCompanyName: string;
@@ -6,6 +8,6 @@ export interface Request {
   talentName: string;
   uniion: string;
   priority: string;
-  RequestSchedule: RequestSchedule;
+  requestSchedule: RequestSchedule;
   status: string;
 }

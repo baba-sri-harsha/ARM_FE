@@ -4,7 +4,7 @@ export interface TaskVO {
   createdBy: string;
   taskDescription: string;
   productionCompanyName: string;
-  ProductionNumber?: string;
+  contractNo?: string;
   productionId: string;
   projectName: string;
   talentName: string;

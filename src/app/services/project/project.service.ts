@@ -12,5 +12,10 @@ export class ProjectService {
   getAllProjects = (): Observable<Project[]> => {
     const url = 'http://localhost:9090/api/projects';
     return this._httpClient.get<Project[]>(url);
-}
+  };
+  getProjectsOfTypedProduction = (productionId: any): Observable<Project[]> => {
+    return this._httpClient.get<Project[]>(
+      `http://localhost:9090/api/projectNames/productionId/${productionId}`
+    );
+  };
 }

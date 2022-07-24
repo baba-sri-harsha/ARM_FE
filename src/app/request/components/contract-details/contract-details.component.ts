@@ -1,16 +1,18 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { TooltipPosition } from '@angular/material/tooltip';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { ProductionNames } from 'src/app/models/productionnames';
 import { Project } from 'src/app/models/project';
-import { TalentNames } from 'src/app/models/talentnames';
 import { ProductionService } from 'src/app/services/production/production.service';
 import { ProjectService } from 'src/app/services/project/project.service';
 import { TalentService } from 'src/app/services/talent/talent.service';
 import { DropdownOption } from 'src/app/shared/components/dropdown/dropdown.component';
 import { DropdownService } from 'src/app/shared/services/dropdown.service';
 
+export interface TalentVOList {
+  talentName: string;
+  contractNo: string;
+}
 @Component({
   selector: 'app-contract-details',
   templateUrl: './contract-details.component.html',
@@ -20,12 +22,15 @@ export class ContractDetailsComponent implements OnInit {
   productionDropdownOptions: DropdownOption[] = [];
   projectDropdownOptions: DropdownOption[] = [];
   talentDropdownOptions: DropdownOption[] = [];
+  contractNo!: string;
+
   constructor(
     private _productionService: ProductionService,
     private _talentService: TalentService,
     private _projectService: ProjectService,
     private _dropdownService: DropdownService
   ) {}
+
   myControl = new FormControl('');
   myControl2 = new FormControl('');
   myControl3 = new FormControl('');
@@ -39,30 +44,49 @@ export class ContractDetailsComponent implements OnInit {
           this._dropdownService.getDropdownOptions<ProductionNames>(
             data,
             'productionCompanyName',
-            'productionCompanyName'
+            'productionId'
           );
-        console.log('data', data);
-        console.log('DropdownOptions', this.productionDropdownOptions);
+        console.log('Productions', data);
       });
-
-    this._talentService.getAllTalents().subscribe((data: TalentNames[]) => {
-      this.talentDropdownOptions =
-        this._dropdownService.getDropdownOptions<TalentNames>(
-          data,
-          'talentName',
-          'talentName'
-        );
-      console.log('Talent', this.talentDropdownOptions);
-    });
-
-    this._projectService.getAllProjects().subscribe((data: Project[]) => {
-      this.projectDropdownOptions =
-        this._dropdownService.getDropdownOptions<Project>(
-          data,
-          'projectName',
-          'projectName'
-        );
-      console.log('Project:', this.projectDropdownOptions);
-    });
   }
+
+  getProjects = (event: any) => {
+    let productionId = parseInt(event.viewValue);
+    console.log('pId', productionId);
+    this._projectService
+      .getProjectsOfTypedProduction(productionId)
+      .subscribe((data: Project[]) => {
+        this.projectDropdownOptions =
+          this._dropdownService.getDropdownOptions<Project>(
+            data,
+            'projectName',
+            'projectName'
+          );
+        console.log('Project Obj', data);
+        console.log('Project:', this.projectDropdownOptions);
+      });
+  };
+
+  getTalents = (event: any) => {
+    this._talentService
+      .getTalentsOfTypedProject(event.productionId, event.projectName)
+      .pipe(
+        map((data) => {
+          return data[0].talentVOList;
+        })
+      )
+      .subscribe((data: any) => {
+        this.talentDropdownOptions =
+          this._dropdownService.getDropdownOptions<any>(
+            data,
+            'talentName',
+            'contractNo'
+          );
+        console.log('Talent', this.talentDropdownOptions);
+        console.log(`Data: ${data}`);
+        console.log('TalentName', data[0].talentName);
+        console.log('ContractNo', data[0].contractNo);
+        this.contractNo = data[0].contractNo;
+      });
+  };
 }

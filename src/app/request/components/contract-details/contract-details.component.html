@@ -31,24 +31,26 @@
       </div>  -->
 
     <app-contract-dropdown
-      *ngIf="productionDropdownOptions.length > 0"
       label="Production Company"
       [options]="productionDropdownOptions"
+      (id)="getProjects($event)"
     >
     </app-contract-dropdown>
     <app-contract-dropdown
-      *ngIf="projectDropdownOptions.length > 0"
       label="Project Name"
       [options]="projectDropdownOptions"
+      (id)="getTalents($event)"
     >
     </app-contract-dropdown>
     <app-contract-dropdown
-      *ngIf="talentDropdownOptions.length > 0"
       label="Talent Name"
       [options]="talentDropdownOptions"
     ></app-contract-dropdown>
 
-    <div class="cont">Production#</div>
+    <div class="cont">
+      Production: <br />
+      {{ contractNo }}
+    </div>
     <div class="cont">Date<mat-icon>calendar_today</mat-icon></div>
   </mat-toolbar>
 

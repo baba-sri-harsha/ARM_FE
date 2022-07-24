@@ -5,13 +5,16 @@ import { DropdownOption } from '../components/dropdown/dropdown.component';
   providedIn: 'root'
 })
 export class DropdownService {
+  constructor() {}
 
-  constructor() { }
-
-  getDropdownOptions<T extends Record<string, any>>(data:T[], valueKey:string, viewValueKey:string): DropdownOption[]{
-    return data.map((item:T) => ({
+  getDropdownOptions<T extends Record<string, any>>(
+    data: T[],
+    valueKey: string,
+    viewValueKey: string
+  ): DropdownOption[] {
+    return data.map((item: T) => ({
       value: item[valueKey],
       viewValue: item[viewValueKey]
     }));
-  };
+  }
 }

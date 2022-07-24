@@ -1,3 +1,7 @@
+import { TalentVOList } from '../request/components/contract-details/contract-details.component';
+
 export interface TalentNames {
-  talentName: string;
+  talentVOList: TalentVOList[];
+  // talentName: string;
+  // contractNo: any;
 }

@@ -23,7 +23,7 @@ export class ContractDropdownComponent implements OnInit {
   ngOnInit(): void {
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
-      map((value:string | null) => this._filter(value || ''))
+      map((value: string | null) => this._filter(value || ''))
     );
   }
   private _filter(value: string): DropdownOption[] {
@@ -35,5 +35,11 @@ export class ContractDropdownComponent implements OnInit {
     return this.options.filter((option) =>
       option.value.toLowerCase().includes(filterValue)
     );
+  }
+  @Output() id = new EventEmitter<any>();
+
+  getId(event: any) {
+    this.id.emit(event);
+    // console.log(`Id: ${event}`);
   }
 }
