@@ -1,25 +1,59 @@
 import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { map, Observable } from 'rxjs';
+import { UploadService } from 'src/app/services/upload/upload.service';
 
+type Files = {
+  file: string;
+};
 @Component({
   selector: 'app-documents-dossier',
   templateUrl: './documents-dossier.component.html',
   styleUrls: ['./documents-dossier.component.scss']
 })
 export class DocumentsDossierComponent implements OnInit {
-  displayedColumns: string[] = ['item', 'cost'];
-  transactions: any[] = [
-    { item: 'Beach ball', cost: 4 },
-    { item: 'Towel', cost: 5 }
-  ];
+  displayedColumns: string[] = ['DocName', 'Actions'];
 
-  constructor() {}
+  selectedFiles!: FileList;
+  progressInfos = [];
+  message = '';
+  fileInfos!: Observable<any>;
+  filesArray: string[] = [];
+  dataSource = new MatTableDataSource(this.filesArray);
+
+  constructor(private _uploadService: UploadService) {}
 
   ngOnInit(): void {
     console.log(`Inside DocumentDossier`);
+    this.getFiles();
   }
-  getTotalCost() {
-    return this.transactions
-      .map((t) => t.cost)
-      .reduce((acc, value) => acc + value, 0);
+
+  async upload(event: Event) {
+    this._uploadService
+      .uploadFiles((event.target as HTMLInputElement).files, 1, null)
+      .subscribe((data) => {
+        console.log('Uploads:', data);
+        this.getFiles();
+      });
   }
+
+  getFiles = () => {
+    this._uploadService
+      .getAllFiles(1, 0)
+      .pipe(
+        map((data) => {
+          console.log('data:', data);
+          return data;
+        })
+      )
+      .subscribe((data) => {
+        this.filesArray = data;
+        console.log('Files', data);
+      });
+  };
+
+  // selectFiles(event: any) {
+  //   this.progressInfos = [];
+  //   this.selectedFiles = event.target.files;
+  // }
 }
