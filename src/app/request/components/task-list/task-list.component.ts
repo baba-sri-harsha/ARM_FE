@@ -1,5 +1,4 @@
 import { KeycloakProfile } from 'keycloak-js';
-import { AuthGuard } from './../../../user/auth.guard';
 import {
   AfterViewInit,
   Component,

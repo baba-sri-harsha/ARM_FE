@@ -7,7 +7,7 @@ import { CategoryVO } from 'src/app/models/category-vo';
   providedIn: 'root'
 })
 export class RequestService {
-  private _baseurl = 'http://localhost:9090/api/request';
+  private _baseurl = 'api/request';
   constructor(private _httpClient: HttpClient) {}
 
   getAllRequests = (username: string | undefined): Observable<Request[]> => {
@@ -15,7 +15,7 @@ export class RequestService {
   };
 
   getAllCategories = (): Observable<CategoryVO[]> => {
-    const url = 'http://localhost:9090/api/categories_vo';
+    const url = 'api/categories_vo';
 
     return this._httpClient.get<CategoryVO[]>(url, { responseType: 'json' });
   };

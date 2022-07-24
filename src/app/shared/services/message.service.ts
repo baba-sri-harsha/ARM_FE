@@ -10,16 +10,19 @@ import { Injectable } from '@angular/core';
 export class MessageService {
   constructor(private _httpClient: HttpClient) {}
 
-  private _baseUrl = 'http://localhost:9090/messages/';
+  private _baseUrl = '/api/messages/';
 
   getMessageByTaskId = (taskId: number): Observable<Message[]> => {
     return this._httpClient.get<Message[]>(this._baseUrl + `${taskId}`);
   };
 
-  private _createURl = 'http://localhost:9090/messages/create';
+  private _createURl = '/api/create/message';
 
-  createMessage = (message: MessageVo): void => {
+  createMessage = (message: MessageVo): Observable<void> => {
     console.log(message);
-    this._httpClient.post<void>(this._createURl, message);
+    console.log('message');
+    return this._httpClient.post<void>(this._createURl, message);
   };
+
+  // private _getReportOwnerUserIdUrl = 'http://localhost:9090/messages/';
 }

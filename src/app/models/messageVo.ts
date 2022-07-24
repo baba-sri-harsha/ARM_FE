@@ -1,6 +1,6 @@
 export interface MessageVo {
   taskId: number;
-  fromUserName: string | undefined;
-  toUserName: string;
+  fromUserName?: string;
+  toUserName?: string;
   messageText: string;
 }

@@ -13,4 +13,6 @@ export interface TaskVO {
   auditEndDate: Date;
   requestRaised: Date;
   requestClosed: Date;
+  taskCreator: string;
+  reportOwner: string;
 }

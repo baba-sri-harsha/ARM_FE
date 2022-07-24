@@ -1,3 +1,4 @@
+import { MatDialogModule } from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -21,6 +22,7 @@ describe('DropdownComponent', () => {
         MatInputModule,
         ReactiveFormsModule,
         HttpClientModule,
+        MatDialogModule,
         BrowserAnimationsModule
       ]
     }).compileComponents();

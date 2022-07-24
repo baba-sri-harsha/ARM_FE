@@ -58,18 +58,19 @@
 
     <ng-container matColumnDef="quickActions">
       <th mat-header-cell *matHeaderCellDef>Quick Actions</th>
+
       <td mat-cell class="conte" *matCellDef="let task">
         <button class="cont">
           <mat-icon [routerLink]="['taskDetails', task.taskId]">forum</mat-icon>
         </button>
 
-        <!-- <td mat-cell *matCellDef>
-        <button class="cont" [routerLink]="['/message']">
-          <mat-icon>forum</mat-icon>
+        <!-- <td mat-cell *matCellDef="let task">
+        <button class="cont">
+          <mat-icon [routerLink]="['taskDetails', task.taskId]">forum</mat-icon>
         </button> -->
         <button class="cont"><mat-icon>edit_note_black</mat-icon></button>
         <button class="cont">
-          <mat-icon (click)="openDialog()">visibility</mat-icon>
+          <mat-icon>visibility</mat-icon>
         </button>
         <button class="cont"><mat-icon>add_alert_black</mat-icon></button>
         <button class="cont"><mat-icon>delete</mat-icon></button>

@@ -23,7 +23,8 @@ import { SearchComponent } from './components/search/search.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ContractDropdownComponent } from './components/contract-dropdown/contract-dropdown/contract-dropdown.component';
 import { MessageComponent } from './components/message/message.component';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MessagedialogComponent } from './components/messagedialog/messagedialog.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     BoxContainerComponent,
     SearchComponent,
     ContractDropdownComponent,
-    MessageComponent
+    MessageComponent,
+    MessagedialogComponent
   ],
   imports: [
     CommonModule,
@@ -65,6 +67,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MessageComponent,
     MatDialogModule
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
+  providers: []
 })
 export class SharedModule {}

@@ -1,3 +1,4 @@
+import { MatDialogModule } from '@angular/material/dialog';
 import { KeycloakService } from 'keycloak-angular';
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
@@ -7,7 +8,6 @@ import { MatTableModule } from '@angular/material/table';
 import { TaskService } from 'src/app/services/task/task.service';
 import { AuthService } from 'src/app/user/auth.service';
 import { TaskListComponent } from './task-list.component';
-import { MatDialogModule } from '@angular/material/dialog';
 
 describe('TaskListComponent', () => {
   let component: TaskListComponent;

@@ -1,23 +1,22 @@
-import { TaskVO } from './../../../models/taskVO';
-import { KeycloakService } from 'keycloak-angular';
-import { MessageVo } from './../../../models/messageVo';
-import { Message } from './../../../models/message';
-import { Component, Inject, Injector, Input, OnInit } from '@angular/core';
-import { MessageService } from '../../services/message.service';
-import { KeycloakProfile } from 'keycloak-js';
-import { AuthService } from 'src/app/user/auth.service';
-import { TaskService } from 'src/app/services/task/task.service';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { KeycloakService } from 'keycloak-angular';
+import { KeycloakProfile } from 'keycloak-js';
+import { Message } from 'src/app/models/message';
+import { MessageVo } from 'src/app/models/messageVo';
+import { TaskVO } from 'src/app/models/taskVO';
+import { TaskService } from 'src/app/services/task/task.service';
+import { AuthService } from 'src/app/user/auth.service';
+import { MessageService } from '../../services/message.service';
+import { MessageComponent } from '../message/message.component';
 
 @Component({
-  selector: 'app-message',
-  templateUrl: './message.component.html',
-  styleUrls: ['./message.component.scss']
+  selector: 'app-messagedialog',
+  templateUrl: './messagedialog.component.html',
+  styleUrls: ['./messagedialog.component.scss']
 })
-export class MessageComponent implements OnInit {
-  @Input() taskId!: number;
-
-  textElement = document.getElementById('message');
+export class MessagedialogComponent implements OnInit {
+  taskId!: number;
 
   messageValue: string = '';
   task!: TaskVO;
@@ -32,18 +31,15 @@ export class MessageComponent implements OnInit {
     messageText: ''
   };
 
-  // private dialogRef = null;
-  // private dialogData;
   constructor(
     private _messageService: MessageService,
     private _authService: AuthService,
     private _keycloakService: KeycloakService,
-    private _taskService: TaskService // private injector: Injector
+    private _taskService: TaskService,
+    public dialogRef: MatDialogRef<MessageComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    // this.dialogRef = this.injector.get(MatDialogRef, null);
-    // this.dialogData = this.injector.get(MAT_DIALOG_DATA, null);
-    // this.taskId = data.taskId;
-    // this.userMessage.taskId = this.data.taskId;
+    this.taskId = data.taskId;
   }
 
   async ngOnInit(): Promise<void> {

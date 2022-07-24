@@ -1,6 +1,8 @@
+import { MessagedialogComponent } from './../../../shared/components/messagedialog/messagedialog.component';
 import {
   AfterViewInit,
   Component,
+  Inject,
   Input,
   OnChanges,
   OnInit,
@@ -13,8 +15,9 @@ import { KeycloakService } from 'keycloak-angular';
 import { KeycloakProfile } from 'keycloak-js';
 import { RequestService } from 'src/app/services/request/request.service';
 import { AuthService } from 'src/app/user/auth.service';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MessageComponent } from 'src/app/shared/components/message/message.component';
+import { Dialog } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'app-request-list',
@@ -97,10 +100,11 @@ export class RequestListComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   openDialog(): void {
-    this.dailog.open(MessageComponent, {
+    const dialogRef = this.dailog.open(MessagedialogComponent, {
       width: '500px',
       height: '500px',
-      panelClass: 'chat-dialog'
+      panelClass: 'chat-dialog',
+      data: { taskId: 1 }
     });
   }
 

@@ -1,14 +1,17 @@
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { MessageComponent } from './message.component';
-import { MessageService } from '../../services/message.service';
+import {
+  MatDialogModule,
+  MatDialogRef,
+  MAT_DIALOG_DATA
+} from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { KeycloakService } from 'keycloak-angular';
 
-describe('MessageComponent', () => {
-  let component: MessageComponent;
-  let fixture: ComponentFixture<MessageComponent>;
+import { MessagedialogComponent } from './messagedialog.component';
+
+describe('MessagedialogComponent', () => {
+  let component: MessagedialogComponent;
+  let fixture: ComponentFixture<MessagedialogComponent>;
 
   const MockKeycloakService = {
     getKeycloakInstance: () => {
@@ -18,20 +21,19 @@ describe('MessageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MessageComponent],
+      declarations: [MessagedialogComponent],
       imports: [HttpClientModule, MatDialogModule],
-
       providers: [
-        MessageService,
         { provide: KeycloakService, useValue: MockKeycloakService },
         {
           provide: MatDialogRef,
           useValue: {}
-        }
+        },
+        { provide: MAT_DIALOG_DATA, useValue: {} }
       ]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(MessageComponent);
+    fixture = TestBed.createComponent(MessagedialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

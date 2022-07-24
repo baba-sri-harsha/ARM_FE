@@ -7,6 +7,8 @@ export interface Message {
   toUserName: string;
   createdAt: Date;
   messageText: string;
+  taskCreator: string;
+  reportOwner: string | undefined;
   seen: boolean;
   deleted: boolean;
 }
