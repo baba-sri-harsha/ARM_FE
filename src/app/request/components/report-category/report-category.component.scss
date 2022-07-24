@@ -35,7 +35,8 @@ th.mat-header-cell,
 td.mat-cell,
 td.mat-footer-cell {
   padding: 0;
-  border: rgb(82, 82, 82) solid 1px;
+  border: rgb(82, 82, 82) solid 0.5px;
+  max-width: 80px;
 }
 //   .icon{
 //     height: 10px;
