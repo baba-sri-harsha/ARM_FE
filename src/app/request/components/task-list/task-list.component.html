@@ -15,11 +15,11 @@
       <td mat-cell *matCellDef="let task">{{ task.productionCompanyName }}</td>
     </ng-container>
 
-    <!-- 
-    <ng-container matColumnDef="productionId">
+    
+    <ng-container matColumnDef="contractNo">
       <th mat-header-cell *matHeaderCellDef>Production#</th>
-      <td mat-cell *matCellDef="let task">{{ task.productionId }}</td>
-    </ng-container> -->
+      <td mat-cell *matCellDef="let task">{{ task.contractNo }}</td>
+    </ng-container>
 
     <ng-container matColumnDef="projectName">
       <th mat-header-cell *matHeaderCellDef>Project</th>
@@ -85,9 +85,8 @@
   <mat-paginator
     class="pagination"
     #paginator
-    pageSize="5"
-    [length]="100"
-    [pageSizeOptions]="[5, 9]"
+    pageSize="6"
+    [pageSizeOptions]="[2, 4, 6, 8, 10]"
     showFirstLastButtons
   >
   </mat-paginator>

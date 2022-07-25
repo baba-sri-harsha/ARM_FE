@@ -3,7 +3,7 @@ export interface Task {
   taskId: number;
   taskDescription: string;
   production: string;
-  productionId: string;
+  contractNo: string;
   project: string;
   talentName: string;
   priority: string;

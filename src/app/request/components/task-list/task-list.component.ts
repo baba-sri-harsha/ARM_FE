@@ -34,6 +34,7 @@ export class TaskListComponent implements OnInit, OnChanges, AfterViewInit {
     'requestId',
     'taskDescription',
     'productionCompanyName',
+    'contractNo',
     'projectName',
     'talentName',
     'priority',
@@ -65,6 +66,7 @@ export class TaskListComponent implements OnInit, OnChanges, AfterViewInit {
     this._taskService
       .getTasksForLoggedInUser(this.userProfile.username)
       .subscribe((data: Task[]) => {
+        console.log('User', this.userProfile.username);
         this.dataSource.data = data;
         console.log('Data:', data);
       });

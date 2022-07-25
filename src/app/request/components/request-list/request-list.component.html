@@ -12,9 +12,9 @@
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="productionNumber">
+    <ng-container matColumnDef="contractNo">
       <th mat-header-cell *matHeaderCellDef>Production#</th>
-      <td mat-cell *matCellDef="let request">{{ request.productionNumber }}</td>
+      <td mat-cell *matCellDef="let request">{{ request.contractNo }}</td>
     </ng-container>
 
     <ng-container matColumnDef="projectName">
@@ -74,8 +74,8 @@
   </table>
   <mat-paginator
     #paginator
-    pageSize="5"
-    [pageSizeOptions]="[5, 9]"
+    pageSize="6"
+    [pageSizeOptions]="[2, 4, 6, 8, 10]"
     showFirstLastButtons
   >
   </mat-paginator>

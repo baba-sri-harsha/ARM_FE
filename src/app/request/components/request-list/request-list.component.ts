@@ -28,7 +28,7 @@ export class RequestListComponent implements OnInit, OnChanges, AfterViewInit {
   headers = [
     'requestId',
     'productionCompanyName',
-    'productionNumber',
+    'contractNo',
     'projectName',
     'talentName',
     'union',
