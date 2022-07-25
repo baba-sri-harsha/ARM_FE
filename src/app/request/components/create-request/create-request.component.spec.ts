@@ -2,7 +2,6 @@ import { LayoutComponent } from './../../../shared/components/layout/layout.comp
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CreateRequestComponent } from './create-request.component';
-import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 
@@ -13,7 +12,7 @@ describe('CreateRequestComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [CreateRequestComponent, LayoutComponent],
-      imports: [RouterTestingModule]
+      imports: [HttpClientModule,RouterTestingModule]
     }).compileComponents();
 
     fixture = TestBed.createComponent(CreateRequestComponent);
