@@ -1,29 +1,41 @@
 @import 'src/scss/variables';
 .cont {
-    margin-left: 0.4rem;
-  }
-
-  .dropdown-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .icon {
-    margin-right: 0.5rem;
-  }
-.header{
-    display: flex;
-    justify-content: space-between;
+  margin-left: 0.4rem;
 }
 
-.request{
-    background-color: $background-color;
-    align-items:  center;
+.dropdown-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
-button{
-    // border : red solid 1px;
-    margin-right: 1rem;
+.icon {
+  margin-right: 0.5rem;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.request {
+  background-color: $background-color;
+  align-items: center;
+}
+
+button {
+  // border : red solid 1px;
+  margin-right: 1rem;
+}
+
+.request {
+  background-color: $background-color;
+  align-items: center;
+  border-radius: 3px;
+  padding: 5px;
+  //   display: flex;
+  //   flex-direction: column;
+  //   justify-content: center;
+  //   align-items: center;
+  text-align: center;
 }
