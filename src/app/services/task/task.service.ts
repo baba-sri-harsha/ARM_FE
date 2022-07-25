@@ -8,8 +8,8 @@ import { TaskVO } from 'src/app/models/taskVO';
 })
 export class TaskService {
   // private _url = '../../assets/json/task.json';
-  private _url = 'http://localhost:9090/api/tasks/';
-  private url = 'http://localhost:9090/api/taskVo/taskId/';
+  private _url = '/api/tasks/';
+  private url = '/api/taskVo/taskId/';
   constructor(private _http: HttpClient) {}
 
   getTasks = (): Observable<TaskVO[]> => {

@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TalentNames } from 'src/app/models/talentnames';
-import { TalentVOList } from 'src/app/request/components/contract-details/contract-details.component';
 
 @Injectable({
   providedIn: 'root'
