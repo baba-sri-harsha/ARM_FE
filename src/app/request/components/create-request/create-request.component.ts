@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ReqId } from 'src/app/models/req-id';
-import { ReqIdService } from 'src/app/services/requestId/req-id.service';
+import { Router } from '@angular/router';
 import { DropdownOption } from 'src/app/shared/components/dropdown/dropdown.component';
 import { DropdownService } from 'src/app/shared/services/dropdown.service';
 enum Priority {
@@ -39,14 +37,11 @@ type Unions = {
 export class CreateRequestComponent implements OnInit {
   constructor(
     private _dropdownService: DropdownService,
-    private _reqIdService: ReqIdService,
-    private _activatedRoute: ActivatedRoute,
-    private router: Router
+    private _router: Router
   ) {}
   priorityDropDownOptions: DropdownOption[] = [];
   statusDropDownOptions: DropdownOption[] = [];
   unionsDropDownOptions: DropdownOption[] = [];
-  reqId:ReqId = { id: 0 };
 
   priorities: Priorities[] = [
     { name: Priority.HIGH },
@@ -65,51 +60,27 @@ export class CreateRequestComponent implements OnInit {
     { name: Union.INDEPENDENT },
     { name: Union.WAG }
   ];
-  url: string = '';
   ngOnInit(): void {
+    this.priorityDropDownOptions =
+      this._dropdownService.getDropdownOptions<Priorities>(
+        this.priorities,
+        'name',
+        'name'
+      );
+    this.statusDropDownOptions =
+      this._dropdownService.getDropdownOptions<Statuses>(
+        this.statuses,
+        'name',
+        'name'
+      );
     console.log('inside CreateRequestComponent ngOnInit');
-    console.log(this.router.url);
-    this.url = this.router.url;
-
-    //----------Request Details-----------------
-
-    if (this.url.includes('/request-details')) {
-      this._activatedRoute.paramMap.subscribe((map) => {
-        let i = map.get('requestId');
-        if (i) this.reqId.id = parseInt(i);
-      });
-    } 
-
-
-    //-------------Create New------------------
-    else {
-      this._reqIdService.getRequestId().subscribe({
-        next: (data) => {
-          this.reqId = data;
-          console.log(data);
-        }
-      });
-
-      this.priorityDropDownOptions =
-        this._dropdownService.getDropdownOptions<Priorities>(
-          this.priorities,
-          'name',
-          'name'
-        );
-      this.statusDropDownOptions =
-        this._dropdownService.getDropdownOptions<Statuses>(
-          this.statuses,
-          'name',
-          'name'
-        );
-      console.log('inside CreateRequestComponent ngOnInit');
-      this.unionsDropDownOptions =
-        this._dropdownService.getDropdownOptions<Unions>(
-          this.unions,
-          'name',
-          'name'
-        );
-    }
+    this.unionsDropDownOptions =
+      this._dropdownService.getDropdownOptions<Unions>(
+        this.unions,
+        'name',
+        'name'
+      );
+    console.log('inside CreateRequestComponent ngOnInit');
   }
 
   redirectToHome = () => {
