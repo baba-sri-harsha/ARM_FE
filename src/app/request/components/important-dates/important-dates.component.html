@@ -1,28 +1,39 @@
 <div class="container">
-    <app-box-container>
-        <ng-container header>
-      Important Dates
-        </ng-container>
-      <table mat-table [dataSource]="transactions" class="mat-elevation-z8" dossier>
-        <!-- Item Column -->
-        <ng-container matColumnDef="item">
-          <th mat-header-cell *matHeaderCellDef>Item</th>
-          <td mat-cell *matCellDef="let transaction">{{ transaction.item }}</td>
-          <td mat-footer-cell *matFooterCellDef>Total</td>
-        </ng-container>
-    
-        <!-- Cost Column -->
-        <ng-container matColumnDef="cost">
-          <th mat-header-cell *matHeaderCellDef>Cost</th>
-          <td mat-cell *matCellDef="let transaction">
-            {{ transaction.cost | currency }}
-          </td>
-          <td mat-footer-cell *matFooterCellDef>{{ getTotalCost() | currency }}</td>
-        </ng-container>
-    
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-        <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
-      </table>
-    </app-box-container>
-    </div>
+  <app-box-container>
+    <ng-container header> Important Dates </ng-container>
+    <table
+      mat-table
+      [dataSource]="ELEMENT_DATA"
+      class="mat-elevation-z8"
+      dossier
+    >
+      <ng-container matColumnDef="option">
+        <td mat-cell *matCellDef="let element">
+          {{ element.option }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="date">
+        <td mat-cell *matCellDef>
+          <mat-form-field class="audit" appearance="fill">
+            <input
+              matInput
+              placeholder="_/_/_"
+              [matDatepicker]="picker"
+              class="audit"
+              appearance="fill"
+            />
+
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </td>
+      </ng-container>
+
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </app-box-container>
+</div>

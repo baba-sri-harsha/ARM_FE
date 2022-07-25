@@ -25,6 +25,7 @@ import { ContractDropdownComponent } from './components/contract-dropdown/contra
 import { MessageComponent } from './components/message/message.component';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MessagedialogComponent } from './components/messagedialog/messagedialog.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { MessagedialogComponent } from './components/messagedialog/messagedialog
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    MatDatepickerModule,
     MatAutocompleteModule,
     MatCardModule,
     MatToolbarModule,
@@ -56,6 +58,7 @@ import { MessagedialogComponent } from './components/messagedialog/messagedialog
   ],
   exports: [
     LayoutComponent,
+    MatDatepickerModule,
     HeaderComponent,
     DropdownComponent,
     MatTableModule,

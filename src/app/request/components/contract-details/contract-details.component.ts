@@ -86,7 +86,11 @@ export class ContractDetailsComponent implements OnInit {
         console.log(`Data: ${data}`);
         console.log('TalentName', data[0].talentName);
         console.log('ContractNo', data[0].contractNo);
-        this.contractNo = data[0].contractNo;
+        // this.contractNo = data[0].contractNo;
       });
+  };
+  getContract = (event: any) => {
+    this.contractNo = event.viewValue;
+    console.log(`Contract No: ${event.viewValue}`);
   };
 }

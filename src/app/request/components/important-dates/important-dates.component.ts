@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+export interface PeriodicElement {
+  option: string;
+  date?: string;
+}
 
 @Component({
   selector: 'app-important-dates',
@@ -6,21 +10,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./important-dates.component.scss']
 })
 export class ImportantDatesComponent implements OnInit {
+  ELEMENT_DATA: PeriodicElement[] = [
+    { option: 'Request Created' },
+    { option: 'Expected Closure' },
+    { option: 'Audit Start Date' },
+    { option: 'Audit End Date' },
+    { option: 'Report Submission' },
+    { option: 'Settlement Date' },
+    { option: 'Receipt Date' }
+  ];
+
   constructor() {}
 
   ngOnInit(): void {
     console.log(`Inside ImportantDates`);
   }
-  displayedColumns: string[] = ['item', 'cost'];
-  transactions: any[] = [
-    { item: 'Beach ball', cost: 4 },
-    { item: 'Towel', cost: 5 }
-  ];
 
-  /** Gets the total cost of all transactions. */
-  getTotalCost() {
-    return this.transactions
-      .map((t) => t.cost)
-      .reduce((acc, value) => acc + value, 0);
-  }
+  displayedColumns: string[] = ['option', 'date'];
+  dataSource = this.ELEMENT_DATA;
 }

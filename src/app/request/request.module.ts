@@ -28,7 +28,6 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { ContractDetailsComponent } from './components/contract-details/contract-details.component';
 
-
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -61,7 +60,7 @@ import { ContractDetailsComponent } from './components/contract-details/contract
     MatCheckboxModule,
     MatToolbarModule,
     MatAutocompleteModule,
-    MatInputModule,
+    MatInputModule
   ],
   exports: [RequestListComponent],
   providers: []
