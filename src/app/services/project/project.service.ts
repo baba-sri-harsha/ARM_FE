@@ -10,12 +10,12 @@ export class ProjectService {
   constructor(private _httpClient: HttpClient) {}
 
   getAllProjects = (): Observable<Project[]> => {
-    const url = 'http://localhost:9090/api/projects';
+    const url = '/api/projects';
     return this._httpClient.get<Project[]>(url);
   };
   getProjectsOfTypedProduction = (productionId: any): Observable<Project[]> => {
     return this._httpClient.get<Project[]>(
-      `http://localhost:9090/api/projectNames/productionId/${productionId}`
+      `/api/projectNames/productionId/${productionId}`
     );
   };
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { DropdownOption } from 'src/app/shared/components/dropdown/dropdown.component';
 import { DropdownService } from 'src/app/shared/services/dropdown.service';
 enum Priority {
@@ -34,7 +35,10 @@ type Unions = {
   styleUrls: ['./create-request.component.scss']
 })
 export class CreateRequestComponent implements OnInit {
-  constructor(private _dropdownService: DropdownService) {}
+  constructor(
+    private _dropdownService: DropdownService,
+    private _router: Router
+  ) {}
   priorityDropDownOptions: DropdownOption[] = [];
   statusDropDownOptions: DropdownOption[] = [];
   unionsDropDownOptions: DropdownOption[] = [];
@@ -78,4 +82,8 @@ export class CreateRequestComponent implements OnInit {
       );
     console.log('inside CreateRequestComponent ngOnInit');
   }
+
+  redirectToHome = () => {
+    this._router.navigate(['/']);
+  };
 }

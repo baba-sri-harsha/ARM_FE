@@ -10,11 +10,13 @@ export class ProductionService {
   constructor(private _httpClient: HttpClient) {}
 
   getAllProductions = (): Observable<ProductionNames[]> => {
-    const url = 'http://localhost:9090/api/productions';
+    const url = '/api/productions';
     return this._httpClient.get<ProductionNames[]>(url);
   };
-  getAllProductionByName = (productionName:string): Observable<ProductionNames[]> => {
-    const url = 'http://localhost:9090/api/productions/${productionName}';
+  getAllProductionByName = (
+    productionName: string
+  ): Observable<ProductionNames[]> => {
+    const url = '/api/productions/${productionName}';
     return this._httpClient.get<ProductionNames[]>(url);
   };
 }
