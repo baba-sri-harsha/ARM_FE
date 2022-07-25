@@ -34,10 +34,10 @@ export class UploadService {
 
     const paramsObj = {
       ...requestId && {
-        requestId
+        request_id: requestId
       },
       ...taskId && {
-        taskId
+        task_id: taskId
       }
     };
     const searchParams = new URLSearchParams(paramsObj);
