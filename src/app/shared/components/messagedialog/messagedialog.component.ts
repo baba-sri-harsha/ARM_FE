@@ -1,4 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { KeycloakService } from 'keycloak-angular';
 import { KeycloakProfile } from 'keycloak-js';
@@ -31,6 +32,8 @@ export class MessagedialogComponent implements OnInit {
     messageText: ''
   };
 
+  messageInputCtrl = new FormControl('');
+
   constructor(
     private _messageService: MessageService,
     private _authService: AuthService,
@@ -62,6 +65,12 @@ export class MessagedialogComponent implements OnInit {
       this.task = task;
       this.userMessage.toUserName = this.getTheRoles();
     });
+
+    this.messageInputCtrl.valueChanges.subscribe((message) => {
+      if (message) {
+        this.userMessage.messageText = message;
+      }
+    });
   }
 
   onMessage(message: string) {
@@ -76,6 +85,7 @@ export class MessagedialogComponent implements OnInit {
     } else {
       this._messageService.createMessage(this.userMessage).subscribe(() => {
         console.log(this.userMessage);
+        this.messageInputCtrl.setValue('');
         this.reloadMessages();
       });
     }

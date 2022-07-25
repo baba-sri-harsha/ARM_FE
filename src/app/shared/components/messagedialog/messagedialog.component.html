@@ -1,10 +1,11 @@
-<p>messagedialog works!</p>
 <!-- <app-message [taskId]="taskId"></app-message> -->
 
 <app-box-container class="message-container">
   <div Class="header" header>
     <mat-icon>account_box</mat-icon>
-    <button (click)="reloadMessages()"><mat-icon>refresh</mat-icon></button>
+    <button mat-button (click)="reloadMessages()">
+      <mat-icon>refresh</mat-icon>
+    </button>
   </div>
 
   <div ngClass="message-text-container">
@@ -30,12 +31,7 @@
   </div>
 
   <div class="message-footer">
-    <textarea
-      #message
-      class="message-input"
-      [(ngModel)]="messageValue"
-      (ngModelChange)="onMessage($event)"
-    ></textarea>
+    <input [formControl]="messageInputCtrl" type="text" class="message-input" />
     <button (click)="sendMessage($event)">
       <mat-icon>send</mat-icon>
     </button>

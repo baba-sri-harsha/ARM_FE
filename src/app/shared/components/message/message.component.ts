@@ -1,13 +1,20 @@
+import { FormControl } from '@angular/forms';
 import { TaskVO } from './../../../models/taskVO';
 import { KeycloakService } from 'keycloak-angular';
 import { MessageVo } from './../../../models/messageVo';
 import { Message } from './../../../models/message';
-import { Component, Inject, Injector, Input, OnInit } from '@angular/core';
+import {
+  AfterViewChecked,
+  AfterViewInit,
+  Component,
+  Input,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import { MessageService } from '../../services/message.service';
 import { KeycloakProfile } from 'keycloak-js';
 import { AuthService } from 'src/app/user/auth.service';
 import { TaskService } from 'src/app/services/task/task.service';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-message',
@@ -17,9 +24,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class MessageComponent implements OnInit {
   @Input() taskId!: number;
 
-  textElement = document.getElementById('message');
-
-  messageValue: string = '';
+  messageValue: string = 'trail';
   task!: TaskVO;
   messages: Message[] = [];
   public userProfile: KeycloakProfile = {};
@@ -32,29 +37,21 @@ export class MessageComponent implements OnInit {
     messageText: ''
   };
 
-  // private dialogRef = null;
-  // private dialogData;
+  messageInputCtrl = new FormControl('');
+
   constructor(
     private _messageService: MessageService,
     private _authService: AuthService,
     private _keycloakService: KeycloakService,
-    private _taskService: TaskService // private injector: Injector
-  ) {
-    // this.dialogRef = this.injector.get(MatDialogRef, null);
-    // this.dialogData = this.injector.get(MAT_DIALOG_DATA, null);
-    // this.taskId = data.taskId;
-    // this.userMessage.taskId = this.data.taskId;
-  }
+    private _taskService: TaskService
+  ) {}
 
   async ngOnInit(): Promise<void> {
     this.userMessage.taskId = this.taskId;
-    // this.userMessage.taskId = this.data.taskId;
-
     this.userProfile = await this._authService.loadUserProfile();
     this.userMessage.fromUserName = this.userProfile.username;
     this.userProfileName = this.userProfile.username;
     console.log(this.userProfileName);
-    // write the taskId in the arguments from  the input tag
     this._messageService.getMessageByTaskId(this.taskId).subscribe((data) => {
       this.messages = data;
       console.log(this.messages);
@@ -66,11 +63,12 @@ export class MessageComponent implements OnInit {
       this.task = task;
       this.userMessage.toUserName = this.getTheRoles();
     });
-  }
 
-  onMessage(message: string) {
-    console.log(message);
-    this.userMessage.messageText = message;
+    this.messageInputCtrl.valueChanges.subscribe((message) => {
+      if (message) {
+        this.userMessage.messageText = message;
+      }
+    });
   }
 
   sendMessage(event: MouseEvent): void {
@@ -81,6 +79,7 @@ export class MessageComponent implements OnInit {
       this._messageService.createMessage(this.userMessage).subscribe(() => {
         console.log(this.userMessage);
         this.reloadMessages();
+        this.messageInputCtrl.setValue('');
       });
     }
   }
