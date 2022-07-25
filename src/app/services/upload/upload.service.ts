@@ -31,10 +31,18 @@ export class UploadService {
   };
 
   getAllFiles = (requestId?: any, taskId?: any): Observable<string[]> => {
-    let url = `${this._baseUrl}/listFiles?requestId=${requestId}&taskId=${taskId}`;
-    // let params = new HttpParams();
-    // params = params.append('requestId', 0);
-    // params = params.append('taskId', 1);
+
+    const paramsObj = {
+      ...requestId && {
+        requestId
+      },
+      ...taskId && {
+        taskId
+      }
+    };
+    const searchParams = new URLSearchParams(paramsObj);
+
+    const url = `${this._baseUrl}/listFiles?${searchParams.toString()}`;
     return this._httpClient.get<string[]>(url);
   };
 }

@@ -44,7 +44,7 @@ export class DocumentsDossierComponent implements OnInit {
 
   getFiles = () => {
     this._uploadService
-      .getAllFiles(1, 0)
+      .getAllFiles(1, null)
       .pipe(
         map((data) => {
           console.log('data:', data);
