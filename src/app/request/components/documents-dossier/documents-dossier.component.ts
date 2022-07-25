@@ -31,10 +31,15 @@ export class DocumentsDossierComponent implements OnInit {
   async upload(event: Event) {
     this._uploadService
       .uploadFiles((event.target as HTMLInputElement).files, 1, null)
-      .subscribe((data) => {
-        console.log('Uploads:', data);
-        this.getFiles();
-      });
+      .subscribe(
+        (data) => {
+          console.log('Uploads:', data);
+          this.getFiles();
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
   }
 
   getFiles = () => {

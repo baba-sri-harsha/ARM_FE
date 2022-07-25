@@ -10,11 +10,7 @@ export class UploadService {
 
   constructor(private _httpClient: HttpClient) {}
 
-  uploadFiles = (
-    files: FileList | null,
-    requestId?: any,
-    taskId?: any
-  ): Observable<any> => {
+  uploadFiles = (files: FileList | null, requestId?: any, taskId?: any) => {
     // taskId = 1;
     const formData: FormData = new FormData();
     if (files === null) {
@@ -29,14 +25,16 @@ export class UploadService {
     if (taskId) {
       formData.append('taskId', taskId);
     }
-    return this._httpClient.post<string>(`${this._baseUrl}/upload`, formData);
+    return this._httpClient.post(`${this._baseUrl}/upload`, formData, {
+      responseType: 'text'
+    });
   };
 
-  getAllFiles = (requestId?: any, taskId?: any): Observable<any> => {
+  getAllFiles = (requestId?: any, taskId?: any): Observable<string[]> => {
     let url = `${this._baseUrl}/listFiles?requestId=${requestId}&taskId=${taskId}`;
     // let params = new HttpParams();
     // params = params.append('requestId', 0);
     // params = params.append('taskId', 1);
-    return this._httpClient.get<string>(url);
+    return this._httpClient.get<string[]>(url);
   };
 }
