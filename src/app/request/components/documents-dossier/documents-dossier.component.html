@@ -2,7 +2,13 @@
   <app-box-container>
     <ng-container header>
       Document dossier
-      <input type="file" (change)="upload($event)" multiple #fileInput />
+      <input
+        type="file"
+        (change)="upload($event)"
+        multiple
+        #fileInput
+        accept=".pdf"
+      />
       <button class="upload-icon" (click)="fileInput.click()">
         <mat-icon header>upload</mat-icon>
       </button>

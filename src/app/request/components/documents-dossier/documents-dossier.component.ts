@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { map, Observable } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { UploadService } from 'src/app/services/upload/upload.service';
 
 type Files = {
@@ -29,8 +29,20 @@ export class DocumentsDossierComponent implements OnInit {
   }
 
   async upload(event: Event) {
+    const files = (event.target as HTMLInputElement).files;
+    if (!files) {
+      return;
+    }
+    for (var i = 0; i < files.length; i++) {
+      if (files[i].size >= 3000000) {
+        console.log('File size exceeds 3MB');
+        return;
+      }
+      console.log('Size:', files[i].size / Math.pow(10, 6), 'MB');
+    }
     this._uploadService
       .uploadFiles((event.target as HTMLInputElement).files, 1, null)
+
       .subscribe(
         (data) => {
           console.log('Uploads:', data);
@@ -44,7 +56,7 @@ export class DocumentsDossierComponent implements OnInit {
 
   getFiles = () => {
     this._uploadService
-      .getAllFiles(1, null)
+      .getAllFiles(null, 1)
       .pipe(
         map((data) => {
           console.log('data:', data);
