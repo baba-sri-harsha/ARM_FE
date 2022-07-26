@@ -18,6 +18,7 @@ import { AuthService } from 'src/app/user/auth.service';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MessageComponent } from 'src/app/shared/components/message/message.component';
 import { Dialog } from '@angular/cdk/dialog';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-request-list',
@@ -67,6 +68,8 @@ export class RequestListComponent implements OnInit, OnChanges, AfterViewInit {
   public loggedIn: boolean = false;
   public userProfile: KeycloakProfile = {};
   firstName: string | undefined;
+  @ViewChild('paginator') paginator!: MatPaginator;
+  @ViewChild(MatSort) matSort!: MatSort;
 
   ngOnChanges(changes: SimpleChanges): void {
     this.searchResults();
@@ -92,11 +95,10 @@ export class RequestListComponent implements OnInit, OnChanges, AfterViewInit {
 
   dataSource = new MatTableDataSource<Request>(this.requests);
 
-  @ViewChild('paginator') paginator!: MatPaginator;
-
   ngAfterViewInit() {
     this.dataSource = new MatTableDataSource(this.requests);
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.matSort;
   }
 
   openDialog(): void {
