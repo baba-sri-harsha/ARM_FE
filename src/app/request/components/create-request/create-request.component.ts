@@ -35,6 +35,7 @@ type Unions = {
   styleUrls: ['./create-request.component.scss']
 })
 export class CreateRequestComponent implements OnInit {
+  myDate = new Date();
   constructor(
     private _dropdownService: DropdownService,
     private _router: Router

@@ -6,7 +6,7 @@
 
     <div class="dropdown-container">
       <div class="cont">
-        <h5>Date: 05/20/2022</h5>
+        <h5>Date:{{ myDate | date: 'yyyy-MM-dd' }}</h5>
       </div>
       <div class="cont">
         <app-dropdown [options]="statusDropDownOptions" label="Status">
