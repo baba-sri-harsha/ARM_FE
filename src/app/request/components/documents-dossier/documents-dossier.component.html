@@ -16,9 +16,15 @@
       <ng-container matColumnDef="Actions">
         <th mat-header-cell *matHeaderCellDef>Actions</th>
         <td mat-cell *matCellDef>
-          <button class="actions"><mat-icon>visibility</mat-icon></button>
-          <button class="actions"><mat-icon>download</mat-icon></button>
-          <button class="actions"><mat-icon>delete</mat-icon></button>
+          <button class="actions" matTooltip="View">
+            <mat-icon>visibility</mat-icon>
+          </button>
+          <button class="actions" matTooltip="Download">
+            <mat-icon>download</mat-icon>
+          </button>
+          <button class="actions" matTooltip="Delete">
+            <mat-icon>delete</mat-icon>
+          </button>
         </td>
       </ng-container>
 
