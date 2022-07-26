@@ -26,6 +26,7 @@ import { MessageComponent } from './components/message/message.component';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MessagedialogComponent } from './components/messagedialog/messagedialog.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatButtonModule,
     MatTooltipModule,
     MatDialogModule,
+    MatSortModule,
     RouterModule.forChild([])
   ],
   exports: [
@@ -68,7 +70,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     SearchComponent,
     ContractDropdownComponent,
     MessageComponent,
-    MatDialogModule
+    MatDialogModule,
+    MatSortModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   providers: []
