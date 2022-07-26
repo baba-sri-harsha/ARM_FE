@@ -6,7 +6,7 @@ export interface Request {
   contractNo: string;
   projectName: string;
   talentName: string;
-  uniion: string;
+  union: string;
   priority: string;
   requestSchedule: RequestSchedule;
   status: string;

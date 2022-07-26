@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ReqId } from 'src/app/models/req-id';
+import { ReqIdService } from 'src/app/services/requestId/req-id.service';
 import { DropdownOption } from 'src/app/shared/components/dropdown/dropdown.component';
 import { DropdownService } from 'src/app/shared/services/dropdown.service';
 enum Priority {
@@ -38,11 +40,15 @@ export class CreateRequestComponent implements OnInit {
   myDate = new Date();
   constructor(
     private _dropdownService: DropdownService,
+    private _reqIdService: ReqIdService,
+    private _activatedRoute: ActivatedRoute,
     private _router: Router
   ) {}
   priorityDropDownOptions: DropdownOption[] = [];
   statusDropDownOptions: DropdownOption[] = [];
   unionsDropDownOptions: DropdownOption[] = [];
+  reqId: ReqId = { id: 0 };
+  url: string = '';
 
   priorities: Priorities[] = [
     { name: Priority.HIGH },
@@ -82,6 +88,27 @@ export class CreateRequestComponent implements OnInit {
         'name'
       );
     console.log('inside CreateRequestComponent ngOnInit');
+    console.log(this._router.url);
+    this.url = this._router.url;
+
+    //----------Request Details-----------------
+
+    if (this.url.includes('/request-details')) {
+      this._activatedRoute.paramMap.subscribe((map) => {
+        let i = map.get('requestId');
+        if (i) this.reqId.id = parseInt(i);
+      });
+    }
+
+    //-------------Create New------------------
+    else {
+      this._reqIdService.getRequestId().subscribe({
+        next: (data) => {
+          this.reqId = data;
+          console.log(data);
+        }
+      });
+    }
   }
 
   redirectToHome = () => {
