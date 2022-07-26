@@ -30,6 +30,9 @@ export class MessageComponent implements OnInit {
   public userProfile: KeycloakProfile = {};
   userProfileName: string | undefined = '';
 
+  receiverName: string | undefined = '';
+  roleOfLoggedInUser: string | undefined = '';
+
   userMessage: MessageVo = {
     taskId: 0,
     fromUserName: '',
@@ -51,17 +54,20 @@ export class MessageComponent implements OnInit {
     this.userProfile = await this._authService.loadUserProfile();
     this.userMessage.fromUserName = this.userProfile.username;
     this.userProfileName = this.userProfile.username;
-    console.log(this.userProfileName);
     this._messageService.getMessageByTaskId(this.taskId).subscribe((data) => {
       this.messages = data;
-      console.log(this.messages);
-      console.log(this.taskId);
-      console.log(this.userMessage.taskId);
     });
 
     this._taskService.getTaskById(this.taskId).subscribe((task) => {
       this.task = task;
       this.userMessage.toUserName = this.getTheRoles();
+      if (this.getTheNames() === 'report_owner') {
+        this.receiverName = this.task.taskCreatorFullName;
+        this.roleOfLoggedInUser = 'Production Manager';
+      } else if (this.getTheNames() === 'manager') {
+        this.receiverName = this.task.reportOwnerFullName;
+        this.roleOfLoggedInUser = 'Report Owner';
+      }
     });
 
     this.messageInputCtrl.valueChanges.subscribe((message) => {
@@ -93,6 +99,17 @@ export class MessageComponent implements OnInit {
       return this.task.reportOwner;
     }
     return '';
+  }
+
+  getTheNames(): string {
+    let roles =
+      this._keycloakService.getKeycloakInstance().realmAccess?.['roles'];
+    if (roles?.indexOf('report_owner') != -1) {
+      return 'report_owner';
+    } else if (roles?.indexOf('manager') != -1) {
+      return 'manager';
+    }
+    return 'report_owner';
   }
 
   reloadMessages = () => {

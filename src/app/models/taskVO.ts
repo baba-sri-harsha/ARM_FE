@@ -15,4 +15,6 @@ export interface TaskVO {
   requestClosed: Date;
   taskCreator: string;
   reportOwner: string;
+  taskCreatorFullName: string;
+  reportOwnerFullName: string;
 }

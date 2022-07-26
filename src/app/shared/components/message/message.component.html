@@ -1,6 +1,11 @@
 <app-box-container class="message-container">
   <div Class="header" header>
-    <mat-icon>account_box</mat-icon>
+    <div>
+      <mat-icon>account_box </mat-icon>
+      <p [ngClass]="'receiver-name'">{{ receiverName }}</p>
+      <p [ngClass]="'receiverRole'">{{ roleOfLoggedInUser }}</p>
+    </div>
+
     <button mat-button (click)="reloadMessages()">
       <mat-icon>refresh</mat-icon>
     </button>
@@ -34,6 +39,3 @@
     </button>
   </div>
 </app-box-container>
-
-<!-- [(ngModel)]="messageValue"
-      (ngModelChange)="onMessage($event)" -->
