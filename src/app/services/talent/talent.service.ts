@@ -8,7 +8,6 @@ import { TalentNames } from 'src/app/models/talentnames';
 })
 export class TalentService {
   constructor(private _httpClient: HttpClient) {}
-
   getAllTalents = (): Observable<TalentNames[]> => {
     const url = '/api/talents';
     return this._httpClient.get<TalentNames[]>(url);
@@ -18,7 +17,7 @@ export class TalentService {
     projectNames: any
   ): Observable<TalentNames[]> => {
     return this._httpClient.get<TalentNames[]>(
-      `/api/projectNames/productionId/20/typedProjectName/Black Widow`
+      `/api/projectNames/productionId/${productionId}/typedProjectName/${projectNames}`
     );
   };
 }

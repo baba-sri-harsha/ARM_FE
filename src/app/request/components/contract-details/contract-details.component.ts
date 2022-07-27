@@ -69,12 +69,17 @@ export class ContractDetailsComponent implements OnInit {
         console.log('Productions', data);
       });
   }
-
+  productionId: number = 0;
   getProjects = (event: any) => {
-    let productionId = parseInt(event.viewValue);
-    console.log('pId', productionId);
+    this.productionId = parseInt(event.viewValue);
+    console.log('pId', this.productionId);
     this._projectService
-      .getProjectsOfTypedProduction(productionId)
+      .getProjectsOfTypedProduction(this.productionId)
+      .pipe(
+        map((data) => {
+          return data;
+        })
+      )
       .subscribe((data: Project[]) => {
         this.projectDropdownOptions =
           this._dropdownService.getDropdownOptions<Project>(
@@ -88,8 +93,9 @@ export class ContractDetailsComponent implements OnInit {
   };
 
   getTalents = (event: any) => {
+    console.log(` Get Talents ${event.viewValue}`);
     this._talentService
-      .getTalentsOfTypedProject(event.productionId, event.projectName)
+      .getTalentsOfTypedProject(this.productionId, event.value)
       .pipe(
         map((data) => {
           return data[0].talentVOList;
