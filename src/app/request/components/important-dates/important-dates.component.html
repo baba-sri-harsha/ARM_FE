@@ -15,7 +15,7 @@
 
       <ng-container matColumnDef="date">
         <td mat-cell *matCellDef>
-          <mat-form-field class="audit" appearance="fill">
+          <mat-form-field class="audit" appearance="fill" *ngFor="let date of dates">
             <input
               matInput
               placeholder="_/_/_"

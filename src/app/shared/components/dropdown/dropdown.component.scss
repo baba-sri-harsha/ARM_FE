@@ -12,16 +12,21 @@ input {
   border: $border;
   color: $text-color;
 }
-
 mat-icon {
   color: $gray;
   position: absolute;
   right: 0;
   bottom: 1px;
 }
+.icon{
+  bottom:12px;
+}
 
 mat-option {
   color: $text-color;
+}
+select {
+  background-color: $background-color;
 }
 ::ng-deep .mat-tooltip {
   font-size: 15px;

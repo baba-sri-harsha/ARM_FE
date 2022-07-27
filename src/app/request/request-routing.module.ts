@@ -20,6 +20,10 @@ const routes: Routes = [
     path: 'create',
     component: CreateRequestComponent
   },
+  {
+    path: 'request-details/:requestId',
+    component: CreateRequestComponent
+  },
   { path: 'taskDetails/:taskId', component: TaskDetailsComponent },
   // {
   //   path: 'task-view',

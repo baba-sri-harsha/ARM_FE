@@ -1,25 +1,40 @@
 <app-layout>
   <ng-container header>
-    <div class="request" color="primary">
+    <div>
       <h3>Request # {{ reqId.id }}</h3>
     </div>
 
     <div class="dropdown-container">
       <div class="cont">
-        <h5>Date:{{ myDate | date: 'yyyy-MM-dd' }}</h5>
+        <h3>Date: {{ req.requestSchedule.requestCreated | date: 'shortDate'}}</h3>
       </div>
       <div class="cont">
-        <app-dropdown [options]="statusDropDownOptions" label="Status">
+        <app-dropdown
+          [options]="statusDropDownOptions"
+          [data]="req.status"
+          [reqDetails]="reqDetails"
+          label="Status"
+        >
         </app-dropdown>
       </div>
 
       <div class="cont">
-        <app-dropdown [options]="priorityDropDownOptions" label="Priority">
+        <app-dropdown
+          [options]="priorityDropDownOptions"
+          [data]="req.priority"
+          [reqDetails]="reqDetails"
+          label="Priority"
+        >
         </app-dropdown>
       </div>
 
       <div class="cont">
-        <app-dropdown [options]="unionsDropDownOptions" label="Union">
+        <app-dropdown
+          [options]="unionsDropDownOptions"
+          [data]="req.unionName"
+          [reqDetails]="reqDetails"
+          label="Union"
+        >
         </app-dropdown>
       </div>
     </div>
@@ -31,5 +46,8 @@
       <button mat-raised-button color="primary">Submit</button>
     </div>
   </ng-container>
-  <app-contract-details></app-contract-details>
+  <app-contract-details
+    [url]="reqDetails"
+    [request]="req"
+  ></app-contract-details>
 </app-layout>

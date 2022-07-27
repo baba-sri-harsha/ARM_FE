@@ -17,7 +17,8 @@ export class ContractDropdownComponent implements OnInit {
   @Input() options: DropdownOption[] = [];
   @Input() label: string = '';
   position: TooltipPosition[] = ['above'];
-
+  @Input() data: string = '';
+  @Input() reqDetails:Boolean=  false;
   constructor() {}
 
   ngOnInit(): void {

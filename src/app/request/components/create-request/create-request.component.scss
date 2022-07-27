@@ -1,3 +1,4 @@
+@use '@angular/material' as mat;
 @import 'src/scss/variables';
 .cont {
   margin-left: 0.4rem;
@@ -22,20 +23,27 @@
   background-color: $background-color;
   align-items: center;
 }
-
+h3{
+  background-color: mat.get-color-from-palette($md-primary-pallette, 500);
+  border-radius: 5px;
+  border: $border;
+  color: $text-color;
+  padding:10px;
+  margin-top: 15px;
+}
 button {
   // border : red solid 1px;
   margin-right: 1rem;
 }
 
-.request {
-  background-color: $background-color;
-  align-items: center;
-  border-radius: 3px;
-  padding: 5px;
-  //   display: flex;
-  //   flex-direction: column;
-  //   justify-content: center;
-  //   align-items: center;
-  text-align: center;
-}
+// .request {
+//   background-color: $background-color;
+//   align-items: center;
+//   border-radius: 3px;
+//   padding: 5px;
+//   //   display: flex;
+//   //   flex-direction: column;
+//   //   justify-content: center;
+//   //   align-items: center;
+//   text-align: center;
+// }

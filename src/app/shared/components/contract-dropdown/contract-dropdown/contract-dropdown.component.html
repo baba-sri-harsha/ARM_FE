@@ -1,6 +1,17 @@
-<form class="example-form">
-  <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>{{ label }}</mat-label>
+
+<div *ngIf="reqDetails; then thenBlock; else elseBlock"></div>
+<ng-template #thenBlock>
+    <mat-form-field appearance="fill" class="then">
+      <mat-label>{{label}}</mat-label>
+      <select required="true" matNativeControl> 
+        <option [value]="data" selected>{{data}}</option>
+      </select>
+    </mat-form-field>
+</ng-template>
+<ng-template #elseBlock>
+  <form class="example-form">
+    <mat-form-field class="example-full-width" appearance="fill">
+  <mat-label>{{ label }}</mat-label>
     <input
       type="text"
       required
@@ -22,5 +33,8 @@
         {{ option.value }}
       </mat-option>
     </mat-autocomplete>
+    
   </mat-form-field>
 </form>
+
+</ng-template>

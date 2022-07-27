@@ -1,3 +1,12 @@
+<div *ngIf="reqDetails; then thenBlock; else elseBlock"></div>
+<ng-template #thenBlock>
+  <select >
+<mat-icon class="icon">arrow_drop_down</mat-icon>
+    <option [value]="data" selected>{{ data }}</option>
+  </select>
+
+</ng-template>
+<ng-template #elseBlock>
 <input
   type="text"
   [placeholder]="label"
@@ -8,12 +17,13 @@
 />
 <mat-icon>arrow_drop_down</mat-icon>
 <mat-autocomplete #auto="matAutocomplete">
-  <mat-option
-    *ngFor="let option of filteredOptions | async"
-    [value]="option.value"
-    matTooltip="{{ option.value }}"
-    [matTooltipPosition]="position[0]"
-  >
-    {{ option.value }}
-  </mat-option>
+    <mat-option
+      *ngFor="let option of filteredOptions | async"
+      [value]="option.value"
+      matTooltip="{{ option.value }}"
+      [matTooltipPosition]="position[0]"
+    >
+      {{ option.value }}
+    </mat-option>
 </mat-autocomplete>
+</ng-template>

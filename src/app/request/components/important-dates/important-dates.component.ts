@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { RequestView } from 'src/app/models/requestView';
 export interface PeriodicElement {
   option: string;
   date?: string;
@@ -19,7 +21,34 @@ export class ImportantDatesComponent implements OnInit {
     { option: 'Settlement Date' },
     { option: 'Receipt Date' }
   ];
-
+  @Input() reqDetails:Boolean = false;
+  @Input() req:RequestView={
+    requestId: 0,
+    productionName: '',
+    productionNumber: '',
+    contractNo: '',
+    projectName: '',
+    contractDate:new Date(),
+    talentName: '',
+    unionName: '',
+    priority:'',
+    requestSchedule:{
+      requestCreated: new Date(),
+    expectedClosure: new Date()
+    },
+    status: '',
+    tasksList:new Set()
+  };
+  dates:Date[]=[
+    new Date(this.req.requestSchedule.requestCreated),
+    new Date(),
+    new Date(),
+    new Date(),
+    new Date(),
+    new Date(),
+    new Date()
+  ]
+  // date1= new FormControl(new Date("22-12-2"));
   constructor() {}
 
   ngOnInit(): void {
@@ -28,4 +57,8 @@ export class ImportantDatesComponent implements OnInit {
 
   displayedColumns: string[] = ['option', 'date'];
   dataSource = this.ELEMENT_DATA;
+  // setDate=(date:Date):Date=>{
+   date = new FormControl(new Date(11,22,4));
+    // return date1.value;
+  // }
 }

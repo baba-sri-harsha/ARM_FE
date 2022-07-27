@@ -26,13 +26,15 @@ export class DropdownComponent implements OnInit {
   // @Output() childData: EventEmitter<string> = new EventEmitter();
 
   @Input() options: DropdownOption[] = [];
+  @Input() data: string = '';
+  @Input() reqDetails:Boolean=  false;
   myControl = new FormControl('');
   position: TooltipPosition[] = ['above'];
   constructor() {}
 
   filteredOptions!: Observable<DropdownOption[]>;
-
   ngOnInit(): void {
+
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map((value: string | null) => this._filter(value || ''))

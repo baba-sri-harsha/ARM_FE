@@ -33,26 +33,38 @@
     <app-contract-dropdown
       label="Production Company"
       [options]="productionDropdownOptions"
+      [data]="request.productionName" [reqDetails]="url"
       (id)="getProjects($event)"
     >
     </app-contract-dropdown>
     <app-contract-dropdown
       label="Project Name"
       [options]="projectDropdownOptions"
+      [data]="request.projectName" [reqDetails]="url"
       (id)="getTalents($event)"
     >
     </app-contract-dropdown>
     <app-contract-dropdown
       label="Talent Name"
       [options]="talentDropdownOptions"
+      [data]="request.talentName" [reqDetails]="url"
       (id)="getContract($event)"
     ></app-contract-dropdown>
 
     <div class="cont contract">
       Production# <br />
-      {{ contractNo }}
+      {{ request.contractNo }}
     </div>
-    <div class="cont">Date<mat-icon>calendar_today</mat-icon></div>
+    <div class="cont contract" *ngIf="url;else elseBlock">Date <br>{{request.contractDate | date: 'shortDate'}}<mat-icon>calendar_today</mat-icon></div>
+     <ng-template #elseBlock> <div class="cont contract">
+      <mat-form-field appearance="fill">
+        <mat-label>Date</mat-label>
+        <input matInput [matDatepicker]="picker">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+     </div></ng-template>
+    
   </mat-toolbar>
 
   <div class="container">
@@ -62,7 +74,8 @@
     <div class="box2">
       <div class="right-box">
         <div class="cal">
-          <app-important-dates></app-important-dates>
+          <app-important-dates [reqDetails]="url"
+          [req]="request"></app-important-dates>
         </div>
         <div class="doc">
           <app-documents-dossier></app-documents-dossier>

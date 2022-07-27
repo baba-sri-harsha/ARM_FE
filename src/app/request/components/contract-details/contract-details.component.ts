@@ -3,6 +3,8 @@ import { FormControl } from '@angular/forms';
 import { map, Observable } from 'rxjs';
 import { ProductionNames } from 'src/app/models/productionnames';
 import { Project } from 'src/app/models/project';
+import { RequestView } from 'src/app/models/requestView';
+import { TaskView } from 'src/app/models/task-view';
 import { ProductionService } from 'src/app/services/production/production.service';
 import { ProjectService } from 'src/app/services/project/project.service';
 import { TalentService } from 'src/app/services/talent/talent.service';
@@ -23,7 +25,25 @@ export class ContractDetailsComponent implements OnInit {
   projectDropdownOptions: DropdownOption[] = [];
   talentDropdownOptions: DropdownOption[] = [];
   contractNo!: string;
+  @Input() request: RequestView={
+    requestId: 0,
+    productionName: '',
+    productionNumber: '',
+    contractNo: '',
+    projectName: '',
+    contractDate:new Date(),
+    talentName: '',
+    unionName: '',
+    priority:'',
+    requestSchedule:{
+      requestCreated: new Date(),
+    expectedClosure: new Date()
+    },
+    status: '',
+    tasksList:new Set()
+  };
 
+  @Input() url:Boolean = false;
   constructor(
     private _productionService: ProductionService,
     private _talentService: TalentService,

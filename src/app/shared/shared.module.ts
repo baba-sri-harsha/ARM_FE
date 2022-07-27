@@ -27,6 +27,7 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MessagedialogComponent } from './components/messagedialog/messagedialog.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSortModule } from '@angular/material/sort';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
+    MatSelectModule,
     MatButtonModule,
     MatTooltipModule,
     MatDialogModule,
