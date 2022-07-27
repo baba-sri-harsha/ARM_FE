@@ -25,25 +25,25 @@ export class ContractDetailsComponent implements OnInit {
   projectDropdownOptions: DropdownOption[] = [];
   talentDropdownOptions: DropdownOption[] = [];
   contractNo!: string;
-  @Input() request: RequestView={
+  @Input() request: RequestView = {
     requestId: 0,
-    productionName: '',
+    productionCompanyName: '',
     productionNumber: '',
     contractNo: '',
     projectName: '',
-    contractDate:new Date(),
+    contractDate: new Date(),
     talentName: '',
     unionName: '',
-    priority:'',
-    requestSchedule:{
+    priority: '',
+    requestSchedule: {
       requestCreated: new Date(),
-    expectedClosure: new Date()
+      expectedClosure: new Date()
     },
     status: '',
-    tasksList:new Set()
+    tasksList: new Set()
   };
 
-  @Input() url:Boolean = false;
+  @Input() url: Boolean = false;
   constructor(
     private _productionService: ProductionService,
     private _talentService: TalentService,

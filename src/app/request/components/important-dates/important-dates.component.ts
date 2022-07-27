@@ -21,25 +21,25 @@ export class ImportantDatesComponent implements OnInit {
     { option: 'Settlement Date' },
     { option: 'Receipt Date' }
   ];
-  @Input() reqDetails:Boolean = false;
-  @Input() req:RequestView={
+  @Input() reqDetails: Boolean = false;
+  @Input() req: RequestView = {
     requestId: 0,
-    productionName: '',
+    productionCompanyName: '',
     productionNumber: '',
     contractNo: '',
     projectName: '',
-    contractDate:new Date(),
+    contractDate: new Date(),
     talentName: '',
     unionName: '',
-    priority:'',
-    requestSchedule:{
+    priority: '',
+    requestSchedule: {
       requestCreated: new Date(),
-    expectedClosure: new Date()
+      expectedClosure: new Date()
     },
     status: '',
-    tasksList:new Set()
+    tasksList: new Set()
   };
-  dates:Date[]=[
+  dates: Date[] = [
     new Date(this.req.requestSchedule.requestCreated),
     new Date(),
     new Date(),
@@ -47,7 +47,7 @@ export class ImportantDatesComponent implements OnInit {
     new Date(),
     new Date(),
     new Date()
-  ]
+  ];
   // date1= new FormControl(new Date("22-12-2"));
   constructor() {}
 
@@ -58,7 +58,7 @@ export class ImportantDatesComponent implements OnInit {
   displayedColumns: string[] = ['option', 'date'];
   dataSource = this.ELEMENT_DATA;
   // setDate=(date:Date):Date=>{
-   date = new FormControl(new Date(11,22,4));
-    // return date1.value;
+  date = new FormControl(new Date(11, 22, 4));
+  // return date1.value;
   // }
 }

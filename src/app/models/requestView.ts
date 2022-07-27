@@ -3,10 +3,10 @@ import { TaskView } from './task-view';
 
 export interface RequestView {
   requestId: number;
-  productionName: string;
+  productionCompanyName: string;
   productionNumber: string;
   contractNo: string;
-  contractDate:Date;
+  contractDate: Date;
   projectName: string;
   talentName: string;
   unionName: string;
@@ -14,5 +14,4 @@ export interface RequestView {
   requestSchedule: RequestSchedule;
   status: string;
   tasksList: Set<TaskView>;
-
 }

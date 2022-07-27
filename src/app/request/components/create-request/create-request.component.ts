@@ -71,20 +71,20 @@ export class CreateRequestComponent implements OnInit {
   url: string = '';
   req: RequestView = {
     requestId: 0,
-    productionName: '',
+    productionCompanyName: '',
     productionNumber: '',
     contractNo: '',
     projectName: '',
     talentName: '',
     unionName: '',
-    contractDate:new Date(),
+    contractDate: new Date(),
     priority: '',
     requestSchedule: {
       requestCreated: new Date(),
       expectedClosure: new Date()
     },
     status: '',
-    tasksList:new Set()
+    tasksList: new Set()
   };
 
   reqDetails: Boolean = false;
