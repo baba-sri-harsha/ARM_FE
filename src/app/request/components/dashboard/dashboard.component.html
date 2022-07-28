@@ -15,11 +15,16 @@
           *ngIf="talentDropdownOptions.length > 0"
           label="Talents"
           [options]="talentDropdownOptions"
+          (selectedOption)="getSelectedOptFromChild($event)"
         >
         </app-dropdown>
       </div>
       <div class="cont">
-        <app-dropdown label="Priority" [options]="priorityDropDownOptions">
+        <app-dropdown
+          label="Priority"
+          [options]="priorityDropDownOptions"
+          (selectedOption)="getSelectedPriorityFromChild($event)"
+        >
         </app-dropdown>
       </div>
 
@@ -28,6 +33,7 @@
           *ngIf="productionDropdownOptions.length > 0"
           label="Production"
           [options]="productionDropdownOptions"
+          (selectedOption)="getSelectedProductionFromChild($event)"
         >
         </app-dropdown>
       </div>
@@ -36,6 +42,7 @@
           *ngIf="statusDropDownOptions.length > 0"
           label="Status"
           [options]="statusDropDownOptions"
+          (selectedOption)="getSelectedStatusFromChild($event)"
         >
         </app-dropdown>
       </div>
@@ -51,6 +58,10 @@
     <app-request-list
       [searchedValue]="searchText"
       *ngIf="role === 'manager'"
+      [selectedTalentValue]="selectedTalent"
+      [selectedPriorityValue]="selectedPriority"
+      [selectedProductionValue]="selectedProduction"
+      [selectedStatusValue]="selectedStatus"
     ></app-request-list>
     <!-- <app-task-details></app-task-details> -->
   </ng-container>

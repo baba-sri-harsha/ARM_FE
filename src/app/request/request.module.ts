@@ -1,4 +1,3 @@
-import { MatPaginator } from '@angular/material/paginator';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -8,7 +7,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { UserModule } from '../user/user.module';
 import { RequestRoutingModule } from './request-routing.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { CreateRequestComponent } from './components/create-request/create-request.component';
 import { RequestListComponent } from './components/request-list/request-list.component';
 import { TaskListComponent } from './components/task-list/task-list.component';
 import { ReportCategoryComponent } from './components/report-category/report-category.component';
@@ -27,6 +25,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { ContractDetailsComponent } from './components/contract-details/contract-details.component';
+import { CreateRequestComponent } from './components/create-request/create-request.component';
 
 @NgModule({
   declarations: [

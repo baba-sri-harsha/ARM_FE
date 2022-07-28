@@ -46,6 +46,11 @@ export class DashboardComponent implements OnInit {
     { name: Status.C }
   ];
   // somedata = '';
+  selectedTalent: string = '';
+  selectedPriority: string = '';
+  selectedProduction: string = '';
+  selectedStatus: string = '';
+  
 
   constructor(
     private _dropdownService: DropdownService,
@@ -107,5 +112,19 @@ export class DashboardComponent implements OnInit {
 
   onSearchTextEntered = (searchValue: string) => {
     this.searchText = searchValue;
+  };
+
+  getSelectedOptFromChild = (childData: any) => {
+    console.log(childData.value);
+    this.selectedTalent = childData.value;
+  };
+  getSelectedPriorityFromChild = (priority: any) => {
+    this.selectedPriority = priority.value;
+  };
+  getSelectedProductionFromChild = (production: any) => {
+    this.selectedProduction = production.value;
+  };
+  getSelectedStatusFromChild = (status: any) => {
+    this.selectedStatus = status.value;
   };
 }

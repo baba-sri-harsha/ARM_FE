@@ -7,3 +7,5 @@ const keycloakConfig: KeycloakConfig = {
 };
 
 export default keycloakConfig;
+
+// url: 'http://192.168.1.39:7688'http://localhost:7688',

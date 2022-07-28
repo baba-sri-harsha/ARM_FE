@@ -22,7 +22,7 @@ export class RequestService {
     return this._httpClient.get<CategoryVO[]>(url, { responseType: 'json' });
   };
 
-  getRequestById=(id:number): Observable<RequestView> => {
+  getRequestById = (id: number): Observable<RequestView> => {
     return this._httpClient.get<RequestView>(`${this._baseurl}/id/${id}`);
-  }
+  };
 }
