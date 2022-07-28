@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { map, Observable, of } from 'rxjs';
+import { Assets } from 'src/app/models/assets';
 import { UploadService } from 'src/app/services/upload/upload.service';
 
 type Files = {
@@ -18,7 +19,7 @@ export class DocumentsDossierComponent implements OnInit {
   progressInfos = [];
   message = '';
   fileInfos!: Observable<any>;
-  filesArray: string[] = [];
+  filesArray: Assets[] = [];
   dataSource = new MatTableDataSource(this.filesArray);
 
   constructor(private _uploadService: UploadService) {}
@@ -34,8 +35,9 @@ export class DocumentsDossierComponent implements OnInit {
       return;
     }
     for (var i = 0; i < files.length; i++) {
-      if (files[i].size >= 3000000) {
-        console.log('File size exceeds 3MB');
+      const fileSize = 3000000;
+      if (files[i].size >= fileSize) {
+        alert('File size exceeds 3MB');
         return;
       }
       console.log('Size:', files[i].size / Math.pow(10, 6), 'MB');
@@ -45,6 +47,7 @@ export class DocumentsDossierComponent implements OnInit {
 
       .subscribe(
         (data) => {
+          alert('Upladed Successfully');
           console.log('Uploads:', data);
           this.getFiles();
         },
@@ -69,8 +72,31 @@ export class DocumentsDossierComponent implements OnInit {
       });
   };
 
-  // selectFiles(event: any) {
-  //   this.progressInfos = [];
-  //   this.selectedFiles = event.target.files;
-  // }
+  requestId: number = 1;
+
+  preview(file: Assets) {
+    let fileName = `${file.assetName}`;
+    this._uploadService.previewFile(fileName).subscribe((data: any) => {
+      console.log(data);
+      const fileURL = URL.createObjectURL(data);
+      window.open(fileURL, '_blank');
+    });
+  }
+
+  download(file: Assets) {
+    let fileName = file.assetName;
+    console.log(fileName);
+    this._uploadService.downloadFile(fileName).subscribe((data: any) => {
+      console.log(data);
+    });
+  }
+
+  delete(file: Assets) {
+    console.log(file);
+
+    this._uploadService.deleteFile(file.assetId).subscribe((data: any) => {
+      this.getFiles();
+      console.log(data);
+    });
+  }
 }

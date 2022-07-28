@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
+import { Assets } from 'src/app/models/assets';
 
 @Injectable({
   providedIn: 'root'
@@ -30,19 +31,38 @@ export class UploadService {
     });
   };
 
-  getAllFiles = (requestId?: any, taskId?: any): Observable<string[]> => {
-
+  getAllFiles = (requestId?: any, taskId?: any): Observable<Assets[]> => {
     const paramsObj = {
-      ...requestId && {
+      ...(requestId && {
         request_id: requestId
-      },
-      ...taskId && {
+      }),
+      ...(taskId && {
         task_id: taskId
-      }
+      })
     };
     const searchParams = new URLSearchParams(paramsObj);
 
     const url = `${this._baseUrl}/listFiles?${searchParams.toString()}`;
-    return this._httpClient.get<string[]>(url);
+    return this._httpClient.get<Assets[]>(url);
   };
+
+  previewFile(fileName: string): Observable<Blob> {
+    const url = `${this._baseUrl}/download/${fileName}`;
+    const options = { responseType: 'blob' as 'json' };
+    return this._httpClient
+      .get<Blob>(url, options)
+      .pipe(map((res) => new Blob([res], { type: 'application/pdf' })));
+  }
+
+  deleteFile(fileId: number): any {
+    const url = `${this._baseUrl}/delete/${fileId}`;
+    return this._httpClient.get<string>(url, {
+      responseType: 'text' as 'json'
+    });
+  }
+
+  downloadFile(fileName: string): Observable<Blob> {
+    const url = `${this._baseUrl}/download/${fileName}`;
+    return this._httpClient.get<Blob>(url);
+  }
 }

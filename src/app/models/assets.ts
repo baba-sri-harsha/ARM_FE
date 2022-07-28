@@ -1,6 +1,8 @@
 export interface Assets {
-    assetId:number;
-    assetName:string;
-    createdAt:Date;
-    isDeleted:boolean;
+  assetId: number;
+  task: Task;
+  request: Request;
+  assetName: string;
+  createdAt: Date;
+  isDeleted: boolean;
 }
