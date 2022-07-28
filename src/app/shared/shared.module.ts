@@ -26,7 +26,6 @@ import { MessageComponent } from './components/message/message.component';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MessagedialogComponent } from './components/messagedialog/messagedialog.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatSortModule } from '@angular/material/sort';
 import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
@@ -57,7 +56,6 @@ import { MatSelectModule } from '@angular/material/select';
     MatButtonModule,
     MatTooltipModule,
     MatDialogModule,
-    MatSortModule,
     RouterModule.forChild([])
   ],
   exports: [
@@ -73,7 +71,6 @@ import { MatSelectModule } from '@angular/material/select';
     ContractDropdownComponent,
     MessageComponent,
     MatDialogModule,
-    MatSortModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   providers: []
