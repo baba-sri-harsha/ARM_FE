@@ -34,9 +34,11 @@
           >
             <mat-icon>download</mat-icon>
           </button>
-          <button class="actions" matTooltip="Delete" (click)="delete(file)">
-            <mat-icon>delete</mat-icon>
-          </button>
+          <a href="/api/download/{{ file.assetName }}">
+            <button class="actions" matTooltip="Delete" (click)="delete(file)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </a>
         </td>
       </ng-container>
 
