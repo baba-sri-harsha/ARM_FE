@@ -1,9 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { RequestView } from 'src/app/models/requestView';
-export interface PeriodicElement {
+export interface ImportDate {
   option: string;
-  date?: string;
+  date?:Date | null;
+  ctrl?: FormControl
 }
 
 @Component({
@@ -12,16 +13,18 @@ export interface PeriodicElement {
   styleUrls: ['./important-dates.component.scss']
 })
 export class ImportantDatesComponent implements OnInit {
-  ELEMENT_DATA: PeriodicElement[] = [
-    { option: 'Request Created' },
-    { option: 'Expected Closure' },
-    { option: 'Audit Start Date' },
-    { option: 'Audit End Date' },
-    { option: 'Report Submission' },
-    { option: 'Settlement Date' },
-    { option: 'Receipt Date' }
+  ELEMENT_DATA: ImportDate[] = [
+    { option: 'Request Created', ctrl: new FormControl(new Date()) },
+    { option: 'Expected Closure', ctrl: new FormControl() },
+    { option: 'Audit Start Date', ctrl: new FormControl() },
+    { option: 'Audit End Date', ctrl: new FormControl() },
+    { option: 'Report Submission', ctrl: new FormControl() },
+    { option: 'Settlement Date', ctrl: new FormControl() },
+    { option: 'Receipt Date', ctrl: new FormControl() }
   ];
   @Input() reqDetails: Boolean = false;
+  @Output() dateChanged: EventEmitter<ImportDate[]> = new EventEmitter();
+
   @Input() req: RequestView = {
     requestId: 0,
     productionCompanyName: '',
@@ -48,17 +51,25 @@ export class ImportantDatesComponent implements OnInit {
     new Date(),
     new Date()
   ];
-  // date1= new FormControl(new Date("22-12-2"));
   constructor() {}
 
   ngOnInit(): void {
     console.log(`Inside ImportantDates`);
   }
 
-  displayedColumns: string[] = ['option', 'date'];
+  onDateChange(){
+    const dates = this.ELEMENT_DATA.map<ImportDate>((data:ImportDate) => {
+        return {
+          option: data.option,
+          date: data.ctrl?.value
+        };
+    });
+
+    console.log(dates);
+    this.dateChanged.emit(dates);
+  }
+
+  displayedColumns: string[] = ['option', 'ctrl'];
   dataSource = this.ELEMENT_DATA;
-  // setDate=(date:Date):Date=>{
   date = new FormControl(new Date(11, 22, 4));
-  // return date1.value;
-  // }
 }

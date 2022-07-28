@@ -13,11 +13,13 @@
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="date">
-        <td mat-cell *matCellDef>
-          <mat-form-field class="audit" appearance="fill" *ngFor="let date of dates">
+      <ng-container matColumnDef="ctrl">
+        <td mat-cell *matCellDef="let element">
+          <mat-form-field class="audit" appearance="fill">
             <input
               matInput
+              (dateChange)="onDateChange()"
+              [formControl]="element.ctrl"
               placeholder="_/_/_"
               [matDatepicker]="picker"
               class="audit"
