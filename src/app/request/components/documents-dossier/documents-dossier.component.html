@@ -17,7 +17,7 @@
       <ng-container matColumnDef="DocName">
         <th mat-header-cell *matHeaderCellDef>DocName</th>
         <td mat-cell *matCellDef="let file">
-          {{ file.assetName | slice: 4:file.assetName.length }}
+          {{ file?.assetName | slice: 4:file?.assetName?.length }}
         </td>
       </ng-container>
 
@@ -27,6 +27,7 @@
           <button class="actions" matTooltip="View" (click)="preview(file)">
             <mat-icon>visibility</mat-icon>
           </button>
+          <a href="/api/download/{{ file?.assetName }}">
           <button
             class="actions"
             matTooltip="Download"
@@ -34,11 +35,10 @@
           >
             <mat-icon>download</mat-icon>
           </button>
-          <a href="/api/download/{{ file.assetName }}">
+          </a>
             <button class="actions" matTooltip="Delete" (click)="delete(file)">
               <mat-icon>delete</mat-icon>
             </button>
-          </a>
         </td>
       </ng-container>
 
