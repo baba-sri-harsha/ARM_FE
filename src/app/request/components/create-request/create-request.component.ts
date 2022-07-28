@@ -1,3 +1,5 @@
+import { CreateRequest } from './../../../models/createRequest';
+import { Request } from './../../../models/request';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ReqId } from 'src/app/models/req-id';
@@ -33,12 +35,14 @@ enum Union {
 type Unions = {
   name: Union;
 };
+
 @Component({
   selector: 'app-create-request',
   templateUrl: './create-request.component.html',
   styleUrls: ['./create-request.component.scss']
 })
 export class CreateRequestComponent implements OnInit {
+  request = {} as CreateRequest;
   myDate = new Date();
   constructor(
     private _dropdownService: DropdownService,
@@ -114,7 +118,7 @@ export class CreateRequestComponent implements OnInit {
       this._reqIdService.getRequestId().subscribe({
         next: (data) => {
           this.reqId = data;
-          console.log(data);
+          // console.log(data);
         }
       });
       this.priorityDropDownOptions =
@@ -161,5 +165,21 @@ export class CreateRequestComponent implements OnInit {
   }
   redirectToHome = () => {
     this._router.navigate(['/']);
+  };
+
+  statusValue = (status: string) => {
+    // console.log(`inside the create request`);
+    console.log(status);
+    this.request.status = status;
+  };
+  priorityValue = (priority: string) => {
+    // console.log(`inside the create request`);
+    this.request.priority = priority;
+    console.log(priority);
+  };
+  unionValue = (union: string) => {
+    console.log(`inside the create request`);
+    this.request.unionName = union;
+    console.log(this.request);
   };
 }

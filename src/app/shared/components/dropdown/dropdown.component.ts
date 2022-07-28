@@ -21,6 +21,7 @@ export interface DropdownOption {
   styleUrls: ['./dropdown.component.scss']
 })
 export class DropdownComponent implements OnInit {
+  @Output() selectedValue = new EventEmitter<string>();
   @Input()
   label: string = 'Pick one';
   // @Output() childData: EventEmitter<string> = new EventEmitter();
@@ -50,5 +51,9 @@ export class DropdownComponent implements OnInit {
     return this.options.filter((option) =>
       option.value.toLowerCase().includes(filterValue)
     );
+  }
+
+  change(event: any) {
+    this.selectedValue.emit(event.source.value);
   }
 }

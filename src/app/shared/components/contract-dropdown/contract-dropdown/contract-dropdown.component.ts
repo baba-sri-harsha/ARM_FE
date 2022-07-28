@@ -39,7 +39,7 @@ export class ContractDropdownComponent implements OnInit {
   }
   @Output() id = new EventEmitter<any>();
 
-  getId(event: any) {
+  getOption(event: any) {
     this.id.emit(event);
     // console.log(`Id: ${event}`);
   }

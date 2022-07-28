@@ -1,5 +1,5 @@
 <div class="table-container">
-  <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-container matColumnDef="requestId">
       <th mat-header-cell mat-sort-header *matHeaderCellDef>Request#</th>
       <td mat-cell *matCellDef="let task">{{ task.requestId }}</td>

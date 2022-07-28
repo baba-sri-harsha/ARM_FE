@@ -18,7 +18,6 @@ import { TaskService } from 'src/app/services/task/task.service';
 import { AuthService } from 'src/app/user/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MessageComponent } from 'src/app/shared/components/message/message.component';
-import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-task-list',
@@ -53,7 +52,6 @@ export class TaskListComponent implements OnInit, OnChanges, AfterViewInit {
   ) {}
 
   @Input() searchedValue: string = '';
-  @ViewChild(MatSort) matSort!: MatSort;
 
   ngOnChanges(changes: SimpleChanges): void {
     this.searchResults();
@@ -80,7 +78,6 @@ export class TaskListComponent implements OnInit, OnChanges, AfterViewInit {
   ngAfterViewInit() {
     this.dataSource = new MatTableDataSource(this.dataSource.data);
     this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.matSort;
   }
 
   //for searching inside the table data

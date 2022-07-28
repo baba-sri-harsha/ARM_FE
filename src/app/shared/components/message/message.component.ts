@@ -3,14 +3,7 @@ import { TaskVO } from './../../../models/taskVO';
 import { KeycloakService } from 'keycloak-angular';
 import { MessageVo } from './../../../models/messageVo';
 import { Message } from './../../../models/message';
-import {
-  AfterViewChecked,
-  AfterViewInit,
-  Component,
-  Input,
-  OnInit,
-  ViewChild
-} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MessageService } from '../../services/message.service';
 import { KeycloakProfile } from 'keycloak-js';
 import { AuthService } from 'src/app/user/auth.service';

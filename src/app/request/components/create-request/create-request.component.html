@@ -6,10 +6,13 @@
 
     <div class="dropdown-container">
       <div class="cont">
-        <h3>Date: {{ req.requestSchedule.requestCreated | date: 'shortDate'}}</h3>
+        <h3>
+          Date: {{ req.requestSchedule.requestCreated | date: 'shortDate' }}
+        </h3>
       </div>
       <div class="cont">
         <app-dropdown
+          (selectedValue)="priorityValue($event)"
           [options]="statusDropDownOptions"
           [data]="req.status"
           [reqDetails]="reqDetails"
@@ -20,6 +23,7 @@
 
       <div class="cont">
         <app-dropdown
+          (selectedValue)="statusValue($event)"
           [options]="priorityDropDownOptions"
           [data]="req.priority"
           [reqDetails]="reqDetails"
@@ -30,6 +34,7 @@
 
       <div class="cont">
         <app-dropdown
+          (selectedValue)="unionValue($event)"
           [options]="unionsDropDownOptions"
           [data]="req.unionName"
           [reqDetails]="reqDetails"

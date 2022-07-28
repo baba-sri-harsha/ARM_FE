@@ -1,10 +1,11 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { RequestView } from 'src/app/models/requestView';
 export interface ImportDate {
   option: string;
-  date?:Date | null;
-  ctrl?: FormControl
+  date?: Date | null;
+  ctrl?: FormControl;
 }
 
 @Component({
@@ -57,12 +58,12 @@ export class ImportantDatesComponent implements OnInit {
     console.log(`Inside ImportantDates`);
   }
 
-  onDateChange(){
-    const dates = this.ELEMENT_DATA.map<ImportDate>((data:ImportDate) => {
-        return {
-          option: data.option,
-          date: data.ctrl?.value
-        };
+  onDateChange() {
+    const dates = this.ELEMENT_DATA.map<ImportDate>((data: ImportDate) => {
+      return {
+        option: data.option,
+        date: data.ctrl?.value
+      };
     });
 
     console.log(dates);

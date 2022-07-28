@@ -27,7 +27,7 @@
         *ngFor="let option of filteredOptions | async"
         [value]="option.value"
         matTooltip="{{ option.value }}"
-        (click)="getId(option)"
+        (click)="getOption(option)"
         [matTooltipPosition]="position[0]"
       >
         {{ option.value }}

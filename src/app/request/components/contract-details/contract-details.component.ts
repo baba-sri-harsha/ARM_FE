@@ -1,3 +1,5 @@
+import { ContractDetails } from './../../../models/contractDetails';
+import { CreateRequestComponent } from './../create-request/create-request.component';
 import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { map, Observable } from 'rxjs';
@@ -21,6 +23,13 @@ export interface TalentVOList {
   styleUrls: ['./contract-details.component.scss']
 })
 export class ContractDetailsComponent implements OnInit {
+  contractDetails: ContractDetails = {
+    productionName: '',
+    contractNo: '',
+    projectName: '',
+    talentName: ''
+    // contractDate: new Date()
+  };
   productionDropdownOptions: DropdownOption[] = [];
   projectDropdownOptions: DropdownOption[] = [];
   talentDropdownOptions: DropdownOption[] = [];
@@ -71,8 +80,11 @@ export class ContractDetailsComponent implements OnInit {
   }
   productionId: number = 0;
   getProjects = (event: any) => {
-    this.productionId = parseInt(event.viewValue);
-    console.log('pId', this.productionId);
+    let productionId = parseInt(event.viewValue);
+    this.contractDetails.productionName = event.value;
+    console.log(this.contractDetails);
+
+    console.log('pId', productionId);
     this._projectService
       .getProjectsOfTypedProduction(this.productionId)
       .pipe(
@@ -93,7 +105,9 @@ export class ContractDetailsComponent implements OnInit {
   };
 
   getTalents = (event: any) => {
-    console.log(` Get Talents ${event.viewValue}`);
+    this.contractDetails.projectName = event.value;
+    console.log(event.value);
+    console.log(this.contractDetails);
     this._talentService
       .getTalentsOfTypedProject(this.productionId, event.value)
       .pipe(
@@ -115,8 +129,12 @@ export class ContractDetailsComponent implements OnInit {
         // this.contractNo = data[0].contractNo;
       });
   };
+
   getContract = (event: any) => {
+    this.contractDetails.talentName = event.value;
+    this.contractDetails.contractNo = event.viewValue;
     this.contractNo = event.viewValue;
     console.log(`Contract No: ${event.viewValue}`);
+    console.log(this.contractDetails);
   };
 }

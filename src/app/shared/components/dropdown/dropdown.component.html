@@ -1,29 +1,29 @@
 <div *ngIf="reqDetails; then thenBlock; else elseBlock"></div>
 <ng-template #thenBlock>
-  <select >
-<mat-icon class="icon">arrow_drop_down</mat-icon>
+  <select>
+    <mat-icon class="icon">arrow_drop_down</mat-icon>
     <option [value]="data" selected>{{ data }}</option>
   </select>
-
 </ng-template>
 <ng-template #elseBlock>
-<input
-  type="text"
-  [placeholder]="label"
-  matInput
-  [formControl]="myControl"
-  [matAutocomplete]="auto"
-  #inputValue
-/>
-<mat-icon>arrow_drop_down</mat-icon>
-<mat-autocomplete #auto="matAutocomplete">
+  <input
+    type="text"
+    [placeholder]="label"
+    matInput
+    [formControl]="myControl"
+    [matAutocomplete]="auto"
+    #inputValue
+  />
+  <mat-icon>arrow_drop_down</mat-icon>
+  <mat-autocomplete #auto="matAutocomplete">
     <mat-option
       *ngFor="let option of filteredOptions | async"
       [value]="option.value"
       matTooltip="{{ option.value }}"
+      (onSelectionChange)="change($event)"
       [matTooltipPosition]="position[0]"
     >
       {{ option.value }}
     </mat-option>
-</mat-autocomplete>
+  </mat-autocomplete>
 </ng-template>
