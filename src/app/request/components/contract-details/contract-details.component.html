@@ -33,7 +33,7 @@
     <app-contract-dropdown
       label="Production Company"
       [options]="productionDropdownOptions"
-      [data]="request.productionCompanyName"
+      [data]="request.productionName"
       [reqDetails]="url"
       (id)="getProjects($event)"
     >
@@ -58,22 +58,22 @@
       Production# <br />
       {{ request.contractNo }}
     </div>
+
     <div class="cont contract" *ngIf="url; else elseBlock">
-      Date <br />{{ request.contractDate | date: 'shortDate'
-      }}<mat-icon>calendar_today</mat-icon>
+      Date <br />{{ request.contractDate | date: 'shortDate' }}
+      <mat-icon>calendar_today</mat-icon>
     </div>
     <ng-template #elseBlock>
       <div class="cont contract">
         <mat-form-field appearance="fill">
           <mat-label>Date</mat-label>
           <input matInput [matDatepicker]="picker" />
-          <mat-datepicker-toggle
-            matSuffix
-            [for]="picker"
-          ></mat-datepicker-toggle>
+          <mat-datepicker-toggle matSuffix [for]="picker">
+          </mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field></div
-    ></ng-template>
+        </mat-form-field>
+      </div>
+    </ng-template>
   </mat-toolbar>
 
   <div class="container">

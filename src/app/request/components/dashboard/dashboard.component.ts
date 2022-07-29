@@ -45,7 +45,6 @@ export class DashboardComponent implements OnInit {
     { name: Status.SP },
     { name: Status.C }
   ];
-  // somedata = '';
   selectedTalent: string = '';
   selectedPriority: string = '';
   selectedProduction: string = '';

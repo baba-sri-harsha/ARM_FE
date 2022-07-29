@@ -1,9 +1,9 @@
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { TaskVO } from './../../../models/taskVO';
 import { KeycloakService } from 'keycloak-angular';
 import { MessageVo } from './../../../models/messageVo';
 import { Message } from './../../../models/message';
-import { Component, Input, OnInit } from '@angular/core';
 import { MessageService } from '../../services/message.service';
 import { KeycloakProfile } from 'keycloak-js';
 import { AuthService } from 'src/app/user/auth.service';

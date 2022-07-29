@@ -11,10 +11,6 @@
         <td mat-cell *matCellDef="let element; let i = index">
           <p>{{ element.option }}</p>
         </td>
-
-        <!-- <td mat-cell *matCellDef="let element">
-          {{ element.option }}
-        </td> -->
       </ng-container>
 
       <ng-container matColumnDef="ctrl">
@@ -38,7 +34,6 @@
           </mat-form-field>
         </td>
       </ng-container>
-      -->
 
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>

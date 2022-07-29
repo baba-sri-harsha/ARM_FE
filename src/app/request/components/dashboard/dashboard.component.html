@@ -3,7 +3,7 @@
     <button
       mat-raised-button
       color="primary"
-      [routerLink]="['create']"
+      [routerLink]="['create-request']"
       *ngIf="role === 'manager'"
     >
       <mat-icon>playlist_add</mat-icon>Create New
@@ -51,10 +51,8 @@
     <app-search (searchTextChanged)="onSearchTextEntered($event)"></app-search>
   </ng-container>
   <ng-container>
-    <app-task-list
-      [searchedValue]="searchText"
-      *ngIf="role === 'report_owner'"
-    ></app-task-list>
+    <app-task-list [searchedValue]="searchText" *ngIf="role === 'report_owner'">
+    </app-task-list>
     <app-request-list
       [searchedValue]="searchText"
       *ngIf="role === 'manager'"

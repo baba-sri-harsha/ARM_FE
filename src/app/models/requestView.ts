@@ -3,7 +3,7 @@ import { TaskView } from './task-view';
 
 export interface RequestView {
   requestId: number;
-  productionCompanyName: string;
+  productionName: string;
   productionNumber: string;
   contractNo: string;
   contractDate: Date;

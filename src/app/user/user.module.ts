@@ -9,6 +9,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 @NgModule({
   declarations: [LoginComponent],
   imports: [CommonModule, SharedModule, KeycloakAngularModule],
+  exports: [SharedModule],
   providers: [
     {
       provide: APP_INITIALIZER,

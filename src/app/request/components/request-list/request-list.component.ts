@@ -76,24 +76,11 @@ export class RequestListComponent implements OnInit, OnChanges, AfterViewInit {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.searchResults();
-    // this.filterTalent();
-    // this.filterPriority();
-    // this.filterStatus();
-    // this.filterProduction();
     this.filterRequests();
   }
 
   async ngOnInit(): Promise<void> {
     this.showLoader = true;
-
-    // this.dataSource.filter = this.searchedValue;
-
-    // this.dataSource.filterPredicate = function (record, filter) {
-    //   return record.id.indexOf(filter) != -1;
-    // };
-    // this.dataSource.filter = this.selectedPriorityValue;
-    // this.dataSource.filter = this.selectedProductionValue;
-    // this.dataSource.filter = this.selectedStatusValue;
 
     this.dataSource.data = this.requests;
 
@@ -108,44 +95,7 @@ export class RequestListComponent implements OnInit, OnChanges, AfterViewInit {
         console.log(`Inside Request List Component`);
         console.log('Request list', data);
       });
-
-    // this.dataSource.filterPredicate = (record) => {
-    //   let totalCondition = false;
-    //   let talentCondition = false;
-    //   let productionCondition = false;
-    //   if (!this.selectedTalentValue && !this.selectedProductionValue) {
-    //     return true;
-    //   }
-
-    //   if (this.selectedTalentValue) {
-    //     talentCondition = record.talentName === this.selectedTalentValue.trim();
-    //   }
-    //   if (this.selectedProductionValue) {
-    //     productionCondition =
-    //       record.productionCompanyName === this.selectedProductionValue.trim();
-    //   }
-
-    //   totalCondition = talentCondition || productionCondition;
-
-    //   return totalCondition;
-    // };
-    // console.log(this.dataSource);
-  }
-
-  // customFiltered() {
-  //   return (data: any, filter: any) => {
-  //     if (this.selectedTalentValue && this.selectedPriorityValue)
-  //       return (
-  //         data.talentName == this.selectedTalentValue &&
-  //         data.priority == this.selectedPriorityValue
-  //       );
-  //     if (this.selectedTalentValue)
-  //       return data.talentName == this.selectedTalentValue;
-  //     if (this.selectedPriorityValue)
-  //       return data.priority == this.selectedPriorityValue;
-  //     return true;
-  //   };
-  // }
+    }
 
   ngAfterViewInit() {
     this.dataSource = new MatTableDataSource(this.requests);
@@ -167,15 +117,6 @@ export class RequestListComponent implements OnInit, OnChanges, AfterViewInit {
 
   filterTalent = () => {
     console.log(this.selectedTalentValue);
-    // 4.0    this._requestService
-    //       .getAllRequests(this.userProfile.username)
-    //       .subscribe((data: Request[]) => {
-    //         this.dataSource.data = data;
-
-    //         console.log(`Inside Request List Component`);
-    //         console.log('Request list', data);
-    //       });
-
     this.dataSource.filter = JSON.stringify(
       this.selectedTalentValue.trim().toLowerCase()
     );

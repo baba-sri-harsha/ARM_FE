@@ -1,7 +1,6 @@
-import { CreateRequest } from './../../../models/createRequest';
-import { Request } from './../../../models/request';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CreateRequest } from 'src/app/models/createRequest';
 import { ReqId } from 'src/app/models/req-id';
 import { RequestView } from 'src/app/models/requestView';
 import { RequestService } from 'src/app/services/request/request.service';
@@ -75,7 +74,7 @@ export class CreateRequestComponent implements OnInit {
   url: string = '';
   req: RequestView = {
     requestId: 0,
-    productionCompanyName: '',
+    productionName: '',
     productionNumber: '',
     contractNo: '',
     projectName: '',
@@ -118,7 +117,6 @@ export class CreateRequestComponent implements OnInit {
       this._reqIdService.getRequestId().subscribe({
         next: (data) => {
           this.reqId = data;
-          // console.log(data);
         }
       });
       this.priorityDropDownOptions =
@@ -142,25 +140,6 @@ export class CreateRequestComponent implements OnInit {
       console.log('inside CreateRequestComponent ngOnInit');
       console.log(this._router.url);
       this.url = this._router.url;
-
-      //----------Request Details-----------------
-
-      if (this.url.includes('/request-details')) {
-        this._activatedRoute.paramMap.subscribe((map) => {
-          let i = map.get('requestId');
-          if (i) this.reqId.id = parseInt(i);
-        });
-      }
-
-      //-------------Create New------------------
-      else {
-        this._reqIdService.getRequestId().subscribe({
-          next: (data) => {
-            this.reqId = data;
-            console.log(data);
-          }
-        });
-      }
     }
   }
   redirectToHome = () => {

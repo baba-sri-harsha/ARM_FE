@@ -12,6 +12,7 @@ import { ProjectService } from 'src/app/services/project/project.service';
 import { TalentService } from 'src/app/services/talent/talent.service';
 import { DropdownOption } from 'src/app/shared/components/dropdown/dropdown.component';
 import { DropdownService } from 'src/app/shared/services/dropdown.service';
+import { Category } from 'src/app/models/category';
 
 export interface TalentVOList {
   talentName: string;
@@ -28,7 +29,6 @@ export class ContractDetailsComponent implements OnInit {
     contractNo: '',
     projectName: '',
     talentName: ''
-    // contractDate: new Date()
   };
   productionDropdownOptions: DropdownOption[] = [];
   projectDropdownOptions: DropdownOption[] = [];
@@ -36,7 +36,7 @@ export class ContractDetailsComponent implements OnInit {
   contractNo!: string;
   @Input() request: RequestView = {
     requestId: 0,
-    productionCompanyName: '',
+    productionName: '',
     productionNumber: '',
     contractNo: '',
     projectName: '',
@@ -53,6 +53,9 @@ export class ContractDetailsComponent implements OnInit {
   };
 
   @Input() url: Boolean = false;
+  taskList:TaskView[]=[];
+  categories:Category[]=[];
+  currentUrl:string='';
   constructor(
     private _productionService: ProductionService,
     private _talentService: TalentService,
@@ -126,7 +129,6 @@ export class ContractDetailsComponent implements OnInit {
         console.log(`Data: ${data}`);
         console.log('TalentName', data[0].talentName);
         console.log('ContractNo', data[0].contractNo);
-        // this.contractNo = data[0].contractNo;
       });
   };
 

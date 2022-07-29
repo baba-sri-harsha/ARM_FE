@@ -28,7 +28,7 @@ export class ImportantDatesComponent implements OnInit {
 
   @Input() req: RequestView = {
     requestId: 0,
-    productionCompanyName: '',
+    productionName: '',
     productionNumber: '',
     contractNo: '',
     projectName: '',
