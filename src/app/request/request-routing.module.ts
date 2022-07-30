@@ -17,11 +17,15 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'create',
+    path: 'create-request',
     component: CreateRequestComponent
   },
   {
     path: 'request-details/:requestId',
+    component: CreateRequestComponent
+  },
+  {
+    path: 'requestView-details/:requestId',
     component: CreateRequestComponent
   },
   { path: 'taskDetails/:taskId', component: TaskDetailsComponent },

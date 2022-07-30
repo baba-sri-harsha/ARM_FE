@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { TaskView } from 'src/app/models/task-view';
 import { TaskVO } from 'src/app/models/taskVO';
 
 @Injectable({
@@ -11,7 +12,10 @@ export class TaskService {
   private _url = '/api/tasks/';
   private url = '/api/taskVo/taskId/';
   constructor(private _http: HttpClient) {}
-
+  
+  getTasksByReqId(reqId: number):Observable<TaskView[]> {
+    return this._http.get<TaskView[]>(`${this._url}/reqId/${reqId}`);
+  }
   getTasks = (): Observable<TaskVO[]> => {
     return this._http.get<TaskVO[]>(this._url);
   };

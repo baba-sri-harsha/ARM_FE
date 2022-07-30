@@ -42,6 +42,7 @@ type Unions = {
 })
 export class CreateRequestComponent implements OnInit {
   request = {} as CreateRequest;
+  reqView:boolean=false;
   myDate = new Date();
   constructor(
     private _dropdownService: DropdownService,
@@ -84,22 +85,30 @@ export class CreateRequestComponent implements OnInit {
     priority: '',
     requestSchedule: {
       requestCreated: new Date(),
-      expectedClosure: new Date()
+      expectedClosure: new Date(),
+      auditEndDate:new Date(),
+auditStartDate:new Date(),
+reportSubmission:new Date(),
+settlementDate:new Date(),
+receiptDate:new Date(),
     },
     status: '',
     tasksList: new Set()
   };
 
-  reqDetails: Boolean = false;
+  reqDetails: boolean = false;
   ngOnInit(): void {
     console.log('inside CreateRequestComponent ngOnInit');
     console.log(this._router.url);
     this.url = this._router.url;
+    if(this._router.url.includes('/requestView-details'))
+    this.reqView=true;
+    if(this._router.url.includes('/request-details'))
+    this.reqDetails = true;
 
     //----------Request Details-----------------
 
-    if (this.url.includes('/request-details')) {
-      this.reqDetails = true;
+    if (this.url.includes('/request-details' || '/requestView-details')) {
       this._activatedRoute.paramMap.subscribe((map) => {
         let i = map.get('requestId');
         if (i) this.reqId.id = parseInt(i);

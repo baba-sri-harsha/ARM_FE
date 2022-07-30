@@ -18,7 +18,8 @@ export class ContractDropdownComponent implements OnInit {
   @Input() label: string = '';
   position: TooltipPosition[] = ['above'];
   @Input() data: string = '';
-  @Input() reqDetails:Boolean=  false;
+  @Input() reqDetails:boolean=  false;
+  @Input() requestView: boolean = false;
   constructor() {}
 
   ngOnInit(): void {
@@ -26,6 +27,7 @@ export class ContractDropdownComponent implements OnInit {
       startWith(''),
       map((value: string | null) => this._filter(value || ''))
     );
+      
   }
   private _filter(value: string): DropdownOption[] {
     if (!value) {

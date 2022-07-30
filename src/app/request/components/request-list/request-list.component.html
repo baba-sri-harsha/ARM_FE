@@ -69,7 +69,7 @@
         >
           <mat-icon>edit_note_black</mat-icon>
         </button>
-        <button matTooltip="View"><mat-icon>visibility</mat-icon></button>
+        <button [routerLink]="['requestView-details', request.requestId]" matTooltip="View"><mat-icon>visibility</mat-icon></button>
 
         <button class="notifi-button">
           <mat-icon (click)="openDialog()" matTooltip="Notifications"

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -7,6 +7,8 @@ import {
 } from '@angular/forms';
 import { MatOption } from '@angular/material/core';
 import { MatSelect } from '@angular/material/select';
+import { Router } from '@angular/router';
+import { Category } from 'src/app/models/category';
 import { CategoryVO } from 'src/app/models/category-vo';
 import { RequestService } from 'src/app/services/request/request.service';
 
@@ -34,16 +36,19 @@ export class ReportCategoryComponent implements OnInit {
     'reportOwner',
     'actions'
   ];
-
+  @Input() categoriesArray: Category[] = [];
+  @Input() reqDetails:Boolean = false;
+  @Input() requestView:boolean = false;
   auditPeriod = new FormGroup({
     start: new FormControl(),
     end: new FormControl()
   });
-
   constructor(private _request: RequestService, private fb: FormBuilder) {}
 
   ngOnInit(): void {
     console.log(`Inside ReportCategory`);
+
+    
     this._request.getAllCategories().subscribe({
       next: (data) => {
         (this.categories = data), console.log(data);

@@ -32,7 +32,8 @@ export class DropdownComponent implements OnInit {
 
   @Input() options: DropdownOption[] = [];
   @Input() data: string = '';
-  @Input() reqDetails: Boolean = false;
+  @Input() reqDetails: boolean = false;
+  @Input() requestView: boolean = false;
   myControl = new FormControl('');
   position: TooltipPosition[] = ['above'];
   constructor() {}

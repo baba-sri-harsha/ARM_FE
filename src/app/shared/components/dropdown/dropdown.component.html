@@ -1,4 +1,4 @@
-<div *ngIf="reqDetails; then thenBlock; else elseBlock"></div>
+<div *ngIf="reqDetails || requestView; then thenBlock; else elseBlock"></div>
 <ng-template #thenBlock>
   <select>
     <mat-icon class="icon">arrow_drop_down</mat-icon>

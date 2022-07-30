@@ -23,8 +23,11 @@ export class ImportantDatesComponent implements OnInit {
     { option: 'Settlement Date', ctrl: new FormControl() },
     { option: 'Receipt Date', ctrl: new FormControl() }
   ];
-  @Input() reqDetails: Boolean = false;
+  editDates: ImportDate[] = [];
+  viewDates: ImportDate[] = [];
+  @Input() reqDetails: boolean = false;
   @Output() dateChanged: EventEmitter<ImportDate[]> = new EventEmitter();
+  @Input() requestView: boolean = false;
 
   @Input() req: RequestView = {
     requestId: 0,
@@ -38,20 +41,16 @@ export class ImportantDatesComponent implements OnInit {
     priority: '',
     requestSchedule: {
       requestCreated: new Date(),
-      expectedClosure: new Date()
+      expectedClosure: new Date(),
+      auditEndDate: new Date(),
+      auditStartDate: new Date(),
+      reportSubmission: new Date(),
+      settlementDate: new Date(),
+      receiptDate: new Date()
     },
     status: '',
     tasksList: new Set()
   };
-  dates: Date[] = [
-    new Date(this.req.requestSchedule.requestCreated),
-    new Date(),
-    new Date(),
-    new Date(),
-    new Date(),
-    new Date(),
-    new Date()
-  ];
   constructor() {}
 
   ngOnInit(): void {
@@ -70,7 +69,77 @@ export class ImportantDatesComponent implements OnInit {
     this.dateChanged.emit(dates);
   }
 
+  setDates = () => {
+    this.editDates = [
+      {
+        option: 'Request Created',
+        ctrl: new FormControl(new Date(this.req.requestSchedule.requestCreated))
+      },
+      {
+        option: 'Expected Closure',
+        ctrl: new FormControl(
+          new Date(this.req.requestSchedule.expectedClosure)
+        )
+      },
+      {
+        option: 'Audit Start Date',
+        ctrl: new FormControl(new Date(this.req.requestSchedule.auditStartDate))
+      },
+      {
+        option: 'Audit End Date',
+        ctrl: new FormControl(new Date(this.req.requestSchedule.auditEndDate))
+      },
+      { option: 'Report Submission', ctrl: new FormControl() },
+      { option: 'Settlement Date', ctrl: new FormControl() },
+      { option: 'Receipt Date', ctrl: new FormControl() }
+    ];
+    this.viewDates = [
+      {
+        option: 'Request Created',
+        ctrl: new FormControl(new Date(this.req.requestSchedule.requestCreated))
+      },
+      {
+        option: 'Expected Closure',
+        ctrl: new FormControl(
+          new Date(this.req.requestSchedule.expectedClosure)
+        )
+      },
+      {
+        option: 'Audit Start Date',
+        ctrl: new FormControl(new Date(this.req.requestSchedule.auditStartDate))
+      },
+      {
+        option: 'Audit End Date',
+        ctrl: new FormControl(new Date(this.req.requestSchedule.auditEndDate))
+      },
+      {
+        option: 'Report Submission',
+        ctrl: new FormControl(
+          new Date(this.req.requestSchedule.reportSubmission)
+        )
+      },
+      {
+        option: 'Settlement Date',
+        ctrl: new FormControl(new Date(this.req.requestSchedule.settlementDate))
+      },
+      {
+        option: 'Receipt Date',
+        ctrl: new FormControl(new Date(this.req.requestSchedule.receiptDate))
+      }
+    ];
+  };
+
   displayedColumns: string[] = ['option', 'ctrl'];
   dataSource = this.ELEMENT_DATA;
   date = new FormControl(new Date(11, 22, 4));
+
+  setDataSource(): ImportDate[] {
+    if (this.reqDetails) {
+      return this.editDates;
+    }
+    else if(this.requestView){
+      return this.viewDates
+    }
+    return this.ELEMENT_DATA;
+  }
 }

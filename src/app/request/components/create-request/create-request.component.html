@@ -16,6 +16,7 @@
           [options]="statusDropDownOptions"
           [data]="req.status"
           [reqDetails]="reqDetails"
+          [requestView]="reqView"
           label="Status"
         >
         </app-dropdown>
@@ -27,6 +28,7 @@
           [options]="priorityDropDownOptions"
           [data]="req.priority"
           [reqDetails]="reqDetails"
+          [requestView]="reqView"
           label="Priority"
         >
         </app-dropdown>
@@ -38,6 +40,7 @@
           [options]="unionsDropDownOptions"
           [data]="req.unionName"
           [reqDetails]="reqDetails"
+          [requestView]="reqView"
           label="Union"
         >
         </app-dropdown>
@@ -54,5 +57,6 @@
   <app-contract-details
     [url]="reqDetails"
     [request]="req"
+    [requestView]="reqView"
   ></app-contract-details>
 </app-layout>

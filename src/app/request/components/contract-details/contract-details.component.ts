@@ -13,6 +13,8 @@ import { TalentService } from 'src/app/services/talent/talent.service';
 import { DropdownOption } from 'src/app/shared/components/dropdown/dropdown.component';
 import { DropdownService } from 'src/app/shared/services/dropdown.service';
 import { Category } from 'src/app/models/category';
+import { TaskService } from 'src/app/services/task/task.service';
+import { Router } from '@angular/router';
 
 export interface TalentVOList {
   talentName: string;
@@ -46,40 +48,69 @@ export class ContractDetailsComponent implements OnInit {
     priority: '',
     requestSchedule: {
       requestCreated: new Date(),
-      expectedClosure: new Date()
+      expectedClosure: new Date(),
+      auditEndDate: new Date(),
+      auditStartDate: new Date(),
+      reportSubmission: new Date(),
+      settlementDate: new Date(),
+      receiptDate: new Date()
     },
     status: '',
     tasksList: new Set()
   };
 
-  @Input() url: Boolean = false;
-  taskList:TaskView[]=[];
-  categories:Category[]=[];
-  currentUrl:string='';
+  @Input() url: boolean = false;
+  taskList: TaskView[] = [];
+  categories: Category[] = [];
+  currentUrl: string = '';
   constructor(
     private _productionService: ProductionService,
     private _talentService: TalentService,
     private _projectService: ProjectService,
-    private _dropdownService: DropdownService
+    private _dropdownService: DropdownService,
+    private _taskService: TaskService,
+    private _router: Router,
   ) {}
 
   myControl = new FormControl('');
   myControl2 = new FormControl('');
   myControl3 = new FormControl('');
 
+  reqId:number = 0;
+  @Input() requestView:boolean = false;
+
   ngOnInit(): void {
-    console.log(`Inside ContractDetails`);
-    this._productionService
-      .getAllProductions()
-      .subscribe((data: ProductionNames[]) => {
-        this.productionDropdownOptions =
-          this._dropdownService.getDropdownOptions<ProductionNames>(
-            data,
-            'productionCompanyName',
-            'productionId'
-          );
-        console.log('Productions', data);
+    this.currentUrl = this._router.url;
+    console.log(this.currentUrl);
+
+    if (this.currentUrl.includes('request-details' || '/requestView-details')) {
+      let sp = this.currentUrl.split('/', 3);
+      this.reqId = parseInt(sp[2]);
+      this._taskService.getTasksByReqId(this.reqId).subscribe({
+        next: (data) => {
+          this.taskList = data;
+          if (this.taskList.length > 0) {
+            this.taskList.forEach((task) => {
+              this.categories.push(task.category);
+            });
+          }
+          console.log('zzz', this.categories);
+        }
       });
+    } else {
+      console.log(`Inside ContractDetails`);
+      this._productionService
+        .getAllProductions()
+        .subscribe((data: ProductionNames[]) => {
+          this.productionDropdownOptions =
+            this._dropdownService.getDropdownOptions<ProductionNames>(
+              data,
+              'productionCompanyName',
+              'productionId'
+            );
+          console.log('Productions', data);
+        });
+    }
   }
   productionId: number = 0;
   getProjects = (event: any) => {

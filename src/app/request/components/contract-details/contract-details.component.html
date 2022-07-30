@@ -2,39 +2,12 @@
   <mat-toolbar>
     <span>Contract Details</span>
 
-    <!-- <div class="cont">
-        <input class="important" list="options1" placeholder="Production Company" required/>
-      <datalist id="options1">
-        <option
-          [value]="option.value"
-          *ngFor="let option of productionCompanyName"
-        ></option>
-      </datalist>
-    </div>
-    <div class="cont">
-        <input class="important" list="options2" placeholder="Project Name" required/>
-        <datalist id="options2">
-          <option
-            [value]="option.value"
-            *ngFor="let option of talentNames"
-          ></option>
-        </datalist>
-      </div>
-      <div class="cont">
-        <input class="important" list="options3" placeholder="Talent Name" required/>
-        <datalist id="options3">
-          <option
-            [value]="option.value"
-            *ngFor="let option of projectNames"
-          ></option>
-        </datalist>
-      </div>  -->
-
     <app-contract-dropdown
       label="Production Company"
       [options]="productionDropdownOptions"
       [data]="request.productionName"
       [reqDetails]="url"
+      [requestView]="requestView"
       (id)="getProjects($event)"
     >
     </app-contract-dropdown>
@@ -43,6 +16,7 @@
       [options]="projectDropdownOptions"
       [data]="request.projectName"
       [reqDetails]="url"
+      [requestView]="requestView"
       (id)="getTalents($event)"
     >
     </app-contract-dropdown>
@@ -51,6 +25,7 @@
       [options]="talentDropdownOptions"
       [data]="request.talentName"
       [reqDetails]="url"
+      [requestView]="requestView"
       (id)="getContract($event)"
     ></app-contract-dropdown>
 
@@ -78,7 +53,7 @@
 
   <div class="container">
     <div class="box1">
-      <app-report-category></app-report-category>
+      <app-report-category [categoriesArray]="categories"  [reqDetails]="url" [requestView]="requestView"></app-report-category>
     </div>
     <div class="box2">
       <div class="right-box">
@@ -86,6 +61,7 @@
           <app-important-dates
             [reqDetails]="url"
             [req]="request"
+            [requestView]="requestView"
           ></app-important-dates>
         </div>
         <div class="doc">
