@@ -106,9 +106,7 @@ export class ContractDetailsComponent implements OnInit {
         next: (data) => {
           this.taskList = data;
           if (this.taskList.length > 0) {
-            this.taskList.forEach((task) => {
-              this.categories.push(task.category);
-            });
+            this.categories = this.taskList.map(task => task.category);
           }
           console.log('zzz', this.categories);
         }

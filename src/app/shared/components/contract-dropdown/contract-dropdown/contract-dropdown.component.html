@@ -1,7 +1,7 @@
 
 <div *ngIf="reqDetails || requestView; then thenBlock; else elseBlock"></div>
-<ng-template #thenBlock>
-    <mat-form-field appearance="legacy"  class="then">
+<ng-template #thenBlock >
+    <mat-form-field appearance="legacy" class="example-full-width" class="then">
       <mat-label>{{label}}</mat-label>
       <select required="true" matNativeControl> 
         <option [value]="data" selected>{{data}}</option>
@@ -9,7 +9,7 @@
     </mat-form-field>
 </ng-template>
 <ng-template #elseBlock>
-  <form class="example-form">
+  <form >
     <mat-form-field class="example-full-width" appearance="legacy">
   <mat-label>{{ label }}</mat-label>
     <input

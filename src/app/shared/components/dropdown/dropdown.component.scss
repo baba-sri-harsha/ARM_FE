@@ -28,7 +28,10 @@ mat-option {
   color: mat.get-color-from-palette($md-primary-pallette, 600);
 }
 select {
-  background-color: $background-color;
+  background-color: mat.get-color-from-palette($md-primary-pallette, 500);
+  border-radius: 5px;
+  border: $border;
+  color: $text-color;
 }
 ::ng-deep .mat-tooltip {
   font-size: 15px;

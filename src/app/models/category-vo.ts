@@ -5,9 +5,9 @@ export interface CategoryVO {
     ownerName:string;
     owner: {
         ownerName: string;
-    },
+    };
     auditPeriod: {
         startDate?: Date,
         endDate?:Date
-    }
+    };
 }

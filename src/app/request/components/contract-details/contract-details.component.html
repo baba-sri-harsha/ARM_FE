@@ -29,14 +29,14 @@
       (id)="getContract($event)"
     ></app-contract-dropdown>
 
-    <div class="cont contract production-number">
+    <div class="contract">
       Production# <br />
       {{ request.contractNo }}
     </div>
 
-    <div class="cont contract contract-date-picker" *ngIf="url; else elseBlock">
-      Date <br />{{ request.contractDate | date: 'shortDate' }}
-      <mat-icon>calendar_today</mat-icon>
+    <div class="date" *ngIf="url; else elseBlock">
+      <div >Date <br>{{ request.contractDate | date: 'shortDate' }}</div> 
+        <mat-icon>calendar_today</mat-icon>
     </div>
     <ng-template #elseBlock>
       <div class="cont contract contract-date-picker">

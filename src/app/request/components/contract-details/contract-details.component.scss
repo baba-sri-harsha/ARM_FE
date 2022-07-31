@@ -98,3 +98,33 @@ mat-toolbar {
     padding: 0.75rem;
   }
 }
+
+.mat-icon {
+  -webkit-user-select: none;
+  user-select: none;
+  background-repeat: no-repeat;
+  display: inline-block;
+  fill: currentColor;
+  height: 24px;
+  width: 24px;
+  overflow: hidden;
+  margin-left: 60px;
+  margin-top: 20px;
+  // margin-top: -550px;
+}
+.date{
+  background-color: #ffffff;
+  padding: 3px;
+  // min-width: 50px;
+  font-family: 'Roboto';
+  font-size: 18px;
+  font-weight: 500;
+  min-width: 150px;
+  max-width: 200px;
+  width: 150px;
+  text-overflow: ellipsis;
+  border: solid $background-color 1px;
+  display: flex;
+  // flex-direction: column;
+  border-radius: 5px;
+}

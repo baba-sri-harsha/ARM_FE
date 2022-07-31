@@ -9,7 +9,6 @@ form {
   border: solid $background-color 1px;
   border-radius: 5px;  
 }
-
 .example-full-width {
   width: 100%;
 }
@@ -24,7 +23,15 @@ mat-icon {
   width: 40px;
 }
 .then{
+//   background-color: white;
+//   border: solid 1px $background-color;
+//   border-radius: 5px;
+padding: 7px;
+min-width: 150px;
+  max-width: 500px;
+  height: 3.5rem;
   background-color: white;
-  border: solid 1px $background-color;
-  border-radius: 5px;
+  top: 10%;
+  border: solid $background-color 1px;
+  border-radius: 5px;  
 }
