@@ -95,7 +95,7 @@ export class RequestListComponent implements OnInit, OnChanges, AfterViewInit {
         console.log(`Inside Request List Component`);
         console.log('Request list', data);
       });
-    }
+  }
 
   ngAfterViewInit() {
     this.dataSource = new MatTableDataSource(this.requests);
@@ -138,11 +138,11 @@ export class RequestListComponent implements OnInit, OnChanges, AfterViewInit {
 
   filterRequests() {
     const filteredRequests = this.requests.filter((request) => {
-      let totalCondition = false;
-      let talentCondition = false;
-      let priorityCondition = false;
-      let productionCondition = false;
-      let statusCondition = false;
+      let totalCondition = true;
+      let talentCondition = true;
+      let priorityCondition = true;
+      let productionCondition = true;
+      let statusCondition = true;
       if (
         !this.selectedTalentValue &&
         !this.selectedProductionValue &&
@@ -169,9 +169,9 @@ export class RequestListComponent implements OnInit, OnChanges, AfterViewInit {
         statusCondition = request.status === this.selectedStatusValue.trim();
       }
       totalCondition =
-        talentCondition ||
-        productionCondition ||
-        priorityCondition ||
+        talentCondition &&
+        productionCondition &&
+        priorityCondition &&
         statusCondition;
 
       return totalCondition;

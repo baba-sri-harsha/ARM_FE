@@ -16,13 +16,15 @@
     #inputValue
   />
   <mat-icon>arrow_drop_down</mat-icon>
-  <mat-autocomplete #auto="matAutocomplete">
+  <mat-autocomplete
+    #auto="matAutocomplete"
+    (optionSelected)="onSelectionChanged($event)"
+  >
     <mat-option
       *ngFor="let option of filteredOptions | async"
       [value]="option.value"
       matTooltip="{{ option.value }}"
       [matTooltipPosition]="position[0]"
-      (onSelectionChange)="change($event)"
     >
       {{ option.value }}
     </mat-option>

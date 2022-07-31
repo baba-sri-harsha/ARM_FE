@@ -1,7 +1,5 @@
 <app-layout>
   <ng-container header>
-
-    
     <button
       mat-raised-button
       color="primary"
@@ -53,7 +51,14 @@
     <app-search (searchTextChanged)="onSearchTextEntered($event)"></app-search>
   </ng-container>
   <ng-container>
-    <app-task-list [searchedValue]="searchText" *ngIf="role === 'report_owner'">
+    <app-task-list
+      [searchedValue]="searchText"
+      *ngIf="role === 'report_owner'"
+      [selectedTalentValue]="selectedTalent"
+      [selectedPriorityValue]="selectedPriority"
+      [selectedProductionValue]="selectedProduction"
+      [selectedStatusValue]="selectedStatus"
+    >
     </app-task-list>
     <app-request-list
       [searchedValue]="searchText"

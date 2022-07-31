@@ -49,7 +49,6 @@ export class DashboardComponent implements OnInit {
   selectedPriority: string = '';
   selectedProduction: string = '';
   selectedStatus: string = '';
-  
 
   constructor(
     private _dropdownService: DropdownService,

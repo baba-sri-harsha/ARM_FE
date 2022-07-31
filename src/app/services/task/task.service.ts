@@ -12,8 +12,8 @@ export class TaskService {
   private _url = '/api/tasks/';
   private url = '/api/taskVo/taskId/';
   constructor(private _http: HttpClient) {}
-  
-  getTasksByReqId(reqId: number):Observable<TaskView[]> {
+
+  getTasksByReqId(reqId: number): Observable<TaskView[]> {
     // const url = '/assets/json/tasks.json';
     const url = `${this._url}/reqId/${reqId}`;
     return this._http.get<TaskView[]>(url);
@@ -22,8 +22,8 @@ export class TaskService {
     return this._http.get<TaskVO[]>(this._url);
   };
 
-  getTasksForLoggedInUser = (userName: any): Observable<Task[]> => {
-    return this._http.get<Task[]>(this._url.concat(userName));
+  getTasksForLoggedInUser = (userName: any): Observable<TaskVO[]> => {
+    return this._http.get<TaskVO[]>(this._url.concat(userName));
   };
 
   getTaskById = (taskId: number): Observable<TaskVO> => {

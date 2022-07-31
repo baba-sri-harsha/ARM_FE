@@ -8,22 +8,24 @@
 
 input {
   background-color: mat.get-color-from-palette($md-primary-pallette, 500);
-  border-radius: 5px;
+  border-radius: 4px;
   border: $border;
-  color: $text-color;
+  color: $black;
+  height: 2rem;
 }
 mat-icon {
   color: $gray;
   position: absolute;
   right: 0;
   bottom: 1px;
+  transform: scale(1.5);
 }
-.icon{
-  bottom:12px;
+.icon {
+  bottom: 12px;
 }
 
 mat-option {
-  color: $text-color;
+  color: mat.get-color-from-palette($md-primary-pallette, 600);
 }
 select {
   background-color: $background-color;
