@@ -1,4 +1,5 @@
 import { RequestSchedule } from './request-schedule';
+import { CreateTask } from './createTask';
 
 export interface CreateRequest {
   requestId: number;
@@ -10,9 +11,9 @@ export interface CreateRequest {
   priority: string;
   requestSchedule: RequestSchedule;
   status: string;
-  contractDate: Date;
-  auditStartDate: Date;
+  contractDate?: Date;
+  auditStartDate?: Date;
   auditEndDate: Date;
-  tasksList: Set<Task>;
+  tasksList: CreateTask[];
   createdBy: string;
 }
