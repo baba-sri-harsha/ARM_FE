@@ -7,6 +7,21 @@ import { RequestService } from 'src/app/services/request/request.service';
 import { ReqIdService } from 'src/app/services/requestId/req-id.service';
 import { DropdownOption } from 'src/app/shared/components/dropdown/dropdown.component';
 import { DropdownService } from 'src/app/shared/services/dropdown.service';
+import { ContractDetails } from 'src/app/models/contractDetails';
+import { KeycloakProfile } from 'keycloak-js';
+import { AuthService } from 'src/app/user/auth.service';
+import { CreateTask } from 'src/app/models/createTask';
+import { FormControl } from '@angular/forms';
+import { createRequestSchedule } from 'src/app/models/createRequestSchedule';
+import { RequestSchedule } from 'src/app/models/request-schedule';
+
+export interface ImportantDate {
+  option: string;
+  name:string;
+  date?: Date | null;
+  ctrl?: FormControl;
+}
+
 enum Priority {
   HIGH = 'High',
   LOW = 'Low',
@@ -42,6 +57,9 @@ type Unions = {
 })
 export class CreateRequestComponent implements OnInit {
   request = {} as CreateRequest;
+  public userProfile: KeycloakProfile = {};
+  userProfileName?: string;
+
   reqView:boolean=false;
   myDate = new Date();
   constructor(
@@ -49,7 +67,8 @@ export class CreateRequestComponent implements OnInit {
     private _reqIdService: ReqIdService,
     private _activatedRoute: ActivatedRoute,
     private _router: Router,
-    private _requestService: RequestService
+    private _requestService: RequestService,
+    private _authService: AuthService
   ) {}
   priorityDropDownOptions: DropdownOption[] = [];
   statusDropDownOptions: DropdownOption[] = [];
@@ -97,10 +116,53 @@ receiptDate:new Date(),
   };
 
   reqDetails: boolean = false;
-  ngOnInit(): void {
+  contractDetails?: ContractDetails;
+
+  onContractDetailsChange(contractDetails: ContractDetails) {
+    this.contractDetails = contractDetails;
+
+    // contractDetails.categories?.forEach((category) => {});
+  }
+
+  onCreateRequestSubmit() {
+    console.log(this.contractDetails);
+
+    if (this.contractDetails) {
+      this.request.productionName = this.contractDetails.productionName;
+      this.request.projectName = this.contractDetails.projectName;
+      this.request.talentName = this.contractDetails.talentName;
+      this.request.contractNo = this.contractDetails.contractNo;
+      this.request.contractDate = this.contractDetails.contractDate;
+
+      this.request.tasksList =  (this.contractDetails.categories ?? [])?.map<CreateTask>((categoryVO) => {
+        return {
+          categoryId: categoryVO.categoryId,
+          requestId: this.reqId.id,
+          auditStartDate: categoryVO.auditPeriod.startDate,
+          auditEndDate: categoryVO.auditPeriod.endDate
+        }
+      });
+    }
+
+    this.request.requestSchedule = {} as RequestSchedule;
+    this.impDates.forEach((dateOption) => {
+      if(dateOption.date){        
+        this.request.requestSchedule[dateOption.name] = dateOption.date;      
+      }      
+    });
+    this._requestService.createRequest(this.request)
+      .subscribe(() => {
+        this.redirectToHome();
+      });
+  }
+
+  async ngOnInit(): Promise<void> {
     console.log('inside CreateRequestComponent ngOnInit');
     console.log(this._router.url);
     this.url = this._router.url;
+    this.userProfile = await this._authService.loadUserProfile();
+    this.userProfileName = this.userProfile.username;
+
     if(this._router.url.includes('/requestView-details'))
     this.reqView=true;
     if(this._router.url.includes('/request-details'))
@@ -117,6 +179,7 @@ receiptDate:new Date(),
         next: (data) => {
           console.log(data);
           this.req = data;
+          this.request.requestId = data.requestId;
         }
       });
     }
@@ -126,6 +189,7 @@ receiptDate:new Date(),
       this._reqIdService.getRequestId().subscribe({
         next: (data) => {
           this.reqId = data;
+          this.request.requestId = data.id;
         }
       });
       this.priorityDropDownOptions =
@@ -166,8 +230,16 @@ receiptDate:new Date(),
     console.log(priority);
   };
   unionValue = (union: string) => {
-    console.log(`inside the create request`);
+    console.log(`inside the request object`);
     this.request.unionName = union;
     console.log(this.request);
   };
+
+  impDates: ImportantDate[] = [];
+  changeImportantDates = (importantDates: ImportantDate[]) => {
+    this.impDates = importantDates;
+    console.log(`inside the requestcreation `);
+    console.log(this.impDates);
+  };
+
 }

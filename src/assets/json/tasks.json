@@ -1,0 +1,31 @@
+[
+    {
+      "taskId": 1,
+      "category": {
+          "categoryId": 2000,
+          "reportType": "Pending Settlement Report",
+          "owner": {
+              "ownerId": 10,
+              "ownerName": "John Brian",
+              "ownerUserId": "brian",
+              "createdBy": "Dibya Prakash Ojha",
+              "createdAt": "2022-07-27T14:04:17",
+              "updatedBy": "",
+              "updatedAt": null,
+              "deleted": false
+          },
+          "createdBy": "Abuthair",
+          "createdAt": "2022-07-27T14:04:17",
+          "updatedBy": "",
+          "updatedAt": null,
+          "deleted": false
+      },
+      "assets": [],
+      "createdBy": "chris",
+      "createdAt": "2022-07-27T14:04:17",
+      "updatedBy": "",
+      "updatedAt": null,
+      "closedAt": null,
+      "deleted": false
+  }    
+  ]

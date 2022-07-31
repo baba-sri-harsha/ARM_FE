@@ -2,8 +2,9 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { RequestView } from 'src/app/models/requestView';
-export interface ImportDate {
+export interface ImportantDate {
   option: string;
+  name:string;
   date?: Date | null;
   ctrl?: FormControl;
 }
@@ -14,19 +15,19 @@ export interface ImportDate {
   styleUrls: ['./important-dates.component.scss']
 })
 export class ImportantDatesComponent implements OnInit {
-  ELEMENT_DATA: ImportDate[] = [
-    { option: 'Request Created', ctrl: new FormControl(new Date()) },
-    { option: 'Expected Closure', ctrl: new FormControl() },
-    { option: 'Audit Start Date', ctrl: new FormControl() },
-    { option: 'Audit End Date', ctrl: new FormControl() },
-    { option: 'Report Submission', ctrl: new FormControl() },
-    { option: 'Settlement Date', ctrl: new FormControl() },
-    { option: 'Receipt Date', ctrl: new FormControl() }
+  ELEMENT_DATA: ImportantDate[] = [
+    { option: 'Request Created', name: 'requestCreated',  ctrl: new FormControl(new Date()) },
+    { option: 'Expected Closure', name: 'expectedClosure',  ctrl: new FormControl() },
+    { option: 'Audit Start Date', name: 'auditStartDate',  ctrl: new FormControl() },
+    { option: 'Audit End Date', name: 'auditEndDate',  ctrl: new FormControl() },
+    { option: 'Report Submission', name: 'reportSubmissionDate',  ctrl: new FormControl() },
+    { option: 'Settlement Date', name: 'settlementDate',  ctrl: new FormControl() },
+    { option: 'Receipt Date', name: 'receiptDate', ctrl: new FormControl() }
   ];
-  editDates: ImportDate[] = [];
-  viewDates: ImportDate[] = [];
+  editDates: ImportantDate[] = [];
+  viewDates: ImportantDate[] = [];
   @Input() reqDetails: boolean = false;
-  @Output() dateChanged: EventEmitter<ImportDate[]> = new EventEmitter();
+  @Output() dateChanged: EventEmitter<ImportantDate[]> = new EventEmitter();
   @Input() requestView: boolean = false;
 
   @Input() req: RequestView = {
@@ -58,9 +59,10 @@ export class ImportantDatesComponent implements OnInit {
   }
 
   onDateChange() {
-    const dates = this.ELEMENT_DATA.map<ImportDate>((data: ImportDate) => {
+    const dates = this.ELEMENT_DATA.map<ImportantDate>((data: ImportantDate) => {
       return {
         option: data.option,
+        name: data.name,
         date: data.ctrl?.value
       };
     });
@@ -73,57 +75,68 @@ export class ImportantDatesComponent implements OnInit {
     this.editDates = [
       {
         option: 'Request Created',
+        name: 'requestCreated',
         ctrl: new FormControl(new Date(this.req.requestSchedule.requestCreated))
       },
       {
         option: 'Expected Closure',
+        name: 'expectedClosure', 
         ctrl: new FormControl(
           new Date(this.req.requestSchedule.expectedClosure)
         )
       },
       {
         option: 'Audit Start Date',
+        name: 'auditStartDate',
         ctrl: new FormControl(new Date(this.req.requestSchedule.auditStartDate))
       },
       {
         option: 'Audit End Date',
+        name: 'auditEndDate',
         ctrl: new FormControl(new Date(this.req.requestSchedule.auditEndDate))
       },
-      { option: 'Report Submission', ctrl: new FormControl() },
-      { option: 'Settlement Date', ctrl: new FormControl() },
-      { option: 'Receipt Date', ctrl: new FormControl() }
+      { option: 'Report Submission', name: 'reportSubmissionDate', ctrl: new FormControl() },
+      { option: 'Settlement Date', name: 'settlementDate', ctrl: new FormControl() },
+      { option: 'Receipt Date', name: 'receiptDate', ctrl: new FormControl() }
     ];
     this.viewDates = [
       {
         option: 'Request Created',
+        name: 'requestCreated',
         ctrl: new FormControl(new Date(this.req.requestSchedule.requestCreated))
       },
       {
         option: 'Expected Closure',
+        name: 'expectedClosure',
         ctrl: new FormControl(
           new Date(this.req.requestSchedule.expectedClosure)
         )
       },
       {
         option: 'Audit Start Date',
+        name: 'auditStartDate',
         ctrl: new FormControl(new Date(this.req.requestSchedule.auditStartDate))
       },
       {
         option: 'Audit End Date',
+        name: 'auditEndDate',
         ctrl: new FormControl(new Date(this.req.requestSchedule.auditEndDate))
       },
       {
         option: 'Report Submission',
+        name: 'reportSubmissionDate',
         ctrl: new FormControl(
           new Date(this.req.requestSchedule.reportSubmission)
         )
       },
       {
         option: 'Settlement Date',
+        name: 'settlementDate',
         ctrl: new FormControl(new Date(this.req.requestSchedule.settlementDate))
       },
       {
         option: 'Receipt Date',
+        name: 'receiptDate',
         ctrl: new FormControl(new Date(this.req.requestSchedule.receiptDate))
       }
     ];
@@ -133,7 +146,7 @@ export class ImportantDatesComponent implements OnInit {
   dataSource = this.ELEMENT_DATA;
   date = new FormControl(new Date(11, 22, 4));
 
-  setDataSource(): ImportDate[] {
+  setDataSource(): ImportantDate[] {
     if (this.reqDetails) {
       return this.editDates;
     }

@@ -51,12 +51,14 @@
         Close
       </button>
       <span></span>
-      <button mat-raised-button color="primary">Submit</button>
+      <button mat-raised-button color="primary" (click)="onCreateRequestSubmit()">Submit</button>
     </div>
   </ng-container>
   <app-contract-details
     [url]="reqDetails"
     [request]="req"
     [requestView]="reqView"
+    (contractDetailsChange)="onContractDetailsChange($event)"
+    (importantDatesChanged)="changeImportantDates($event)"
   ></app-contract-details>
 </app-layout>

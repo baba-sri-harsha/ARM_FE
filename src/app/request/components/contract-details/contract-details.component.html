@@ -42,7 +42,11 @@
       <div class="cont contract">
         <mat-form-field appearance="fill">
           <mat-label>Date</mat-label>
-          <input matInput [matDatepicker]="picker" />
+          <input
+            (dateChange)="onContractDateChange($event)"
+            matInput
+            [matDatepicker]="picker"
+          />
           <mat-datepicker-toggle matSuffix [for]="picker">
           </mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
@@ -53,7 +57,12 @@
 
   <div class="container">
     <div class="box1">
-      <app-report-category [categoriesArray]="categories"  [reqDetails]="url" [requestView]="requestView"></app-report-category>
+      <app-report-category 
+        (categoryListChange)="onCategoryListChange($event)" 
+        [categoriesArray]="categories"  
+        [reqDetails]="url" 
+        [requestView]="requestView">
+      </app-report-category>
     </div>
     <div class="box2">
       <div class="right-box">
@@ -62,6 +71,7 @@
             [reqDetails]="url"
             [req]="request"
             [requestView]="requestView"
+            (dateChanged)="onImportantDatesChanged($event)"
           ></app-important-dates>
         </div>
         <div class="doc">

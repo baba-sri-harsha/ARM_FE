@@ -1,0 +1,16 @@
+[
+    {
+        "categoryId": 1,
+        "reportType": "Pending Settlement report",
+        "owner": {
+            "ownerName": "Robert"
+        }
+    },
+    {
+        "categoryId": 2,
+        "reportType": "Pending Another report",
+        "owner": {
+            "ownerName": "Anna"
+        }
+    }
+]

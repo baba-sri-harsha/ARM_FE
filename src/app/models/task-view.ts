@@ -1,5 +1,5 @@
 import { Assets } from "./assets";
-import { Category } from "./category";
+import { CategoryVO } from './category-vo';
 
 export interface TaskView {
     closedAt: Date;
@@ -9,7 +9,7 @@ export interface TaskView {
     taskId:number;
     updatedAt: Date;
     updatedBy: string;
-    category:Category;
+    category:CategoryVO;
     auditStartDate: Date;
     auditEndDate: Date;
     assets:Set<Assets>;

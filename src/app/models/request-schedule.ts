@@ -1,4 +1,4 @@
-export interface RequestSchedule {
+export interface RequestSchedule extends Record<string, any> {
   requestCreated: Date;
   expectedClosure: Date;
   auditEndDate: Date;

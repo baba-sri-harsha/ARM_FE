@@ -1,6 +1,6 @@
 import { ContractDetails } from './../../../models/contractDetails';
 import { CreateRequestComponent } from './../create-request/create-request.component';
-import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { map, Observable } from 'rxjs';
 import { ProductionNames } from 'src/app/models/productionnames';
@@ -15,6 +15,14 @@ import { DropdownService } from 'src/app/shared/services/dropdown.service';
 import { Category } from 'src/app/models/category';
 import { TaskService } from 'src/app/services/task/task.service';
 import { Router } from '@angular/router';
+import { CategoryVO } from 'src/app/models/category-vo';
+
+export interface ImportantDate {
+  option: string;
+  name:string;
+  date?: Date | null;
+  ctrl?: FormControl;
+}
 
 export interface TalentVOList {
   talentName: string;
@@ -30,7 +38,9 @@ export class ContractDetailsComponent implements OnInit {
     productionName: '',
     contractNo: '',
     projectName: '',
-    talentName: ''
+    talentName: '',
+    categories: [],
+    contractDate: new Date()
   };
   productionDropdownOptions: DropdownOption[] = [];
   projectDropdownOptions: DropdownOption[] = [];
@@ -59,10 +69,16 @@ export class ContractDetailsComponent implements OnInit {
     tasksList: new Set()
   };
 
+  @Output() contractDetailsChange: EventEmitter<ContractDetails> =
+    new EventEmitter();
+  @Output() importantDatesChanged: EventEmitter<ImportantDate[]> =
+    new EventEmitter<ImportantDate[]>();
+
   @Input() url: boolean = false;
   taskList: TaskView[] = [];
-  categories: Category[] = [];
+  categories: CategoryVO[] = [];
   currentUrl: string = '';
+
   constructor(
     private _productionService: ProductionService,
     private _talentService: TalentService,
@@ -113,12 +129,20 @@ export class ContractDetailsComponent implements OnInit {
     }
   }
   productionId: number = 0;
+
+  onCategoryListChange(categories: CategoryVO[]) {
+    console.log(categories);
+    this.contractDetails.categories = categories;
+    this.contractDetailsChange.emit(this.contractDetails);
+  }
+
   getProjects = (event: any) => {
-    let productionId = parseInt(event.viewValue);
+    
+    this.productionId = parseInt(event.viewValue);
     this.contractDetails.productionName = event.value;
     console.log(this.contractDetails);
 
-    console.log('pId', productionId);
+    console.log('pId', this.productionId);
     this._projectService
       .getProjectsOfTypedProduction(this.productionId)
       .pipe(
@@ -166,8 +190,23 @@ export class ContractDetailsComponent implements OnInit {
   getContract = (event: any) => {
     this.contractDetails.talentName = event.value;
     this.contractDetails.contractNo = event.viewValue;
-    this.contractNo = event.viewValue;
+    this.request.contractNo = event.viewValue;
     console.log(`Contract No: ${event.viewValue}`);
     console.log(this.contractDetails);
   };
+
+  onContractDateChange = (event: any) => {
+    let contractDate = event.target.value;
+    if (contractDate) {
+      this.contractDetails.contractDate = contractDate;
+    }
+  };
+
+  impDates: ImportantDate[] = [];
+  onImportantDatesChanged(importantDates: ImportantDate[]) {
+    this.impDates = importantDates;
+    if (this.impDates) {
+      this.importantDatesChanged.emit(this.impDates);
+    }
+  }
 }

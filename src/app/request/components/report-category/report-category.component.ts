@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -29,6 +29,10 @@ export class ReportCategoryComponent implements OnInit {
   isCategorySelected = false;
   data = ELEMENT_DATA;
   model!: string;
+  @Output()
+  categoryListChange: EventEmitter<CategoryVO[]> = new EventEmitter<CategoryVO[]>();
+
+  auditForms: FormGroup[] = [];
 
   displayedColumns: string[] = [
     'category',
@@ -36,7 +40,7 @@ export class ReportCategoryComponent implements OnInit {
     'reportOwner',
     'actions'
   ];
-  @Input() categoriesArray: Category[] = [];
+  @Input() categoriesArray: CategoryVO[] = [];
   @Input() reqDetails:Boolean = false;
   @Input() requestView:boolean = false;
   auditPeriod = new FormGroup({
@@ -57,12 +61,40 @@ export class ReportCategoryComponent implements OnInit {
     });
   }
 
+  getData(data:any){
+    console.log(data);
+    return 'hello';
+  }
+
   toggleAllSelection() {
     if (this.allSelected) {
       this.select.options.forEach((item: MatOption) => item.select());
     } else {
       this.select.options.forEach((item: MatOption) => item.deselect());
     }
+  }
+
+  getAuditForm(index:number){
+    return this.auditForms[index];
+  }
+
+  setCombinedFormValues(){
+    this.selectedOptions.forEach((option, index) => {
+      const currentAuditForm = this.getAuditForm(index);
+      option.auditPeriod = {
+        startDate: currentAuditForm.value.startDate,
+        endDate: currentAuditForm.value.endDate
+      }
+    });
+    this.categoryListChange.emit(this.selectedOptions);
+  }
+
+  onStartDateChange(){
+   this.setCombinedFormValues();
+  }
+
+  onEndDateChange(){
+    this.setCombinedFormValues();
   }
 
   optionClick() {
@@ -79,13 +111,15 @@ export class ReportCategoryComponent implements OnInit {
     this.selectedOptions = event;
     console.log(`${this.selectedOptions}`);
     const newData = this.selectedOptions;
-    //   .map((item) => {
-    //   return {
-    //     categoryId: item.categoryId,
-    //     category: item.reportType,
-    //     reportOwner: item.ownerName
-    //   }
-    // })
+
+    newData.forEach((item) => {
+      const auditFormGroup = this.fb.group({
+        startDate: '',
+        endDate: ''
+      });
+      this.auditForms.push(auditFormGroup);
+    });
+    
 
     this.isCategorySelected = true;
     this.data = newData;
