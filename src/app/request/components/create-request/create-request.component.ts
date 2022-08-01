@@ -1,7 +1,6 @@
 import { Category } from './../../../models/category';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CreateRequest } from 'src/app/models/CreateRequest';
 import { ReqId } from 'src/app/models/req-id';
 import { RequestView } from 'src/app/models/requestView';
 import { RequestService } from 'src/app/services/request/request.service';
@@ -14,6 +13,7 @@ import { AuthService } from 'src/app/user/auth.service';
 import { CreateTask } from 'src/app/models/createTask';
 import { FormControl } from '@angular/forms';
 import { createRequestSchedule } from 'src/app/models/createRequestSchedule';
+import { CreateRequest } from 'src/app/models/createRequest';
 
 export interface ImportantDate {
   option: string;

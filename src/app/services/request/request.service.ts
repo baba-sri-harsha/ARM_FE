@@ -5,7 +5,7 @@ import { Observable, map } from 'rxjs';
 import { CategoryVO } from 'src/app/models/category-vo';
 import { RequestView } from 'src/app/models/requestView';
 import { Request } from 'src/app/models/request';
-import { CreateRequest } from 'src/app/models/CreateRequest';
+import { CreateRequest } from 'src/app/models/createRequest';
 
 @Injectable({
   providedIn: 'root'
