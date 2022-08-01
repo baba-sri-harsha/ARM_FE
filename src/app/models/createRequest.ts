@@ -1,4 +1,4 @@
-import { RequestSchedule } from './request-schedule';
+import { createRequestSchedule } from './createRequestSchedule';
 import { CreateTask } from './createTask';
 
 export interface CreateRequest {
@@ -9,7 +9,7 @@ export interface CreateRequest {
   talentName: string;
   unionName: string;
   priority: string;
-  requestSchedule: RequestSchedule;
+  requestSchedule: createRequestSchedule;
   status: string;
   contractDate?: Date;
   auditStartDate?: Date;
