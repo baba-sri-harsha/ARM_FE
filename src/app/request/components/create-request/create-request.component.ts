@@ -1,3 +1,4 @@
+import { MatOption } from '@angular/material/core';
 import { Category } from './../../../models/category';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -62,6 +63,7 @@ export class CreateRequestComponent implements OnInit {
 
   reqView: boolean = false;
   myDate = new Date();
+
   constructor(
     private _dropdownService: DropdownService,
     private _reqIdService: ReqIdService,
@@ -156,6 +158,7 @@ export class CreateRequestComponent implements OnInit {
 
     this._requestService.createRequest(this.request).subscribe((data) => {
       if (data === 'Created Request') {
+        alert('Request has been created');
         this.redirectToHome();
       }
     });
@@ -222,19 +225,24 @@ export class CreateRequestComponent implements OnInit {
     this._router.navigate(['/']);
   };
 
-  statusValue = (status: string) => {
+  statusValue = (event: any) => {
     // console.log(`inside the create request`);
-    console.log(status);
-    this.request.status = status;
+    this.request.status = event.value;
+    // console.log(event.value);
+    console.log(this.request);
   };
-  priorityValue = (priority: string) => {
+
+  priorityValue = (event: any) => {
     // console.log(`inside the create request`);
-    this.request.priority = priority;
-    console.log(priority);
+    // console.log(`priority: ${priority}`);
+    this.request.priority = event.value;
+    // console.log(priority);
   };
-  unionValue = (union: string) => {
+
+  unionValue = (event: any) => {
     console.log(`inside the request object`);
-    this.request.unionName = union;
+    this.request.unionName = event.value;
+    console.log(this.request.unionName);
     console.log(this.request);
   };
 
