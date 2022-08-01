@@ -1,7 +1,9 @@
 export interface CreateTask {
+  category: {
     categoryId: number;
-    requestId: number;
-    auditStartDate?: Date;
-    auditEndDate?: Date;
-    createdBy?: string;
-  }
+    reportType: string;
+  };
+  auditStartDate?: Date;
+  auditEndDate?: Date;
+  createdBy?: string;
+}

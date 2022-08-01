@@ -1,3 +1,4 @@
+import { TestBed } from '@angular/core/testing';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
@@ -24,22 +25,25 @@ export class RequestService {
     return this._httpClient
       .get<CategoryVO[]>(url, { responseType: 'json' })
       .pipe(
-        map((categories: CategoryVO[]) => categories.map(category => ({
-          ...category,
-          owner: {
-            ownerName: category.ownerName
-          }
-        })))
-      )
+        map((categories: CategoryVO[]) =>
+          categories.map((category) => ({
+            ...category,
+            owner: {
+              ownerName: category.ownerName
+            }
+          }))
+        )
+      );
   };
 
   getRequestById = (id: number): Observable<RequestView> => {
     return this._httpClient.get<RequestView>(`${this._baseurl}/id/${id}`);
   };
 
-  createRequest = (createRequest: CreateRequest): Observable<void> => {
+  createRequest = (createRequest: CreateRequest): Observable<string> => {
     const url = `/api/requests`;
-    return this._httpClient.post<void>(url, createRequest);
+    return this._httpClient.post<string>(url, createRequest, {
+      responseType: 'text' as 'json'
+    });
   };
-  
 }

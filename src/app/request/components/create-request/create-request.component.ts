@@ -1,3 +1,4 @@
+import { Category } from './../../../models/category';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CreateRequest } from 'src/app/models/createRequest';
@@ -17,7 +18,7 @@ import { RequestSchedule } from 'src/app/models/request-schedule';
 
 export interface ImportantDate {
   option: string;
-  name:string;
+  name: string;
   date?: Date | null;
   ctrl?: FormControl;
 }
@@ -60,7 +61,7 @@ export class CreateRequestComponent implements OnInit {
   public userProfile: KeycloakProfile = {};
   userProfileName?: string;
 
-  reqView:boolean=false;
+  reqView: boolean = false;
   myDate = new Date();
   constructor(
     private _dropdownService: DropdownService,
@@ -105,11 +106,11 @@ export class CreateRequestComponent implements OnInit {
     requestSchedule: {
       requestCreated: new Date(),
       expectedClosure: new Date(),
-      auditEndDate:new Date(),
-auditStartDate:new Date(),
-reportSubmission:new Date(),
-settlementDate:new Date(),
-receiptDate:new Date(),
+      auditEndDate: new Date(),
+      auditStartDate: new Date(),
+      reportSubmission: new Date(),
+      settlementDate: new Date(),
+      receiptDate: new Date()
     },
     status: '',
     tasksList: new Set()
@@ -120,8 +121,6 @@ receiptDate:new Date(),
 
   onContractDetailsChange(contractDetails: ContractDetails) {
     this.contractDetails = contractDetails;
-
-    // contractDetails.categories?.forEach((category) => {});
   }
 
   onCreateRequestSubmit() {
@@ -134,26 +133,34 @@ receiptDate:new Date(),
       this.request.contractNo = this.contractDetails.contractNo;
       this.request.contractDate = this.contractDetails.contractDate;
 
-      this.request.tasksList =  (this.contractDetails.categories ?? [])?.map<CreateTask>((categoryVO) => {
+      this.request.tasksList = (
+        this.contractDetails.categories ?? []
+      )?.map<CreateTask>((categoryVO) => {
         return {
-          categoryId: categoryVO.categoryId,
-          requestId: this.reqId.id,
+          category: {
+            categoryId: categoryVO.categoryId,
+            reportType: categoryVO.reportType
+          },
           auditStartDate: categoryVO.auditPeriod.startDate,
-          auditEndDate: categoryVO.auditPeriod.endDate
-        }
+          auditEndDate: categoryVO.auditPeriod.endDate,
+          createdBy: this.userProfile.username
+        };
       });
     }
 
-    this.request.requestSchedule = {} as RequestSchedule;
+    this.request.requestSchedule = {} as createRequestSchedule;
     this.impDates.forEach((dateOption) => {
-      if(dateOption.date){        
-        this.request.requestSchedule[dateOption.name] = dateOption.date;      
-      }      
+      if (dateOption.date) {
+        this.request.requestSchedule[dateOption.name] = dateOption.date;
+      }
     });
-    this._requestService.createRequest(this.request)
-      .subscribe(() => {
+
+    this._requestService.createRequest(this.request).subscribe((data) => {
+      if (data === 'Created Request') {
         this.redirectToHome();
-      });
+      }
+    });
+    console.log(this.request);
   }
 
   async ngOnInit(): Promise<void> {
@@ -161,12 +168,10 @@ receiptDate:new Date(),
     console.log(this._router.url);
     this.url = this._router.url;
     this.userProfile = await this._authService.loadUserProfile();
-    this.userProfileName = this.userProfile.username;
+    this.request.createdBy = this.userProfile.username;
 
-    if(this._router.url.includes('/requestView-details'))
-    this.reqView=true;
-    if(this._router.url.includes('/request-details'))
-    this.reqDetails = true;
+    if (this._router.url.includes('/requestView-details')) this.reqView = true;
+    if (this._router.url.includes('/request-details')) this.reqDetails = true;
 
     //----------Request Details-----------------
 
@@ -241,5 +246,4 @@ receiptDate:new Date(),
     console.log(`inside the requestcreation `);
     console.log(this.impDates);
   };
-
 }

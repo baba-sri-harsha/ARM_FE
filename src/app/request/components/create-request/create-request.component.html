@@ -12,7 +12,7 @@
       </div>
       <div class="cont">
         <app-dropdown
-          (selectedValue)="priorityValue($event)"
+          (selectedValue)="statusValue($event)"
           [options]="statusDropDownOptions"
           [data]="req.status"
           [reqDetails]="reqDetails"
@@ -24,7 +24,7 @@
 
       <div class="cont">
         <app-dropdown
-          (selectedValue)="statusValue($event)"
+          (selectedValue)="priorityValue($event)"
           [options]="priorityDropDownOptions"
           [data]="req.priority"
           [reqDetails]="reqDetails"
@@ -51,7 +51,13 @@
         Close
       </button>
       <span></span>
-      <button mat-raised-button color="primary" (click)="onCreateRequestSubmit()">Submit</button>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="onCreateRequestSubmit()"
+      >
+        Submit
+      </button>
     </div>
   </ng-container>
   <app-contract-details
