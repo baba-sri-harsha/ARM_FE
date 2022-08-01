@@ -15,5 +15,5 @@ export interface CreateRequest {
   auditStartDate?: Date;
   auditEndDate: Date;
   tasksList: CreateTask[];
-  createdBy: string;
+  createdBy: string | undefined;
 }
