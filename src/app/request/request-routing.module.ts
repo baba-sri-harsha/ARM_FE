@@ -24,10 +24,6 @@ const routes: Routes = [
     path: 'request-details/:requestId',
     component: CreateRequestComponent
   },
-  {
-    path: 'requestView-details/:requestId',
-    component: CreateRequestComponent
-  },
   { path: 'taskDetails/:taskId', component: TaskDetailsComponent },
   // {
   //   path: 'task-view',

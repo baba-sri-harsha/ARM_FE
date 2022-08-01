@@ -169,7 +169,6 @@ export class CreateRequestComponent implements OnInit {
     this.userProfile = await this._authService.loadUserProfile();
     this.request.createdBy = this.userProfile.username;
 
-    if (this._router.url.includes('/requestView-details')) this.reqView = true;
     if (this._router.url.includes('/request-details')) this.reqDetails = true;
 
     //----------Request Details-----------------

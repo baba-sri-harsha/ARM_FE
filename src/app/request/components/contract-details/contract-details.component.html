@@ -7,7 +7,6 @@
       [options]="productionDropdownOptions"
       [data]="request.productionName"
       [reqDetails]="url"
-      [requestView]="requestView"
       (id)="getProjects($event)"
     >
     </app-contract-dropdown>
@@ -16,7 +15,6 @@
       [options]="projectDropdownOptions"
       [data]="request.projectName"
       [reqDetails]="url"
-      [requestView]="requestView"
       (id)="getTalents($event)"
     >
     </app-contract-dropdown>
@@ -25,13 +23,12 @@
       [options]="talentDropdownOptions"
       [data]="request.talentName"
       [reqDetails]="url"
-      [requestView]="requestView"
       (id)="getContract($event)"
     ></app-contract-dropdown>
 
-    <div class="contract">
-      Production# <br />
-      {{ request.contractNo }}
+    <div class="production">
+      <div class="text">Production#</div> <br />
+      <div class="contractNo">{{ request.contractNo }}</div>
     </div>
 
     <div class="date" *ngIf="url; else elseBlock">
@@ -40,6 +37,7 @@
     </div>
     <ng-template #elseBlock>
       <div class="cont contract contract-date-picker">
+        <form >
         <mat-form-field appearance="fill">
           <mat-label>Date</mat-label>
           <input
@@ -51,18 +49,19 @@
           </mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
+      </form>
       </div>
     </ng-template>
   </mat-toolbar>
 
   <div class="container">
     <div class="box1">
-      <app-report-category
-        (categoryListChange)="onCategoryListChange($event)"
-        [categoriesArray]="categories"
-        [reqDetails]="url"
-        [requestView]="requestView"
-      >
+      <app-report-category 
+        (categoryListChange)="onCategoryListChange($event)" 
+        [categoriesArray]="categories" 
+        [taskIds]="taskId" 
+        [tasks]="taskList"
+        [reqDetails]="url" >
       </app-report-category>
     </div>
     <div class="box2">
@@ -71,7 +70,6 @@
           <app-important-dates
             [reqDetails]="url"
             [req]="request"
-            [requestView]="requestView"
             (dateChanged)="onImportantDatesChanged($event)"
           ></app-important-dates>
         </div>

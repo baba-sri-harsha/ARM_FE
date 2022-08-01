@@ -23,14 +23,11 @@ mat-icon {
 .icon {
   bottom: 12px;
 }
-
-mat-option {
-  color: mat.get-color-from-palette($md-primary-pallette, 600);
-}
 select {
   background-color: mat.get-color-from-palette($md-primary-pallette, 500);
   border-radius: 5px;
   border: $border;
+  padding: 8px;
   color: $text-color;
 }
 ::ng-deep .mat-tooltip {

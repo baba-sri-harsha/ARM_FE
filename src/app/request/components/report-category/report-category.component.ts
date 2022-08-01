@@ -6,11 +6,14 @@ import {
   Validators
 } from '@angular/forms';
 import { MatOption } from '@angular/material/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSelect } from '@angular/material/select';
 import { Router } from '@angular/router';
 import { Category } from 'src/app/models/category';
 import { CategoryVO } from 'src/app/models/category-vo';
+import { TaskView } from 'src/app/models/task-view';
 import { RequestService } from 'src/app/services/request/request.service';
+import { MessagedialogComponent } from 'src/app/shared/components/messagedialog/messagedialog.component';
 
 const ELEMENT_DATA: CategoryVO[] = [];
 
@@ -42,12 +45,13 @@ export class ReportCategoryComponent implements OnInit {
   ];
   @Input() categoriesArray: CategoryVO[] = [];
   @Input() reqDetails:Boolean = false;
-  @Input() requestView:boolean = false;
+  @Input() taskIds:number[]=[];
+  @Input() tasks:TaskView[] = [];
   auditPeriod = new FormGroup({
     start: new FormControl(),
     end: new FormControl()
   });
-  constructor(private _request: RequestService, private fb: FormBuilder) {}
+  constructor(private _request: RequestService, private fb: FormBuilder,public dailog: MatDialog) {}
 
   ngOnInit(): void {
     console.log(`Inside ReportCategory`);
@@ -133,5 +137,14 @@ export class ReportCategoryComponent implements OnInit {
     const reports = this.data.filter((item) => item.categoryId !== a);
     console.log(reports);
     this.data = reports;
+  }
+  openDialog(id:number): void {
+    console.log("ggggggggggg",id);
+    const dialogRef = this.dailog.open(MessagedialogComponent, {
+      width: '500px',
+      height: '500px',
+      panelClass: 'chat-dialog',
+      data: { taskId: 1 }
+    });
   }
 }

@@ -91,15 +91,14 @@ export class ContractDetailsComponent implements OnInit {
   myControl = new FormControl('');
   myControl2 = new FormControl('');
   myControl3 = new FormControl('');
-
+    taskId:number[]=[]
   reqId:number = 0;
-  @Input() requestView:boolean = false;
 
   ngOnInit(): void {
     this.currentUrl = this._router.url;
     console.log(this.currentUrl);
 
-    if (this.currentUrl.includes('request-details' || '/requestView-details')) {
+    if (this.currentUrl.includes('request-details')) {
       let sp = this.currentUrl.split('/', 3);
       this.reqId = parseInt(sp[2]);
       this._taskService.getTasksByReqId(this.reqId).subscribe({
@@ -107,6 +106,7 @@ export class ContractDetailsComponent implements OnInit {
           this.taskList = data;
           if (this.taskList.length > 0) {
             this.categories = this.taskList.map(task => task.category);
+            this.taskId=this.taskList.map(task=>task.taskId);
           }
           console.log('zzz', this.categories);
         }
@@ -190,7 +190,7 @@ export class ContractDetailsComponent implements OnInit {
     this.contractDetails.contractNo = event.viewValue;
     this.request.contractNo = event.viewValue;
     console.log(`Contract No: ${event.viewValue}`);
-    console.log(this.contractDetails);
+    console.log("heyyyy",this.contractDetails);
   };
 
   onContractDateChange = (event: any) => {

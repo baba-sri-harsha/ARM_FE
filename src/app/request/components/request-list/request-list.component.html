@@ -67,13 +67,10 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef>Actions</th>
       <td mat-cell *matCellDef="let request">
-        <button
-          [routerLink]="['request-details', request.requestId]"
-          matTooltip="Edit"
-        >
+        <button matTooltip="Edit">
           <mat-icon>edit_note_black</mat-icon>
         </button>
-        <button [routerLink]="['requestView-details', request.requestId]" matTooltip="View"><mat-icon>visibility</mat-icon></button>
+        <button  [routerLink]="['request-details', request.requestId]" matTooltip="View"><mat-icon>visibility</mat-icon></button>
 
         <button class="notifi-button">
           <mat-icon (click)="openDialog()" matTooltip="Notifications"

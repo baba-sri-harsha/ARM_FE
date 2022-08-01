@@ -98,7 +98,25 @@ mat-toolbar {
     padding: 0.75rem;
   }
 }
-
+.production{
+  background-color: white;
+  border-radius: 5px;
+  border: solid $background-color 1px;
+  height: 55px;
+  width: 180px;
+  
+}
+.text{
+  font-size: 15px;
+  margin-top: -8px;
+  margin-left: 1px;
+  color: rgba(0, 0, 0, 0.623);
+}
+// mat-form-field{
+//   background-color: white;
+//   width: 30px;
+//   // border: red solid 1px;
+// }
 .mat-icon {
   -webkit-user-select: none;
   user-select: none;
@@ -112,6 +130,11 @@ mat-toolbar {
   margin-top: 20px;
   // margin-top: -550px;
 }
+.contractNo{
+  margin-top: -35px;
+  font-size: 17px;
+}
+
 .date{
   background-color: #ffffff;
   padding: 3px;

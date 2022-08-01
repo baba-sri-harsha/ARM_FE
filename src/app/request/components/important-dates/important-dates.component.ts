@@ -28,8 +28,6 @@ export class ImportantDatesComponent implements OnInit {
   viewDates: ImportantDate[] = [];
   @Input() reqDetails: boolean = false;
   @Output() dateChanged: EventEmitter<ImportantDate[]> = new EventEmitter();
-  @Input() requestView: boolean = false;
-
   @Input() req: RequestView = {
     requestId: 0,
     productionName: '',
@@ -72,33 +70,6 @@ export class ImportantDatesComponent implements OnInit {
   }
 
   setDates = () => {
-    this.editDates = [
-      {
-        option: 'Request Created',
-        name: 'requestCreated',
-        ctrl: new FormControl(new Date(this.req.requestSchedule.requestCreated))
-      },
-      {
-        option: 'Expected Closure',
-        name: 'expectedClosure', 
-        ctrl: new FormControl(
-          new Date(this.req.requestSchedule.expectedClosure)
-        )
-      },
-      {
-        option: 'Audit Start Date',
-        name: 'auditStartDate',
-        ctrl: new FormControl(new Date(this.req.requestSchedule.auditStartDate))
-      },
-      {
-        option: 'Audit End Date',
-        name: 'auditEndDate',
-        ctrl: new FormControl(new Date(this.req.requestSchedule.auditEndDate))
-      },
-      { option: 'Report Submission', name: 'reportSubmissionDate', ctrl: new FormControl() },
-      { option: 'Settlement Date', name: 'settlementDate', ctrl: new FormControl() },
-      { option: 'Receipt Date', name: 'receiptDate', ctrl: new FormControl() }
-    ];
     this.viewDates = [
       {
         option: 'Request Created',
@@ -144,14 +115,10 @@ export class ImportantDatesComponent implements OnInit {
 
   displayedColumns: string[] = ['option', 'ctrl'];
   dataSource = this.ELEMENT_DATA;
-  date = new FormControl(new Date(11, 22, 4));
 
   setDataSource(): ImportantDate[] {
     if (this.reqDetails) {
-      return this.editDates;
-    }
-    else if(this.requestView){
-      return this.viewDates
+      return this.viewDates;
     }
     return this.ELEMENT_DATA;
   }
