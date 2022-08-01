@@ -28,7 +28,7 @@ export class DocumentsDossierComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(`Inside DocumentDossier`);
-    this.getFiles();
+    // this.getFiles();
   }
 
   async upload(event: Event) {
@@ -56,7 +56,18 @@ export class DocumentsDossierComponent implements OnInit {
           (data) => {
             alert('Upladed Successfully');
             console.log('Uploads:', data);
-            this.getFiles();
+            this._uploadService
+              .getAllFiles(this.request.requestId, null)
+              .pipe(
+                map((data) => {
+                  console.log('data:', data);
+                  return data;
+                })
+              )
+              .subscribe((data) => {
+                this.filesArray = data;
+                console.log('Files', data);
+              });
           },
           (err) => {
             console.log(err);
@@ -75,7 +86,18 @@ export class DocumentsDossierComponent implements OnInit {
               (data) => {
                 alert('Upladed Successfully');
                 console.log('Uploads:', data);
-                this.getFiles();
+                this._uploadService
+                  .getAllFiles(null, task.taskId)
+                  .pipe(
+                    map((data) => {
+                      console.log('data:', data);
+                      return data;
+                    })
+                  )
+                  .subscribe((data) => {
+                    this.filesArray = data;
+                    console.log('Files', data);
+                  });
               },
               (err) => {
                 console.log(err);
@@ -86,20 +108,20 @@ export class DocumentsDossierComponent implements OnInit {
     }
   }
 
-  getFiles = () => {
-    this._uploadService
-      .getAllFiles(1, null)
-      .pipe(
-        map((data) => {
-          console.log('data:', data);
-          return data;
-        })
-      )
-      .subscribe((data) => {
-        this.filesArray = data;
-        console.log('Files', data);
-      });
-  };
+  // getFiles = () => {
+  //   this._uploadService
+  //     .getAllFiles(1, null)
+  //     .pipe(
+  //       map((data) => {
+  //         console.log('data:', data);
+  //         return data;
+  //       })
+  //     )
+  //     .subscribe((data) => {
+  //       this.filesArray = data;
+  //       console.log('Files', data);
+  //     });
+  // };
 
   preview(file: Assets) {
     let fileName = `${file.assetName}`;
@@ -122,8 +144,39 @@ export class DocumentsDossierComponent implements OnInit {
     console.log(file);
 
     this._uploadService.deleteFile(file.assetId).subscribe((data: any) => {
-      this.getFiles();
-      console.log(data);
+      if (this.request.requestId) {
+        // this.getFiles();
+        this._uploadService
+          .getAllFiles(this.request.requestId, null)
+          .pipe(
+            map((data) => {
+              console.log('data:', data);
+              return data;
+            })
+          )
+          .subscribe((data) => {
+            this.filesArray = data;
+            console.log('Files', data);
+          });
+      } else {
+        this.request.tasksList.forEach((task) => {
+          if (task.taskId) {
+            this._uploadService
+              .getAllFiles(null, task.taskId)
+              .pipe(
+                map((data) => {
+                  console.log('data:', data);
+                  return data;
+                })
+              )
+              .subscribe((data) => {
+                this.filesArray = data;
+                console.log('Files', data);
+              });
+          }
+          console.log(data);
+        });
+      }
     });
   }
 }
