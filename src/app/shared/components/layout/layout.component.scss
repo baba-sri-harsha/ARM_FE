@@ -3,7 +3,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 95vh;
 }
 
 main {
@@ -20,7 +20,7 @@ main {
 }
 
 app-box-container {
-  width: 90%;
-  margin: 5px;
+  width: 100%;
+  // margin: 5px;
   padding: 5px;
 }

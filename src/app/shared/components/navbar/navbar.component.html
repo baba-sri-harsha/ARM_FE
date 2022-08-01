@@ -5,7 +5,7 @@
     aria-label="requests"
     routerLink="/"
     routerLinkActive="active"
-    [routerLinkActiveOptions]="{ exact: true }"
+    [routerLinkActiveOptions]="{ exact: false }"
   >
     <div class="nav-item">
       <mat-icon>list</mat-icon>
@@ -13,7 +13,13 @@
     </div>
   </button>
 
-  <button mat-icon-button *ngIf="role === 'report_owner'">
+  <button
+    mat-icon-button
+    *ngIf="role === 'report_owner'"
+    routerLink="/"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: false }"
+  >
     <div class="nav-item">
       <mat-icon>list</mat-icon>
       <span>Task</span>
