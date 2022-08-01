@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { map, Observable, of } from 'rxjs';
 import { Assets } from 'src/app/models/assets';
+import { RequestView } from 'src/app/models/requestView';
 import { UploadService } from 'src/app/services/upload/upload.service';
 
 type Files = {
@@ -21,6 +22,7 @@ export class DocumentsDossierComponent implements OnInit {
   fileInfos!: Observable<any>;
   filesArray: Assets[] = [];
   dataSource = new MatTableDataSource(this.filesArray);
+  @Input() request = {} as RequestView;
 
   constructor(private _uploadService: UploadService) {}
 
@@ -42,19 +44,46 @@ export class DocumentsDossierComponent implements OnInit {
       }
       console.log('Size:', files[i].size / Math.pow(10, 6), 'MB');
     }
-    this._uploadService
-      .uploadFiles((event.target as HTMLInputElement).files, 1, null)
-
-      .subscribe(
-        (data) => {
-          alert('Upladed Successfully');
-          console.log('Uploads:', data);
-          this.getFiles();
-        },
-        (err) => {
-          console.log(err);
+    if (this.request.requestId) {
+      console.log('Request Id:', this.request.requestId);
+      this._uploadService
+        .uploadFiles(
+          (event.target as HTMLInputElement).files,
+          this.request.requestId,
+          null
+        )
+        .subscribe(
+          (data) => {
+            alert('Upladed Successfully');
+            console.log('Uploads:', data);
+            this.getFiles();
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
+    } else {
+      this.request.tasksList.forEach((task) => {
+        if (task.taskId) {
+          this._uploadService
+            .uploadFiles(
+              (event.target as HTMLInputElement).files,
+              null,
+              task.taskId
+            )
+            .subscribe(
+              (data) => {
+                alert('Upladed Successfully');
+                console.log('Uploads:', data);
+                this.getFiles();
+              },
+              (err) => {
+                console.log(err);
+              }
+            );
         }
-      );
+      });
+    }
   }
 
   getFiles = () => {
@@ -71,8 +100,6 @@ export class DocumentsDossierComponent implements OnInit {
         console.log('Files', data);
       });
   };
-
-  requestId: number = 1;
 
   preview(file: Assets) {
     let fileName = `${file.assetName}`;
