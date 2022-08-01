@@ -6,6 +6,7 @@ import { ProductionNames } from 'src/app/models/productionnames';
 import { TalentService } from 'src/app/services/talent/talent.service';
 import { ProductionService } from 'src/app/services/production/production.service';
 import { KeycloakService } from 'keycloak-angular';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 enum Priority {
   HIGH = 'High',
   LOW = 'Low',
@@ -54,7 +55,8 @@ export class DashboardComponent implements OnInit {
     private _dropdownService: DropdownService,
     private _talentService: TalentService,
     private _productionService: ProductionService,
-    private keycloakService: KeycloakService
+    private keycloakService: KeycloakService,
+    public loaderService: LoaderService
   ) {}
 
   roles: string[] | undefined;

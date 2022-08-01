@@ -26,7 +26,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { ContractDetailsComponent } from './components/contract-details/contract-details.component';
 import { CreateRequestComponent } from './components/create-request/create-request.component';
-
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -50,8 +51,10 @@ import { CreateRequestComponent } from './components/create-request/create-reque
     MatButtonModule,
     MatPaginatorModule,
     MatTableModule,
+    MatProgressBarModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatProgressSpinnerModule,
     ReactiveFormsModule,
     MatSelectModule,
     FormsModule,

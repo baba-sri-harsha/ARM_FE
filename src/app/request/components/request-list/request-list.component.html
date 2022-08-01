@@ -1,4 +1,8 @@
 <div class="table-container">
+   <div class="loader-container" *ngIf="loaderService.isLoading | async">
+    <mat-spinner color="primary" strokeWidth="5" diameter="50"></mat-spinner>
+  </div>
+
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-container matColumnDef="requestId">
       <th mat-header-cell mat-sort-header *matHeaderCellDef style="right: 20%">

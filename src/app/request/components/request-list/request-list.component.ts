@@ -19,6 +19,7 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MessageComponent } from 'src/app/shared/components/message/message.component';
 import { Dialog } from '@angular/cdk/dialog';
 import { Request } from 'src/app/models/request';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 
 @Component({
   selector: 'app-request-list',
@@ -59,7 +60,8 @@ export class RequestListComponent implements OnInit, OnChanges, AfterViewInit {
     private _requestService: RequestService,
     private keycloakService: KeycloakService,
     private auth: AuthService,
-    public dailog: MatDialog
+    public dailog: MatDialog,
+    public loaderService: LoaderService
   ) {}
 
   @Input() selectedTalentValue: string = '';
@@ -85,10 +87,13 @@ export class RequestListComponent implements OnInit, OnChanges, AfterViewInit {
     this.dataSource.data = this.requests;
 
     this.userProfile = await this.auth.loadUserProfile();
+    this.loaderService.startLoader();
 
     this._requestService
       .getAllRequests(this.userProfile.username)
       .subscribe((data: Request[]) => {
+        this.loaderService.stopLoader();
+
         this.dataSource.data = data;
         this.requests = data;
 

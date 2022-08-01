@@ -19,6 +19,7 @@ import { AuthService } from 'src/app/user/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MessageComponent } from 'src/app/shared/components/message/message.component';
 import { TaskVO } from 'src/app/models/taskVO';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 
 @Component({
   selector: 'app-task-list',
@@ -49,7 +50,8 @@ export class TaskListComponent implements OnInit, OnChanges, AfterViewInit {
   constructor(
     private _taskService: TaskService,
     private auth: AuthService,
-    public dailog: MatDialog
+    public dailog: MatDialog,
+    public loaderService: LoaderService
   ) {}
 
   @Input() searchedValue: string = '';
@@ -69,9 +71,13 @@ export class TaskListComponent implements OnInit, OnChanges, AfterViewInit {
     this.dataSource.data = this.tasks;
 
     this.userProfile = await this.auth.loadUserProfile();
+    this.loaderService.startLoader();
+
     this._taskService
       .getTasksForLoggedInUser(this.userProfile.username)
       .subscribe((data: TaskVO[]) => {
+        this.loaderService.stopLoader();
+
         console.log('User', this.userProfile.username);
         this.dataSource.data = data;
         this.tasks = data;
