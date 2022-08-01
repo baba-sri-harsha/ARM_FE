@@ -1,4 +1,4 @@
-import { createRequestSchedule } from 'src/app/models/createRequestSchedule';
+import { RequestSchedule } from './request-schedule';
 import { CreateTask } from './createTask';
 
 export interface CreateRequest {
@@ -9,11 +9,11 @@ export interface CreateRequest {
   talentName: string;
   unionName: string;
   priority: string;
-  requestSchedule: createRequestSchedule;
+  requestSchedule: RequestSchedule;
   status: string;
   contractDate?: Date;
   auditStartDate?: Date;
   auditEndDate: Date;
   tasksList: CreateTask[];
-  createdBy?: string;
+  createdBy: string;
 }
