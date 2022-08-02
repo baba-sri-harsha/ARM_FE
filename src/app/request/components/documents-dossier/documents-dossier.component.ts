@@ -1,4 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges
+} from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { map, Observable, of } from 'rxjs';
 import { Assets } from 'src/app/models/assets';
@@ -13,7 +19,7 @@ type Files = {
   templateUrl: './documents-dossier.component.html',
   styleUrls: ['./documents-dossier.component.scss']
 })
-export class DocumentsDossierComponent implements OnInit {
+export class DocumentsDossierComponent implements OnInit, OnChanges {
   displayedColumns: string[] = ['DocName', 'Actions'];
 
   selectedFiles!: FileList;
@@ -25,10 +31,13 @@ export class DocumentsDossierComponent implements OnInit {
   @Input() request = {} as RequestView;
 
   constructor(private _uploadService: UploadService) {}
+  ngOnChanges(changes: SimpleChanges): void {
+    this.getFiles();
+  }
 
   ngOnInit(): void {
     console.log(`Inside DocumentDossier`);
-    // this.getFiles();
+    this.getFiles();
   }
 
   async upload(event: Event) {
@@ -108,20 +117,39 @@ export class DocumentsDossierComponent implements OnInit {
     }
   }
 
-  // getFiles = () => {
-  //   this._uploadService
-  //     .getAllFiles(1, null)
-  //     .pipe(
-  //       map((data) => {
-  //         console.log('data:', data);
-  //         return data;
-  //       })
-  //     )
-  //     .subscribe((data) => {
-  //       this.filesArray = data;
-  //       console.log('Files', data);
-  //     });
-  // };
+  getFiles = () => {
+    if (this.request.requestId) {
+      this._uploadService
+        .getAllFiles(this.request.requestId, null)
+        .pipe(
+          map((data) => {
+            console.log('data:', data);
+            return data;
+          })
+        )
+        .subscribe((data) => {
+          this.filesArray = data;
+          console.log('Files', data);
+        });
+    } else {
+      this.request.tasksList.forEach((task) => {
+        if (task.taskId) {
+          this._uploadService
+            .getAllFiles(null, task.taskId)
+            .pipe(
+              map((data) => {
+                console.log('data:', data);
+                return data;
+              })
+            )
+            .subscribe((data) => {
+              this.filesArray = data;
+              console.log('Files', data);
+            });
+        }
+      });
+    }
+  };
 
   preview(file: Assets) {
     let fileName = `${file.assetName}`;
@@ -144,39 +172,8 @@ export class DocumentsDossierComponent implements OnInit {
     console.log(file);
 
     this._uploadService.deleteFile(file.assetId).subscribe((data: any) => {
-      if (this.request.requestId) {
-        // this.getFiles();
-        this._uploadService
-          .getAllFiles(this.request.requestId, null)
-          .pipe(
-            map((data) => {
-              console.log('data:', data);
-              return data;
-            })
-          )
-          .subscribe((data) => {
-            this.filesArray = data;
-            console.log('Files', data);
-          });
-      } else {
-        this.request.tasksList.forEach((task) => {
-          if (task.taskId) {
-            this._uploadService
-              .getAllFiles(null, task.taskId)
-              .pipe(
-                map((data) => {
-                  console.log('data:', data);
-                  return data;
-                })
-              )
-              .subscribe((data) => {
-                this.filesArray = data;
-                console.log('Files', data);
-              });
-          }
-          console.log(data);
-        });
-      }
+      this.getFiles();
+      console.log(data);
     });
   }
 }
