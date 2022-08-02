@@ -22,10 +22,12 @@ export interface DropdownOption {
   styleUrls: ['./dropdown.component.scss']
 })
 export class DropdownComponent implements OnInit {
-  @Output() selectedValue = new EventEmitter<string>();
+  // @Output() selectedValue = new EventEmitter<string>();
   @Input()
   label: string = 'Pick one';
+
   @Output() selectedOption: EventEmitter<DropdownOption> = new EventEmitter();
+
   onSelectionChanged(event: MatAutocompleteSelectedEvent) {
     this.selectedOption.emit(event.option);
   }
@@ -57,7 +59,7 @@ export class DropdownComponent implements OnInit {
     );
   }
 
-  change(event: any) {
-    this.selectedValue.emit(event.source.value);
-  }
+  // change(event: any) {
+  //   this.selectedValue.emit(event.source.value);
+  // }
 }
