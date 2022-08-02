@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { TooltipPosition } from '@angular/material/tooltip';
 import { Observable } from 'rxjs';
@@ -10,7 +18,7 @@ import { DropdownOption } from '../../dropdown/dropdown.component';
   templateUrl: './contract-dropdown.component.html',
   styleUrls: ['./contract-dropdown.component.scss']
 })
-export class ContractDropdownComponent implements OnInit {
+export class ContractDropdownComponent implements OnInit, OnChanges {
   myControl = new FormControl('');
   filteredOptions!: Observable<DropdownOption[]>;
 
@@ -18,16 +26,21 @@ export class ContractDropdownComponent implements OnInit {
   @Input() label: string = '';
   position: TooltipPosition[] = ['above'];
   @Input() data: string = '';
-  @Input() reqDetails:boolean=  false;
+  @Input() reqDetails: boolean = false;
   @Input() requestView: boolean = false;
   constructor() {}
+  ngOnChanges(changes: SimpleChanges): void {
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map((value: string | null) => this._filter(value || ''))
+    );
+  }
 
   ngOnInit(): void {
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map((value: string | null) => this._filter(value || ''))
     );
-      
   }
   private _filter(value: string): DropdownOption[] {
     if (!value) {

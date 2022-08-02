@@ -3,8 +3,10 @@ import {
   ElementRef,
   EventEmitter,
   Input,
+  OnChanges,
   OnInit,
   Output,
+  SimpleChanges,
   ViewChild
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
@@ -21,7 +23,7 @@ export interface DropdownOption {
   templateUrl: './dropdown.component.html',
   styleUrls: ['./dropdown.component.scss']
 })
-export class DropdownComponent implements OnInit {
+export class DropdownComponent implements OnInit, OnChanges {
   // @Output() selectedValue = new EventEmitter<string>();
   @Input()
   label: string = 'Pick one';
@@ -39,6 +41,12 @@ export class DropdownComponent implements OnInit {
   myControl = new FormControl('');
   position: TooltipPosition[] = ['above'];
   constructor() {}
+  ngOnChanges(changes: SimpleChanges): void {
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map((value: string | null) => this._filter(value || ''))
+    );
+  }
 
   filteredOptions!: Observable<DropdownOption[]>;
   ngOnInit(): void {
