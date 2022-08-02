@@ -1,18 +1,18 @@
 <div *ngIf="reqDetails; then thenBlock; else elseBlock"></div>
 <!-- --------------------------Request-details----------------------- -->
 <ng-template #thenBlock>
-  <table mat-table [dataSource]="categoriesArray">
+  <table mat-table [dataSource]="tasks">
     <!-- Category Column -->
     <ng-container matColumnDef="category">
       <th mat-header-cell *matHeaderCellDef style="width: 35%">Category</th>
       <td
         mat-cell
-        *matCellDef="let categoriesArray"
+        *matCellDef="let task of tasks"
         style="text-align: left"
       >
         <ng-container >
-          <mat-checkbox checked (click)="selectCategory(categoriesArray.categoryId)">{{
-            categoriesArray.reportType
+          <mat-checkbox checked (click)="selectCategory(task.category.categoryId)">{{
+            task.category.reportType
           }}</mat-checkbox>
         </ng-container>
       </td>
@@ -23,7 +23,7 @@
             <mat-select
               #select
               multiple
-              [(ngModel)]="categoriesArray"
+              [(ngModel)]="tasks"
               (ngModelChange)="onNgModelChange($event)"
               [ngModelOptions]="{ updateOn: 'blur' }"
             >
@@ -88,18 +88,18 @@
     <!-- Report Owner Column -->
     <ng-container matColumnDef="reportOwner">
       <th mat-header-cell *matHeaderCellDef style="width: 20%">Report Owner</th>
-      <td mat-cell *matCellDef="let categoriesArray">{{ categoriesArray.owner.ownerName }}</td>
+      <td mat-cell *matCellDef="let task of tasks">{{ task.category.owner.ownerName }}</td>
       <td mat-footer-cell *matFooterCellDef>-</td>
     </ng-container>
   
     <!-- Actions Column -->
     <ng-container matColumnDef="actions" >
       <th mat-header-cell *matHeaderCellDef>Actions</th>
-      <td mat-cell *matCellDef="let id in taskIds" style="width: 23%" >
+      <td mat-cell *matCellDef="let task of tasks" style="width: 23%" >
         <button mat-icon-button  matTooltip="Notification">
           <mat-icon>notifications_alert</mat-icon>
         </button>
-        <button mat-icon-button (click)="openDialog(id)" matTooltip="Chat">
+        <button mat-icon-button (click)="openDialog(task.taskId)" matTooltip="Chat">
           <mat-icon>forum</mat-icon>
         </button>
         <button mat-icon-button  matTooltip="Download">

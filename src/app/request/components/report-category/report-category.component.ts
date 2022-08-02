@@ -43,9 +43,7 @@ export class ReportCategoryComponent implements OnInit {
     'reportOwner',
     'actions'
   ];
-  @Input() categoriesArray: CategoryVO[] = [];
   @Input() reqDetails:Boolean = false;
-  @Input() taskIds:number[]=[];
   @Input() tasks:TaskView[] = [];
   auditPeriod = new FormGroup({
     start: new FormControl(),
@@ -139,12 +137,11 @@ export class ReportCategoryComponent implements OnInit {
     this.data = reports;
   }
   openDialog(id:number): void {
-    console.log("ggggggggggg",id);
     const dialogRef = this.dailog.open(MessagedialogComponent, {
       width: '500px',
       height: '500px',
       panelClass: 'chat-dialog',
-      data: { taskId: 1 }
+      data: { taskId: id }
     });
   }
 }

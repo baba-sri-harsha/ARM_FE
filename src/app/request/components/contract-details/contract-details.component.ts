@@ -76,7 +76,6 @@ export class ContractDetailsComponent implements OnInit {
 
   @Input() url: boolean = false;
   taskList: TaskView[] = [];
-  categories: CategoryVO[] = [];
   currentUrl: string = '';
 
   constructor(
@@ -91,7 +90,6 @@ export class ContractDetailsComponent implements OnInit {
   myControl = new FormControl('');
   myControl2 = new FormControl('');
   myControl3 = new FormControl('');
-    taskId:number[]=[]
   reqId:number = 0;
 
   ngOnInit(): void {
@@ -104,11 +102,6 @@ export class ContractDetailsComponent implements OnInit {
       this._taskService.getTasksByReqId(this.reqId).subscribe({
         next: (data) => {
           this.taskList = data;
-          if (this.taskList.length > 0) {
-            this.categories = this.taskList.map(task => task.category);
-            this.taskId=this.taskList.map(task=>task.taskId);
-          }
-          console.log('zzz', this.categories);
         }
       });
     } else {
