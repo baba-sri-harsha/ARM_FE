@@ -15,7 +15,7 @@ export class TaskService {
 
   getTasksByReqId(reqId: number): Observable<TaskView[]> {
     // const url = '/assets/json/tasks.json';
-    const url = `${this._url}/reqId/${reqId}`;
+    const url = `${this._url}reqId/${reqId}`;
     return this._http.get<TaskView[]>(url);
   }
   getTasks = (): Observable<TaskVO[]> => {
