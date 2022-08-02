@@ -49,6 +49,7 @@ export class ReportCategoryComponent implements OnInit {
     start: new FormControl(),
     end: new FormControl()
   });
+  
   constructor(private _request: RequestService, private fb: FormBuilder,public dailog: MatDialog) {}
 
   ngOnInit(): void {
@@ -61,6 +62,8 @@ export class ReportCategoryComponent implements OnInit {
       },
       complete: () => console.log('Completed')
     });
+
+    
   }
 
   getData(data:any){
@@ -79,7 +82,6 @@ export class ReportCategoryComponent implements OnInit {
   getAuditForm(index:number){
     return this.auditForms[index];
   }
-
   setCombinedFormValues(){
     this.selectedOptions.forEach((option, index) => {
       const currentAuditForm = this.getAuditForm(index);
@@ -144,4 +146,8 @@ export class ReportCategoryComponent implements OnInit {
       data: { taskId: id }
     });
   }
+  auditDatesView=(task:TaskView) => new FormGroup({
+    start: new FormControl(new Date(task.auditStartDate)),
+    end: new FormControl(new Date(task.auditEndDate)),
+  });
 }
