@@ -132,22 +132,24 @@ export class DocumentsDossierComponent implements OnInit, OnChanges {
           console.log('Files', data);
         });
     } else {
-      this.request.tasksList.forEach((task) => {
-        if (task.taskId) {
-          this._uploadService
-            .getAllFiles(null, task.taskId)
-            .pipe(
-              map((data) => {
-                console.log('data:', data);
-                return data;
-              })
-            )
-            .subscribe((data) => {
-              this.filesArray = data;
-              console.log('Files', data);
-            });
-        }
-      });
+      if (this.request.tasksList) {
+        this.request.tasksList.forEach((task) => {
+          if (task.taskId) {
+            this._uploadService
+              .getAllFiles(null, task.taskId)
+              .pipe(
+                map((data) => {
+                  console.log('data:', data);
+                  return data;
+                })
+              )
+              .subscribe((data) => {
+                this.filesArray = data;
+                console.log('Files', data);
+              });
+          }
+        });
+      }
     }
   };
 

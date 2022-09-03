@@ -68,7 +68,7 @@ export class TaskListComponent implements OnInit, OnChanges, AfterViewInit {
   async ngOnInit(): Promise<void> {
     this.showLoader = true;
     // this.dataSource.filter = this.searchedValue;
-    this.dataSource.data = this.tasks;
+    // this.dataSource.data = this.tasks;
 
     this.userProfile = await this.auth.loadUserProfile();
     this.loaderService.startLoader();

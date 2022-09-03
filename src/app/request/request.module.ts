@@ -28,6 +28,7 @@ import { ContractDetailsComponent } from './components/contract-details/contract
 import { CreateRequestComponent } from './components/create-request/create-request.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ListComponent } from './components/list/list.component';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -38,7 +39,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     ImportantDatesComponent,
     DocumentsDossierComponent,
     TaskDetailsComponent,
-    ContractDetailsComponent
+    ContractDetailsComponent,
+    ListComponent
   ],
 
   imports: [

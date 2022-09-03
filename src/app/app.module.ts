@@ -18,10 +18,10 @@ import { TalentService } from './services/talent/talent.service';
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     RequestModule,
     UserModule,
     HttpClientModule,
-    AppRoutingModule,
     BrowserAnimationsModule
   ],
   providers: [ProductionService, TalentService],

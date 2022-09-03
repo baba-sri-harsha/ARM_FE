@@ -55,7 +55,7 @@
     <app-search (searchTextChanged)="onSearchTextEntered($event)"></app-search>
   </ng-container>
   <ng-container>
-    <app-task-list
+    <!-- <app-task-list
       [searchedValue]="searchText"
       *ngIf="role === 'report_owner'"
       [selectedTalentValue]="selectedTalent"
@@ -63,15 +63,14 @@
       [selectedProductionValue]="selectedProduction"
       [selectedStatusValue]="selectedStatus"
     >
-    </app-task-list>
-    <app-request-list
+    </app-task-list> -->
+    <app-list
       [searchedValue]="searchText"
-      *ngIf="role === 'manager'"
       [selectedTalentValue]="selectedTalent"
       [selectedPriorityValue]="selectedPriority"
       [selectedProductionValue]="selectedProduction"
       [selectedStatusValue]="selectedStatus"
-    ></app-request-list>
+    ></app-list>
     <!-- <app-task-details></app-task-details> -->
   </ng-container>
 </app-layout>

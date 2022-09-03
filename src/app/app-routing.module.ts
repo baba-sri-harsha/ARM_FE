@@ -4,15 +4,16 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  {
-    path: '',
-    pathMatch: 'full',
-    redirectTo: '/dashboard'
-  },
-  {
-    path: 'tasks',
-    component: DashboardComponent
-  }
+  // {
+  //   path: '',
+  //   pathMatch: 'full',
+  //   redirectTo: '/dashboard',
+    
+  // }
+  // {
+  //   path: 'tasks',
+  //   component: DashboardComponent
+  // }
 ];
 
 @NgModule({
