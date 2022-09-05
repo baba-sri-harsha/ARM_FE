@@ -17,6 +17,10 @@ import { TaskService } from 'src/app/services/task/task.service';
 import { Router } from '@angular/router';
 import { CategoryVO } from 'src/app/models/category-vo';
 
+/**
+ * to set or view contract details bar
+ * @author - Madhu Shree
+ */
 export interface ImportantDate {
   option: string;
   name:string;
@@ -46,6 +50,10 @@ export class ContractDetailsComponent implements OnInit {
   projectDropdownOptions: DropdownOption[] = [];
   talentDropdownOptions: DropdownOption[] = [];
   contractNo!: string;
+  /**
+   * @author - Madhu Shree
+   * to get request details from parent
+   */
   @Input() request: RequestView = {
     requestId: 0,
     productionName: '',
@@ -68,7 +76,9 @@ export class ContractDetailsComponent implements OnInit {
     status: '',
     tasksList: new Set()
   };
-
+/**
+ * @author - Baba Sri Harsha
+ */
   @Output() contractDetailsChange: EventEmitter<ContractDetails> =
     new EventEmitter();
   @Output() importantDatesChanged: EventEmitter<ImportantDate[]> =
@@ -93,6 +103,7 @@ export class ContractDetailsComponent implements OnInit {
   reqId:number = 0;
 
   ngOnInit(): void {
+    
     this.currentUrl = this._router.url;
     console.log(this.currentUrl);
 
@@ -105,6 +116,7 @@ export class ContractDetailsComponent implements OnInit {
         }
       });
     } else {
+      
       console.log(`Inside ContractDetails`);
       this._productionService
         .getAllProductions()
@@ -121,12 +133,20 @@ export class ContractDetailsComponent implements OnInit {
   }
   productionId: number = 0;
 
+  /**
+   * To select categories from the dropdown
+   * @param categories 
+   */
   onCategoryListChange(categories: CategoryVO[]) {
     console.log(categories);
     this.contractDetails.categories = categories;
     this.contractDetailsChange.emit(this.contractDetails);
   }
 
+  /**
+   * to get projects list in the dropdown based upon the production company name
+   * @param event 
+   */
   getProjects = (event: any) => {
     
     this.productionId = parseInt(event.viewValue);
@@ -153,6 +173,10 @@ export class ContractDetailsComponent implements OnInit {
       });
   };
 
+  /**
+   * To get all the available talents for the particular project in a production company
+   * @param event
+   */
   getTalents = (event: any) => {
     this.contractDetails.projectName = event.value;
     console.log(event.value);
@@ -178,6 +202,10 @@ export class ContractDetailsComponent implements OnInit {
       });
   };
 
+  /**
+   * To get all the contracts available for the talent selected based upon project and production company
+   * @param event 
+   */
   getContract = (event: any) => {
     this.contractDetails.talentName = event.value;
     this.contractDetails.contractNo = event.viewValue;
@@ -186,6 +214,10 @@ export class ContractDetailsComponent implements OnInit {
     console.log("heyyyy",this.contractDetails);
   };
 
+  /**
+   * To set the contract date
+   * @param event 
+   */
   onContractDateChange = (event: any) => {
     let contractDate = event.target.value;
     if (contractDate) {
@@ -193,6 +225,9 @@ export class ContractDetailsComponent implements OnInit {
     }
   };
 
+  /**
+   * To set all the important dates
+   */
   impDates: ImportantDate[] = [];
   onImportantDatesChanged(importantDates: ImportantDate[]) {
     this.impDates = importantDates;

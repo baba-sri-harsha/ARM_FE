@@ -22,6 +22,9 @@ export class AuthGuard implements CanActivate {
     private auth: AuthService
   ) {}
 
+  /**
+   * get the role of the logged in user 
+   */
   public async canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot

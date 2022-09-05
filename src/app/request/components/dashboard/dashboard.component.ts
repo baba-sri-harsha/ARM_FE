@@ -7,6 +7,9 @@ import { TalentService } from 'src/app/services/talent/talent.service';
 import { ProductionService } from 'src/app/services/production/production.service';
 import { KeycloakService } from 'keycloak-angular';
 import { LoaderService } from 'src/app/services/loader/loader.service';
+/**
+ * @author - Sandeep Pinasimham
+ */
 enum Priority {
   HIGH = 'High',
   LOW = 'Low',
@@ -110,20 +113,40 @@ export class DashboardComponent implements OnInit {
 
   searchText: string = '';
 
+  /**
+   * search for any keyword in the displayed request list
+   * @author - Abuthair Sheika
+   */
   onSearchTextEntered = (searchValue: string) => {
     this.searchText = searchValue;
   };
 
-  getSelectedOptFromChild = (childData: any) => {
+  /**
+   * search based upon talent name selected in the dropdown
+   * @param childData 
+   */
+  getSelectedTalentFromChild = (childData: any) => {
     console.log(childData.value);
     this.selectedTalent = childData.value;
   };
+  /**
+   * search based upon priority selected in the dropdown
+   * @param priority 
+   */
   getSelectedPriorityFromChild = (priority: any) => {
     this.selectedPriority = priority.value;
   };
+  /**
+   * search based upon production name selected in the dropdown
+   * @param production 
+   */
   getSelectedProductionFromChild = (production: any) => {
     this.selectedProduction = production.value;
   };
+  /**
+   * search based upon status selected in the dropdown
+   * @param status 
+   */
   getSelectedStatusFromChild = (status: any) => {
     this.selectedStatus = status.value;
   };

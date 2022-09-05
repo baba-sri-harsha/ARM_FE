@@ -6,7 +6,6 @@ import {
   NO_ERRORS_SCHEMA
 } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RequestModule } from './request/request.module';
 import { UserModule } from './user/user.module';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -19,7 +18,6 @@ import { TalentService } from './services/talent/talent.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RequestModule,
     UserModule,
     HttpClientModule,
     BrowserAnimationsModule

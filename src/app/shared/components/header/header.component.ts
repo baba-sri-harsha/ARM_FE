@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { KeycloakProfile } from 'keycloak-js';
 import { AuthService } from 'src/app/user/auth.service';
 import { KeycloakService } from 'keycloak-angular';
-
+/**
+ * @author - Sandeep Pinasimham
+ */
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',

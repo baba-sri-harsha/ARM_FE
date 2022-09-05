@@ -2,6 +2,9 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { RequestView } from 'src/app/models/requestView';
+/**
+ * @author - MadhusreeMangi
+ */
 export interface ImportantDate {
   option: string;
   name:string;
@@ -56,6 +59,10 @@ export class ImportantDatesComponent implements OnInit {
     console.log(`Inside ImportantDates`);
   }
 
+  /**
+   * to get the date entered
+   * @author - Sipoy Sikindar
+   */
   onDateChange() {
     const dates = this.ELEMENT_DATA.map<ImportantDate>((data: ImportantDate) => {
       return {
@@ -68,7 +75,10 @@ export class ImportantDatesComponent implements OnInit {
     console.log(dates);
     this.dateChanged.emit(dates);
   }
-
+  /**
+   * to set the dates
+   * @author - Baba Sri Harsha
+   */
   setDates = () => {
     this.viewDates = [
       {
@@ -116,6 +126,11 @@ export class ImportantDatesComponent implements OnInit {
   displayedColumns: string[] = ['option', 'ctrl'];
   dataSource = this.ELEMENT_DATA;
 
+  /**
+   * to set or view the dates
+   * @author - MadhusreeMangi
+   * @returns dates
+   */
   setDataSource(): ImportantDate[] {
     if (this.reqDetails) {
       return this.viewDates;

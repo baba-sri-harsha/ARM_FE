@@ -10,7 +10,9 @@ import { map, Observable, of } from 'rxjs';
 import { Assets } from 'src/app/models/assets';
 import { RequestView } from 'src/app/models/requestView';
 import { UploadService } from 'src/app/services/upload/upload.service';
-
+/**
+ * @autho - Madhu Shree
+ */
 type Files = {
   file: string;
 };
@@ -40,6 +42,12 @@ export class DocumentsDossierComponent implements OnInit, OnChanges {
     this.getFiles();
   }
 
+  /**
+   * to upload a new file
+   * @author - Dibya Prakash Ojha
+   * @param event 
+   * @returns 
+   */
   async upload(event: Event) {
     const files = (event.target as HTMLInputElement).files;
     if (!files) {
@@ -153,6 +161,11 @@ export class DocumentsDossierComponent implements OnInit, OnChanges {
     }
   };
 
+  /**
+   * To display the uploaded files
+   * @author - Dibya Prakash Ojha
+   * @param file 
+   */
   preview(file: Assets) {
     let fileName = `${file.assetName}`;
     this._uploadService.previewFile(fileName).subscribe((data: any) => {
@@ -162,6 +175,11 @@ export class DocumentsDossierComponent implements OnInit, OnChanges {
     });
   }
 
+  /**
+   * to download a file to local storage
+   * @author - Dibya Prakash Ojha
+   * @param file 
+   */
   download(file: Assets) {
     let fileName = file.assetName;
     console.log(fileName);
@@ -170,6 +188,11 @@ export class DocumentsDossierComponent implements OnInit, OnChanges {
     });
   }
 
+  /**
+   * To delete a uploaded file
+   * @author - Dibya Prakash Ojha
+   * @param file 
+   */
   delete(file: Assets) {
     console.log(file);
 

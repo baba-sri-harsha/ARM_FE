@@ -15,7 +15,10 @@ import { CreateTask } from 'src/app/models/createTask';
 import { FormControl } from '@angular/forms';
 import { createRequestSchedule } from 'src/app/models/createRequestSchedule';
 import { CreateRequest } from 'src/app/models/createRequest';
-
+/**
+ * Create a new request page
+ * @author - Madhu Shree
+ */
 export interface ImportantDate {
   option: string;
   name: string;
@@ -78,19 +81,20 @@ export class CreateRequestComponent implements OnInit {
   reqId: ReqId = { id: 0 };
   priorities: Priorities[] = [
     { name: Priority.HIGH },
-    { name: Priority.MEDIUM },
-    { name: Priority.LOW }
+    { name: Priority.LOW },
+    { name: Priority.MEDIUM }
   ];
   statuses: Statuses[] = [
+    { name: Status.C },
     { name: Status.PI },
     { name: Status.PT },
-    { name: Status.SP },
-    { name: Status.C }
+    { name: Status.SP }
+    
   ];
   unions: Unions[] = [
     { name: Union.DAG },
-    { name: Union.SAG },
     { name: Union.INDEPENDENT },
+    { name: Union.SAG },
     { name: Union.WAG }
   ];
   url: string = '';
@@ -124,6 +128,10 @@ export class CreateRequestComponent implements OnInit {
     this.contractDetails = contractDetails;
   }
 
+  /**
+   * to get all the details of a new request and submit the form
+   * @author - Baba Sri Harsha
+   */
   onCreateRequestSubmit() {
     console.log(this.contractDetails);
 
@@ -176,6 +184,9 @@ export class CreateRequestComponent implements OnInit {
 
     //----------Request Details-----------------
 
+    /**
+     * @author - Madhu Shree
+     */
     if (this.url.includes('/request-details' || '/requestView-details')) {
       this._activatedRoute.paramMap.subscribe((map) => {
         let i = map.get('requestId');

@@ -8,7 +8,9 @@ import { MessageService } from '../../services/message.service';
 import { KeycloakProfile } from 'keycloak-js';
 import { AuthService } from 'src/app/user/auth.service';
 import { TaskService } from 'src/app/services/task/task.service';
-
+/**
+ * @author - Baba Sri Harsha
+ */
 @Component({
   selector: 'app-message',
   templateUrl: './message.component.html',
@@ -69,7 +71,10 @@ export class MessageComponent implements OnInit {
       }
     });
   }
-
+  /**
+   * to send a new message
+   * @param event 
+   */
   sendMessage(event: MouseEvent): void {
     event.preventDefault();
     if (this.userMessage.messageText === '') {
@@ -83,6 +88,10 @@ export class MessageComponent implements OnInit {
     }
   }
 
+  /**
+   * get the user who is sending messages
+   * @returns 
+   */
   getTheRoles(): string | undefined {
     let roles =
       this._keycloakService.getKeycloakInstance().realmAccess?.['roles'];
@@ -94,6 +103,10 @@ export class MessageComponent implements OnInit {
     return '';
   }
 
+  /**
+   * get the names of the users
+   * @returns 
+   */
   getTheNames(): string {
     let roles =
       this._keycloakService.getKeycloakInstance().realmAccess?.['roles'];
@@ -105,6 +118,9 @@ export class MessageComponent implements OnInit {
     return 'report_owner';
   }
 
+  /**
+   * reload all the new and old messages available
+   */
   reloadMessages = () => {
     this._messageService
       .getMessageByTaskId(this.task.taskId)

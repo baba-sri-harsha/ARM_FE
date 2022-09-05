@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
+/**
+ * @author - Dibya Prakash Ojha
+ */
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',

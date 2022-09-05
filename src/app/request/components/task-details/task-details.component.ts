@@ -5,6 +5,9 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { TaskVO } from 'src/app/models/taskVO';
 import { TaskService } from 'src/app/services/task/task.service';
+/**
+ * @author - Awadhesh
+ */
 export interface PeriodicElement {
   category: string;
   reportOwner: string;

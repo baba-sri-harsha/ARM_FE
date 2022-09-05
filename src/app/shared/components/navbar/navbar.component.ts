@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
-
+/**
+ * @author - Sandeep Pinasimham
+ */
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -11,7 +13,9 @@ export class NavbarComponent implements OnInit {
   role: string = '';
 
   constructor(private keycloakService: KeycloakService) {}
-
+  /**
+   * @author - Dibya Prakash Ojha
+   */
   ngOnInit(): void {
     console.log('inside NavbarComponent ngOnInit');
 

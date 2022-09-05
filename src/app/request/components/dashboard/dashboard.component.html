@@ -19,7 +19,7 @@
           *ngIf="talentDropdownOptions.length > 0"
           label="Talents"
           [options]="talentDropdownOptions"
-          (selectedOption)="getSelectedOptFromChild($event)"
+          (selectedOption)="getSelectedTalentFromChild($event)"
         >
         </app-dropdown>
       </div>

@@ -14,6 +14,9 @@ import { fromEvent, Observable } from 'rxjs';
 import { map, startWith, switchMap, filter } from 'rxjs/operators';
 import { TooltipPosition } from '@angular/material/tooltip';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+/**
+ * @author - Sandeep Pinasimham
+ */
 export interface DropdownOption {
   value: string;
 }

@@ -14,7 +14,9 @@ import { CategoryVO } from 'src/app/models/category-vo';
 import { TaskView } from 'src/app/models/task-view';
 import { RequestService } from 'src/app/services/request/request.service';
 import { MessagedialogComponent } from 'src/app/shared/components/messagedialog/messagedialog.component';
-
+/**
+ * @author - Madhu Shree
+ */
 const ELEMENT_DATA: CategoryVO[] = [];
 
 @Component({
@@ -71,6 +73,10 @@ export class ReportCategoryComponent implements OnInit {
     return 'hello';
   }
 
+  /**
+   * to select or deselect categories
+   * @author - Akash Kanaparthi
+   */
   toggleAllSelection() {
     if (this.allSelected) {
       this.select.options.forEach((item: MatOption) => item.select());
@@ -79,6 +85,12 @@ export class ReportCategoryComponent implements OnInit {
     }
   }
 
+  /**
+   * to get the selected audit period
+   * @author - Baba Sri Harsha
+   * @param index 
+   * @returns 
+   */
   getAuditForm(index:number){
     return this.auditForms[index];
   }
@@ -101,6 +113,10 @@ export class ReportCategoryComponent implements OnInit {
     this.setCombinedFormValues();
   }
 
+  /**
+   * to display the selected category in the dropdown
+   * @author - Akash Kanaparthi
+   */
   optionClick() {
     let newStatus = true;
     this.select.options.forEach((item: MatOption) => {
@@ -111,6 +127,11 @@ export class ReportCategoryComponent implements OnInit {
     this.allSelected = newStatus;
   }
 
+  /**
+   * select new/update category
+   * @author - Akash Kanaparthi
+   * @param event 
+   */
   onNgModelChange(event: any) {
     this.selectedOptions = event;
     console.log(`${this.selectedOptions}`);
@@ -131,6 +152,11 @@ export class ReportCategoryComponent implements OnInit {
     console.log(this.data);
   }
 
+  /**
+   * to view the categories of a request
+   * @author - Madhu Shree
+   * @param a 
+   */
   selectCategory(a: number) {
     console.log(a);
     this.catId = a;
@@ -138,6 +164,11 @@ export class ReportCategoryComponent implements OnInit {
     console.log(reports);
     this.data = reports;
   }
+  /**
+   * to open chat box for a particular category
+   * @author - Baba Sri Harsha
+   * @param id 
+   */
   openDialog(id:number): void {
     const dialogRef = this.dailog.open(MessagedialogComponent, {
       width: '500px',
@@ -146,6 +177,13 @@ export class ReportCategoryComponent implements OnInit {
       data: { taskId: id }
     });
   }
+
+  /**
+   * to view the audit dates of a category
+   * @author - MadhusreeMangi
+   * @param task 
+   * @returns 
+   */
   auditDatesView=(task:TaskView) => new FormGroup({
     start: new FormControl(new Date(task.auditStartDate)),
     end: new FormControl(new Date(task.auditEndDate)),

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
-
+/**
+ * @author - Sandeep Pinasimham
+ */
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',

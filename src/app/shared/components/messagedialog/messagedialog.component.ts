@@ -10,7 +10,9 @@ import { TaskService } from 'src/app/services/task/task.service';
 import { AuthService } from 'src/app/user/auth.service';
 import { MessageService } from '../../services/message.service';
 import { MessageComponent } from '../message/message.component';
-
+/**
+ * @author - Baba Sri Harsha
+ */
 @Component({
   selector: 'app-messagedialog',
   templateUrl: './messagedialog.component.html',
@@ -82,12 +84,16 @@ export class MessagedialogComponent implements OnInit {
       }
     });
   }
-
+  
   onMessage(message: string) {
     console.log(message);
     this.userMessage.messageText = message;
   }
 
+  /**
+   * to send a new message
+   * @param event 
+   */
   sendMessage(event: MouseEvent): void {
     event.preventDefault();
     if (this.userMessage.messageText === '') {
@@ -101,6 +107,10 @@ export class MessagedialogComponent implements OnInit {
     }
   }
 
+  /**
+   * to get the role who wants to send the message
+   * @returns 
+   */
   getTheRoles(): string | undefined {
     let roles =
       this._keycloakService.getKeycloakInstance().realmAccess?.['roles'];
@@ -112,6 +122,10 @@ export class MessagedialogComponent implements OnInit {
     return '';
   }
 
+  /**
+   * to get the name of the user
+   * @returns 
+   */
   getTheNames(): string {
     let roles =
       this._keycloakService.getKeycloakInstance().realmAccess?.['roles'];
@@ -123,6 +137,9 @@ export class MessagedialogComponent implements OnInit {
     return 'null';
   }
 
+  /**
+   * to reload new and old messages
+   */
   reloadMessages = () => {
     this._messageService
       .getMessageByTaskId(this.task.taskId)
