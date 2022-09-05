@@ -1,0 +1,316 @@
+<!-- <div *ngIf="role === 'manager'" class="table-container">
+    <div class="loader-container" *ngIf="loaderService.isLoading | async">
+      <mat-spinner color="primary" strokeWidth="5" diameter="50"></mat-spinner>
+    </div>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="requestId">
+        <th
+          mat-header-cell
+          mat-sort-header
+          *matHeaderCellDef
+          style="right: 20%"
+        >
+          Request#
+        </th>
+        <td mat-cell *matCellDef="let request">{{ request.requestId }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="productionCompanyName">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>Production</th>
+        <td mat-cell *matCellDef="let request">
+          {{ request.productionCompanyName }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="contractNo">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>Production#</th>
+        <td mat-cell *matCellDef="let request">{{ request.contractNo }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="projectName">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>Project Name</th>
+        <td mat-cell *matCellDef="let request">{{ request.projectName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="talentName">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>Talent Name</th>
+        <td mat-cell *matCellDef="let request">{{ request.talentName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="union">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>Union</th>
+        <td mat-cell *matCellDef="let request">{{ request.union }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="priority">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>Priority</th>
+        <td mat-cell *matCellDef="let request">{{ request.priority }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="requestCreated">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>
+          Request Raised
+        </th>
+        <td mat-cell *matCellDef="let request">
+          {{ request?.requestSchedule?.requestCreated }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="expectedClosure">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>
+          Expected Closure
+        </th>
+        <td mat-cell *matCellDef="let request">
+          {{ request?.requestSchedule?.expectedClosure }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let request">{{ request.status }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let request">
+          <button matTooltip="Edit">
+            <mat-icon>edit_note_black</mat-icon>
+          </button>
+          <button
+            [routerLink]="['request-details', request.requestId]"
+            matTooltip="View"
+          >
+            <mat-icon>visibility</mat-icon>
+          </button>
+
+          <button class="notifi-button">
+            <mat-icon (click)="openDialog()" matTooltip="Notifications"
+              >add_alert_black
+            </mat-icon>
+          </button>
+          <button matTooltip="Delete"><mat-icon>delete</mat-icon></button>
+          <button matTooltip="More"><mat-icon>pending</mat-icon></button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="headers"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: headers"
+        style="margin-left: 200px"
+      ></tr>
+    </table>
+  </div> -->
+
+<!-- <div *ngIf="role === 'report_owner'" class="table-container">
+    <div class="loader-container" *ngIf="loaderService.isLoading | async">
+      <mat-spinner color="primary" strokeWidth="5" diameter="50"></mat-spinner>
+    </div>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="requestId">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>Request#</th>
+        <td mat-cell *matCellDef="let task">{{ task.requestId }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="taskDescription">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>
+          Task Description
+        </th>
+        <td mat-cell *matCellDef="let task">{{ task.taskDescription }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="productionCompanyName">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>Production</th>
+        <td mat-cell *matCellDef="let task">
+          {{ task.productionCompanyName }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="contractNo">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>Production#</th>
+        <td mat-cell *matCellDef="let task">{{ task.contractNo }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="projectName">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>{{ name }}</th>
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>Broject</th>
+
+        <td mat-cell *matCellDef="let task">{{ task.projectName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="talentName">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>Talent Name</th>
+        <td mat-cell *matCellDef="let task">{{ task.talentName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="priority">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>Priority</th>
+        <td mat-cell *matCellDef="let task">{{ task.priority }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="auditStartDate">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>
+          Audit Start Date
+        </th>
+        <td mat-cell *matCellDef="let task">{{ task.auditStartDate }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="auditEndDate">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>
+          Audit End Date
+        </th>
+        <td mat-cell *matCellDef="let task">{{ task.auditEndDate }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="requestRaised">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>
+          Request Raised
+        </th>
+        <td mat-cell *matCellDef="let task">{{ task.requestRaised }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="requestClosed">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>Closed</th>
+        <td mat-cell *matCellDef="let task">{{ task.requestClosed }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="quickActions">
+        <th mat-header-cell *matHeaderCellDef>Quick Actions</th>
+
+        <td mat-cell class="conte" *matCellDef="let task">
+          <button class="cont" matTooltip="Chat">
+            <mat-icon [routerLink]="['taskDetails', task.taskId]"
+              >forum</mat-icon
+            >
+          </button>
+
+          <button class="cont" matTooltip="Edit">
+            <mat-icon>edit_note_black</mat-icon>
+          </button>
+          <button class="cont" matTooltip="View">
+            <mat-icon>visibility</mat-icon>
+          </button>
+          <button class="cont" matTooltip="Notifications">
+            <mat-icon>add_alert_black</mat-icon>
+          </button>
+          <button class="cont" matTooltip="Delete">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button class="cont" matTooltip="More">
+            <mat-icon>pending</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="taskDisplayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: taskDisplayedColumns"></tr>
+    </table>
+  </div> -->
+<!-- <p *ngFor="let d of requests">{{ d | json }}</p> -->
+<!-- <table mat-table [dataSource]="dataSource">
+    <ng-container *ngFor="let c of headers" [matColumnDef]="c">
+      <th mat-header-cell *matHeaderCellDef>
+        {{ c | titlecase }}
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <span>
+          {{ element[c] }}
+        </span>
+        <span *ngIf="c === 'requestCreated'">
+          {{ element.requestSchedule.requestCreated }}
+        </span>
+        <span *ngIf="c === 'expectedClosure'">
+          {{ element.requestSchedule.expectedClosure }}
+        </span>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="headers"></tr>
+    <tr mat-row *matRowDef="let row; columns: headers"></tr>
+  </table>
+
+  <mat-paginator
+    #paginator
+    pageSize="6"
+    [pageSizeOptions]="[2, 4, 6, 8, 10]"
+    showFirstLastButtons
+  >
+  </mat-paginator>
+</div> -->
+
+<!-- {{tableFields|json}} -->
+<div>
+  <table mat-table [dataSource]="dataSource">
+    <ng-container
+      *ngFor="let c of headers; let i = index"
+      matColumnDef="{{ c }}"
+    >
+      <th mat-header-cell mat-sort-header *matHeaderCellDef>
+        {{tableFields?.[i]}}
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <span>
+          {{ element[c] }}
+        </span>
+        <span *ngIf="c === 'requestCreated'">
+          {{ element.requestSchedule.requestCreated }}
+        </span>
+        <span *ngIf="c === 'expectedClosure'">
+          {{ element.requestSchedule.expectedClosure }}
+        </span>
+        <span *ngIf="c === 'actions'">
+          <button matTooltip="Edit">
+            <mat-icon>edit_note_black</mat-icon>
+          </button>
+          <button
+            [routerLink]="['request-details', element.requestId]"
+            matTooltip="View"
+          >
+            <mat-icon>visibility</mat-icon>
+          </button>
+
+          <button class="notifi-button">
+            <mat-icon (click)="openDialog()" matTooltip="Notifications"
+              >add_alert_black
+            </mat-icon>
+          </button>
+          <button matTooltip="Delete"><mat-icon>delete</mat-icon></button>
+          <button matTooltip="More"><mat-icon>pending</mat-icon></button>
+        </span>
+        <span *ngIf="c === 'quickActions'">
+          <button class="cont" matTooltip="Chat">
+            <mat-icon [routerLink]="['taskDetails', element.taskId]"
+              >forum</mat-icon
+            >
+          </button>
+          <button class="cont" matTooltip="Edit">
+            <mat-icon>edit_note_black</mat-icon>
+          </button>
+          <button class="cont" matTooltip="View">
+            <mat-icon>visibility</mat-icon>
+          </button>
+          <button class="cont" matTooltip="Notifications">
+            <mat-icon>add_alert_black</mat-icon>
+          </button>
+          <button class="cont" matTooltip="Delete">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button class="cont" matTooltip="More">
+            <mat-icon>pending</mat-icon>
+          </button>
+        </span>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="headers"></tr>
+    <tr mat-row *matRowDef="let row; columns: headers"></tr>
+  </table>
+  <mat-paginator
+    #paginator
+    pageSize="6"
+    [pageSizeOptions]="[2, 4, 6, 8]"
+    showFirstLastButtons
+  >
+  </mat-paginator>
+</div>

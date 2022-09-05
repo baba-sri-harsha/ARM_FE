@@ -1,0 +1,70 @@
+@import 'src/scss/variables';
+:host {
+  width: 100%;
+  height: 100%;
+}
+
+.table-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-left: 25px;
+  // align-items: center;
+  // overflow: auto;
+}
+
+.loader-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+table {
+  width: 98%;
+  height: 100%;
+}
+
+button {
+  border: 0px;
+  border-radius: 3px;
+  background-color: white;
+}
+
+button:hover {
+  background-color: rgba(154, 168, 24, 0.5019607843137255);
+  cursor: pointer;
+}
+
+td.mat-cell {
+  text-align: center;
+}
+
+th.mat-header-cell {
+  padding: 16px 0;
+  /* row border */
+  border-bottom: 1px solid black;
+  border-top: 1px solid black;
+  font-weight: 500;
+  color: $black;
+  font-size: 0.938rem;
+  text-align: center;
+}
+
+th.mat-header-cell:first-child {
+  /* row border */
+  border-left: 1px solid black;
+}
+
+th.mat-header-cell:last-child {
+  /* row border */
+  border-right: 1px solid black;
+}
+
+mat-paginator {
+  align-self: flex-end;
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+  margin: 0 auto;
+}
